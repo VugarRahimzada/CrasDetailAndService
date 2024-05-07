@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
-{`
+{
     public class AboutRepository : GenericRepository<About, AppDbContext>, IAboutRepository
     {
 

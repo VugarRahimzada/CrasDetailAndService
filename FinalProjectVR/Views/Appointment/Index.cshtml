@@ -119,7 +119,6 @@
                             </span>
                         </div>
                     </div>
-
                     <div class="from-textarea">
                         <div class="type_1">
                             <label for="textareaInput" class="form-label">Mesajınızı Daxil Edin</label>
@@ -133,5 +132,5 @@
         </div>
     </div>
     <!--End form  -->
-@Html.Partial("_PartialViewProcess")
+@await Component.InvokeAsync("Process")
    
