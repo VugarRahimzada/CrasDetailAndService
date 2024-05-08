@@ -11,6 +11,6 @@ namespace EntityLayer.Models
     {
         public string Description { get; set; }
         public int PricingId { get; set; }
-        public Pricing Pricing { get; set; }
+        public virtual Pricing Pricing { get; set; }
     }
 }

@@ -15,4 +15,9 @@
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\DataAcessLayer\DataAccessLayer.csproj" />
+  </ItemGroup>
+
 </Project>

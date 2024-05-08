@@ -1,4 +1,5 @@
 ﻿using CoreLayer.DataAccess.Abstract;
+using DTOLayer;
 using EntityLayer.Models;
 
 namespace DataAccessLayer.Abstract

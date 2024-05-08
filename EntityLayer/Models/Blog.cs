@@ -12,8 +12,7 @@ namespace EntityLayer.Models
         public string Title { get; set; }
         public string Text { get; set; }
         public int CommentCounta {  get; set; } = 0;
-        public List<Comment> Comment { get; set; }
-        //Şəklin tutma tipini müəyyən et
         public string ImageUrl { get; set; }
+        public List<Comment> Comment { get; set; }
     }
 }

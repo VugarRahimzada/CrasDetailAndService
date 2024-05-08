@@ -52,11 +52,11 @@ namespace CoreLayer.DataAccess.Concrete
             }
         }
 
-        public IQueryable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>();
+                return context.Set<TEntity>().ToList();
             }
         }
 
@@ -65,6 +65,14 @@ namespace CoreLayer.DataAccess.Concrete
             using (TContext context = new TContext())
             {
                 return context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
+            }
+        }
+
+        public IEnumerable<TEntity> GetActiv()
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().Where(x=>x.Delete == 0).ToList();
             }
         }
     }

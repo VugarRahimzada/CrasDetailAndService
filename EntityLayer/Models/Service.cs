@@ -13,7 +13,6 @@ namespace EntityLayer.Models
         public string Description { get; set; }
         public string Icon { get; set; }
         public string Text { get; set; }
-        //Şəklin tutma tipini müəyyən et
         public string ImageUrl { get; set; }
 
     }

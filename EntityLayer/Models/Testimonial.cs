@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Models
 {
-    //REFERASNLAR
     public class Testimonial :BaseEntity
     {
         public string Name { get; set; }

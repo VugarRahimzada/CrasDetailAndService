@@ -11,7 +11,6 @@ namespace DTOLayer
         public string Title { get; set; }
         public string Text { get; set; }
         public int CommentCounta { get; set; } = 0;
-        //Şəklin tutma tipini müəyyən et
         public string ImageUrl { get; set; }
     }
 }

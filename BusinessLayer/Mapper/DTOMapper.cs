@@ -18,7 +18,7 @@ namespace BusinessLayer.Mapper
             CreateMap<BlogDTOs, Blog>().ReverseMap();
             CreateMap<CommentDTOs, Comment>().ReverseMap();
             CreateMap<ContactDTOs, Contact>().ReverseMap();
-            CreateMap<ContactUsDTOs, ContactUs>().ReverseMap();
+            CreateMap<ContactUsDTOs, ContactUs>().ReverseMap(); 
             CreateMap<FAQDTOs, FAQ>().ReverseMap();
             CreateMap<PriceDescriptionDTOs, PriceDescription>().ReverseMap();
             CreateMap<PricingDTOs, Pricing>().ReverseMap();
