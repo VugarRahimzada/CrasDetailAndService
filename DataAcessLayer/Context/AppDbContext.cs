@@ -14,7 +14,7 @@ namespace DataAccessLayer.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=VR;Database=CrasFinalProjectDb;Trusted_Connection=True;Encrypt=false;");
+            optionsBuilder.UseSqlServer(@"Server=VR;Database=CrasFinalProject2Db;Trusted_Connection=True;Encrypt=false;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,5 +33,6 @@ namespace DataAccessLayer.Context
         public DbSet<Service> Services { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

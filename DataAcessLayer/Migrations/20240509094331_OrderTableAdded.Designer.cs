@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240508185819_Inital")]
-    partial class Inital
+    [Migration("20240509094331_OrderTableAdded")]
+    partial class OrderTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,6 +329,62 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("FAQs");
                 });
 
+            modelBuilder.Entity("EntityLayer.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Delete")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("LicensePlate")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("PricingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LicensePlate")
+                        .IsUnique();
+
+                    b.HasIndex("PricingId");
+
+                    b.HasIndex("Id", "Delete")
+                        .IsUnique();
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("EntityLayer.Models.PriceDescription", b =>
                 {
                     b.Property<int>("Id")
@@ -579,6 +635,17 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Blog");
                 });
 
+            modelBuilder.Entity("EntityLayer.Models.Order", b =>
+                {
+                    b.HasOne("EntityLayer.Models.Pricing", "Pricing")
+                        .WithMany("Order")
+                        .HasForeignKey("PricingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pricing");
+                });
+
             modelBuilder.Entity("EntityLayer.Models.PriceDescription", b =>
                 {
                     b.HasOne("EntityLayer.Models.Pricing", "Pricing")
@@ -597,6 +664,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Models.Pricing", b =>
                 {
+                    b.Navigation("Order");
+
                     b.Navigation("PriceDescription");
                 });
 #pragma warning restore 612, 618

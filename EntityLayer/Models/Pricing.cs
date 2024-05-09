@@ -12,5 +12,6 @@ namespace EntityLayer.Models
         public string Title { get; set; }
         public double Price { get; set; }
         public List<PriceDescription> PriceDescription { get; set; }
+        public List<Order> Order { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace BusinessLayer.Mapper
             CreateMap<TeamDTOs, Team>().ReverseMap();
             CreateMap<TestimonialDTOs, Testimonial>().ReverseMap();
             CreateMap<ProcessDTOs, Process>().ReverseMap();
+            CreateMap<OrderDTOs, Order>().ReverseMap();
         }
     }
 }

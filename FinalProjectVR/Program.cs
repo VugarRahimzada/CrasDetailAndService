@@ -25,6 +25,10 @@ namespace FinalProjectVR
 
             builder.Services.AddScoped<IContactUsService, ContactUsManager>();
             builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
+            builder.Services.AddScoped<IOrderService, OrderManager>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IPricingService, PricingManager>();
+            builder.Services.AddScoped<IPricingRepository, PricingRepository>();
 
             var app = builder.Build();
 
