@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.Validation.FluentValidations;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -25,9 +26,16 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
+
+
         public Result TAdd(OrderDTOs entity)
         {
-
+            var validation = new OrderValidation();
+            var validationresult = validation.Validate(entity);
+            if (!validationresult.IsValid)
+            {
+                throw new Exception();
+            }          
             var order = _mapper.Map<Order>(entity);
             _orderRepository.Add(order);
             return new Result("Uğurla Əlavə Edildi", true);
@@ -40,7 +48,11 @@ namespace BusinessLayer.Concrete
 
         public DataResult<List<OrderDTOs>> TGetActiv()
         {
-            throw new NotImplementedException();
+            var order = _orderRepository.GetActiv();
+       
+            var oderderdto  = _mapper.Map<List<OrderDTOs>>(order);
+            return new DataResult<List<OrderDTOs>>(oderderdto, "Uğurla Əlavə Edildi", true);
+
         }
 
         public DataResult<List<OrderDTOs>> TGetAll()

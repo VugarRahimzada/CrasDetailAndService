@@ -1,5 +1,6 @@
 ﻿using CoreLayer.DataAccess.Abstract;
 using CoreLayer.DataAccess.Concrete;
+using DTOLayer;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IOrderRepository :IGenericRepository<Order>
     {
+        
     }
 }

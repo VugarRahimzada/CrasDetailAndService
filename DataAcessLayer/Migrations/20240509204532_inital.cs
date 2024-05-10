@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class Inital : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -242,10 +242,38 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    LicensePlate = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PricingId = table.Column<int>(type: "int", nullable: false),
+                    Delete = table.Column<int>(type: "int", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Pricings_PricingId",
+                        column: x => x.PricingId,
+                        principalTable: "Pricings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PriceDescriptions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     PricingId = table.Column<int>(type: "int", nullable: false),
                     Delete = table.Column<int>(type: "int", nullable: false),
@@ -256,8 +284,8 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_PriceDescriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PriceDescriptions_Pricings_Id",
-                        column: x => x.Id,
+                        name: "FK_PriceDescriptions_Pricings_PricingId",
+                        column: x => x.PricingId,
                         principalTable: "Pricings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -306,10 +334,32 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_Id_Delete",
+                table: "Orders",
+                columns: new[] { "Id", "Delete" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_LicensePlate",
+                table: "Orders",
+                column: "LicensePlate",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_PricingId",
+                table: "Orders",
+                column: "PricingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PriceDescriptions_Id_Delete",
                 table: "PriceDescriptions",
                 columns: new[] { "Id", "Delete" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PriceDescriptions_PricingId",
+                table: "PriceDescriptions",
+                column: "PricingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pricings_Id_Delete",
@@ -355,6 +405,9 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "FAQs");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "PriceDescriptions");

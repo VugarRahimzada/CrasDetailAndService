@@ -1,4 +1,7 @@
-﻿
+﻿@model List<DTOLayer.FAQDTOs>
+
+
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -23,71 +26,18 @@
         <div class="faq-images">
             <div class="faq" data-aos="fade-up" data-aos-delay="750">
                 <div class="ak-accordion">
+                @foreach (var item in Model)
+                {
                     <div class="ak-accordion-item" data-aos="fade-up">
                         <div class="ak-accordion-title active">
-                            <h6>What services do you offer at your auto repair shop?</h6>
+                            <h6>@item.Question</h6>
                         </div>
                         <div class="ak-accordion-tab">
-                            We provide a comprehensive range of auto services, including but not limited to routine
-                            maintenance,
-                            brake repairs, tire services, engine diagnostics, oil changes, suspension repairs, and
-                            more.
-                            Our
-                            experienced technicians are equipped to handle various automotive issues.
+                               @item.Answer
                         </div>
                     </div>
-                    <div class="ak-accordion-item" data-aos="fade-up">
-                        <div class="ak-accordion-title">
-                            <h6>How often should I get my car serviced?</h6>
-                        </div>
-                        <div class="ak-accordion-tab">
-                            We provide a comprehensive range of auto services, including but not limited to routine
-                            maintenance,
-                            brake repairs, tire services, engine diagnostics, oil changes, suspension repairs, and
-                            more.
-                            Our
-                            experienced technicians are equipped to handle various automotive issues.
-                        </div>
-                    </div>
-                    <div class="ak-accordion-item" data-aos="fade-up">
-                        <div class="ak-accordion-title">
-                            <h6>How do I know if my brakes need to be replaced?</h6>
-                        </div>
-                        <div class="ak-accordion-tab">
-                            We provide a comprehensive range of auto services, including but not limited to routine
-                            maintenance,
-                            brake repairs, tire services, engine diagnostics, oil changes, suspension repairs, and
-                            more.
-                            Our
-                            experienced technicians are equipped to handle various automotive issues.
-                        </div>
-                    </div>
-                    <div class="ak-accordion-item" data-aos="fade-up">
-                        <div class="ak-accordion-title">
-                            <h6>What steps can I take to maintain car between services?</h6>
-                        </div>
-                        <div class="ak-accordion-tab">
-                            We provide a comprehensive range of auto services, including but not limited to routine
-                            maintenance,
-                            brake repairs, tire services, engine diagnostics, oil changes, suspension repairs, and
-                            more.
-                            Our
-                            experienced technicians are equipped to handle various automotive issues.
-                        </div>
-                    </div>
-                    <div class="ak-accordion-item" data-aos="fade-up">
-                        <div class="ak-accordion-title">
-                            <h6>Do you provide warranty on your auto repairs?</h6>
-                        </div>
-                        <div class="ak-accordion-tab">
-                            We provide a comprehensive range of auto services, including but not limited to routine
-                            maintenance,
-                            brake repairs, tire services, engine diagnostics, oil changes, suspension repairs, and
-                            more.
-                            Our
-                            experienced technicians are equipped to handle various automotive issues.
-                        </div>
-                    </div>
+                }
+
                 </div>
             </div>
             <div class="images" data-aos="fade-up" data-aos-delay="950">

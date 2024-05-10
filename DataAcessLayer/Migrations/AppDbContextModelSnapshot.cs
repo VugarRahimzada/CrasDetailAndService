@@ -386,7 +386,10 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Models.PriceDescription", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
@@ -406,6 +409,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PricingId");
 
                     b.HasIndex("Id", "Delete")
                         .IsUnique();
@@ -648,7 +653,7 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Models.Pricing", "Pricing")
                         .WithMany("PriceDescription")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("PricingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -15,6 +15,7 @@ namespace DataAccessLayer.Configrations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
+            builder.HasOne(x => x.Pricing).WithMany(x => x.PriceDescription).HasForeignKey(x => x.PricingId);
 
             builder.HasIndex(x => new { x.Id, x.Delete }).IsUnique();
         }

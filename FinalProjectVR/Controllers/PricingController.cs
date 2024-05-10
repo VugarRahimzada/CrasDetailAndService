@@ -22,7 +22,7 @@ namespace FinalProjectVR.Controllers
        
         public IActionResult Index()
         {
-            var value = _pricingService.TGetActiv();
+            var value = _pricingService.TGetActiv().Data;
             return View(value);
         }
 
@@ -30,15 +30,14 @@ namespace FinalProjectVR.Controllers
 
         [HttpGet] 
         public IActionResult Order()
-        {    
-            var pricingOptions = _pricingService.TGetActiv().Select(x => new SelectListItem
+        {
+            var pricingOptions = _pricingService.TGetActiv().Data.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Title
             }).ToList();
 
             ViewBag.PricingOptions = pricingOptions;
-
 
             return View();
         }

@@ -16,6 +16,5 @@ namespace CoreLayer.DataAccess.Abstract
         void Update (T entity);
         void Delete (T entity);
         void HardDelete(T entity);
-
     }
 }

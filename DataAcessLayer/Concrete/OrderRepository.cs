@@ -2,6 +2,7 @@
 using CoreLayer.DataAccess.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
+using DTOLayer;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class OrderRepository :GenericRepository<Order,AppDbContext> , IOrderRepository
+    public class OrderRepository : GenericRepository<Order, AppDbContext>, IOrderRepository
     {
     }
 }

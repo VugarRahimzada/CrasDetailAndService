@@ -17,5 +17,6 @@ namespace BusinessLayer.Abstrsact
         Result TUpdate(OrderDTOs entity);
         Result TDelete(OrderDTOs entity);
         Result THardDelete(OrderDTOs entity);
+
     }
 }

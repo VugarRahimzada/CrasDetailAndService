@@ -11,13 +11,13 @@ namespace BusinessLayer.Abstrsact
 {
     public interface IPricingService
     {
-            DataResult<List<PricingDTOs>> TGetAll();
+        DataResult<List<PricingDTOs>> TGetAll();
 
-            List <Pricing> TGetActiv();
-            DataResult<PricingDTOs> TGetById(int id);
-            Result TAdd(PricingDTOs entity);
-            Result TUpdate(PricingDTOs entity);
-            Result TDelete(PricingDTOs entity);
-            Result THardDelete(PricingDTOs entity);
+        DataResult<List<PricingDTOs>> TGetActiv();
+        DataResult<PricingDTOs> TGetById(int id);
+        Result TAdd(PricingDTOs entity);
+        Result TUpdate(PricingDTOs entity);
+        Result TDelete(PricingDTOs entity);
+        Result THardDelete(PricingDTOs entity);
     }
 }

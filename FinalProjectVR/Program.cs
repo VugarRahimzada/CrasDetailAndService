@@ -4,6 +4,7 @@ using BusinessLayer.Concrete;
 using BusinessLayer.Mapper;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using EntityLayer.Models;
 
 namespace FinalProjectVR
 {
@@ -29,6 +30,10 @@ namespace FinalProjectVR
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IPricingService, PricingManager>();
             builder.Services.AddScoped<IPricingRepository, PricingRepository>();
+            builder.Services.AddScoped<IFAQRepository, FAQRepository>();
+            builder.Services.AddScoped<IFAQService, FAQManager>();
+            builder.Services.AddScoped<IPriceDescriptionsService, PriceDescriptionManager>();
+            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>();
 
             var app = builder.Build();
 
@@ -40,6 +45,7 @@ namespace FinalProjectVR
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1/", "?code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

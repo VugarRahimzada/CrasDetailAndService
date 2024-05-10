@@ -32,20 +32,14 @@ namespace BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
-
-        public List<Pricing> TGetActiv()
+        public DataResult<List<PricingDTOs>> TGetActiv()
         {
-            var value =  _pricingRepository.GetActiv();
-            return value.ToList();
+            var pricing = _pricingRepository.GetActiv();
+            var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
+
+            return new DataResult<List<PricingDTOs>>(pricingdtos, "Uğurlu", true);
+
         }
-
-        //public DataResult<List<Pricing>> TGetActiv()
-        //{
-        //    var pricing = _pricingRepository.GetAll();
-        //    var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
-        //    return new DataResult<List<PricingDTOs>>(pricingdtos, "Uğurlu", true);
-
-        //}
 
         public DataResult<List<PricingDTOs>> TGetAll()
         {
@@ -66,5 +60,6 @@ namespace BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
     }
 }

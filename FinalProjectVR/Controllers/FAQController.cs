@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Abstrsact;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Controllers
 {
     public class FAQController : Controller
     {
-        public IActionResult Index()
+        private readonly IFAQService _faqService;
+
+		public FAQController(IFAQService faqService)
+		{
+			_faqService = faqService;
+		}
+
+		public IActionResult Index()
         {
-            return View();
+            var value = _faqService.TGetActiv().Data;
+            return View(value);
         }
     }
 }
