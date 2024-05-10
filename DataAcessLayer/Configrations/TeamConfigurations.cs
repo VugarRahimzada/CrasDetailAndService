@@ -20,7 +20,7 @@ namespace DataAccessLayer.Configrations
             builder.Property(x => x.Position).IsRequired().HasMaxLength(300);
             builder.Property(x => x.ImageUrl).IsRequired().HasMaxLength(300);
 
-            builder.HasIndex(x => new { x.Id, x.Delete }).IsUnique();
+            builder.HasIndex(x => new { x.Name, x.Delete }).IsUnique();
         }
     }
 }

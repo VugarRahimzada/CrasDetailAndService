@@ -17,8 +17,6 @@ namespace DataAccessLayer.Configrations
             builder.Property(x => x.Vision).IsRequired().HasMaxLength(2000);
             builder.Property(x => x.History).IsRequired().HasMaxLength(2000);
             builder.Property(x => x.Misson).IsRequired().HasMaxLength(2000);
-
-            builder.HasIndex(x => new { x.Id, x.Delete }).IsUnique();
         }
     }
 }

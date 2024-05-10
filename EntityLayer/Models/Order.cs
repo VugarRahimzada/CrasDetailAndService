@@ -15,6 +15,6 @@ namespace EntityLayer.Models
         public string LicensePlate { get; set; }
         public DateTime Deadline { get; set; } = DateTime.Now.AddMonths(6);
         public int PricingId { get; set; }
-        public Pricing Pricing { get; set; }
+        public virtual Pricing Pricing { get; set; }
     }
 }

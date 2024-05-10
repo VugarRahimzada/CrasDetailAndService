@@ -33,8 +33,13 @@ namespace FinalProjectVR
             builder.Services.AddScoped<IFAQRepository, FAQRepository>();
             builder.Services.AddScoped<IFAQService, FAQManager>();
             builder.Services.AddScoped<IPriceDescriptionsService, PriceDescriptionManager>();
-            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>();
-
+            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>(); 
+            builder.Services.AddScoped<ITeamService, TeamManager>();
+            builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+            builder.Services.AddScoped<IAboutService, AboutManager>();
+            builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+            builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+            builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

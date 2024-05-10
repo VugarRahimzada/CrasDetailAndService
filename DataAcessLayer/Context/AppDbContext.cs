@@ -25,7 +25,6 @@ namespace DataAccessLayer.Context
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactUs> ContactUses { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<PriceDescription> PriceDescriptions { get; set; }
