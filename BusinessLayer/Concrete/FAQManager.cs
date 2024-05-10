@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -24,56 +25,56 @@ namespace BusinessLayer.Concrete
 			_mapper = mapper;
 		}
 
-		public Result TAdd(FAQDTOs entity)
+		public IResult TAdd(FAQDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Add(faq);
-			return new Result("Uğurla Əlavə Edildi", true);
+			return new SuccessResult("Uğurla Əlavə Edildi");
 		}
 
-		public Result TDelete(FAQDTOs entity)
+		public IResult TDelete(FAQDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Delete(faq);
-			return new Result("Uğurla Silindi ", true);
+			return new SuccessResult("Uğurla Silindi ");
 		}
 
-		public DataResult<List<FAQDTOs>> TGetActiv()
+		public IDataResult<List<FAQDTOs>> TGetActiv()
 		{
 			var faq = _faqrepository.GetActiv();
 			var faqdtos = _mapper.Map<List<FAQDTOs>>(faq);
 
-			return new DataResult<List<FAQDTOs>>(faqdtos, "Uğurlu", true);
+			return new SuccessDataResult<List<FAQDTOs>>(faqdtos, "Uğurlu");
 		}
 
-		public DataResult<List<FAQDTOs>> TGetAll()
+		public IDataResult<List<FAQDTOs>> TGetAll()
 		{
 			var faq = _faqrepository.GetAll();
 			var faqdtos = _mapper.Map<List<FAQDTOs>>(faq);
 
-			return new DataResult<List<FAQDTOs>>(faqdtos, "Uğurlu", true);
+			return new SuccessDataResult<List<FAQDTOs>>(faqdtos, "Uğurlu");
 		}
 
-		public DataResult<FAQDTOs> TGetById(int id)
+		public IDataResult<FAQDTOs> TGetById(int id)
 		{
 			var faq = _faqrepository.GetById(id);
 			var faqdtos = _mapper.Map<FAQDTOs>(faq);
 
-			return new DataResult<FAQDTOs>(faqdtos, "Uğurlu", true);
+			return new SuccessDataResult<FAQDTOs>(faqdtos, "Uğurlu");
 		}
 
-		public Result THardDelete(FAQDTOs entity)
+		public IResult THardDelete(FAQDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.HardDelete(faq);
-			return new Result("Uğurla DataBasadan Silindi", true);
+			return new SuccessResult("Uğurla DataBasadan Silindi");
 		}
 
-		public Result TUpdate(FAQDTOs entity)
+		public IResult TUpdate(FAQDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Update(faq);
-			return new Result("Uğurla Yenil'ndi", true);
+			return new SuccessResult("Uğurla Yenil'ndi");
 		}
 	}
 }

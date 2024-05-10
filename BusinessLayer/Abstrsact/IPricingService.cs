@@ -1,4 +1,5 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 using EntityLayer.Models;
 using System;
@@ -11,13 +12,13 @@ namespace BusinessLayer.Abstrsact
 {
     public interface IPricingService
     {
-        DataResult<List<PricingDTOs>> TGetAll();
+        IDataResult<List<PricingDTOs>> TGetAll();
 
-        DataResult<List<PricingDTOs>> TGetActiv();
-        DataResult<PricingDTOs> TGetById(int id);
-        Result TAdd(PricingDTOs entity);
-        Result TUpdate(PricingDTOs entity);
-        Result TDelete(PricingDTOs entity);
-        Result THardDelete(PricingDTOs entity);
+        IDataResult<List<PricingDTOs>> TGetActiv();
+        IDataResult<PricingDTOs> TGetById(int id);
+        IResult TAdd(PricingDTOs entity);
+        IResult TUpdate(PricingDTOs entity);
+        IResult TDelete(PricingDTOs entity);
+        IResult THardDelete(PricingDTOs entity);
     }
 }

@@ -36,7 +36,6 @@ namespace FinalProjectVR.Controllers
                 Value = x.Id.ToString(),
                 Text = x.Title
             }).ToList();
-
             ViewBag.PricingOptions = pricingOptions;
 
             return View();

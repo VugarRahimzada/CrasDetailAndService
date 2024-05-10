@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer;
@@ -23,40 +24,40 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public Result TAdd(PricingDTOs entity)
+        public IResult TAdd(PricingDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public Result TDelete(PricingDTOs entity)
+        public IResult TDelete(PricingDTOs entity)
         {
             throw new NotImplementedException();
         }
-        public DataResult<List<PricingDTOs>> TGetActiv()
+        public IDataResult<List<PricingDTOs>> TGetActiv()
         {
             var pricing = _pricingRepository.GetActiv();
             var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
 
-            return new DataResult<List<PricingDTOs>>(pricingdtos, "Uğurlu", true);
+            return new SuccessDataResult<List<PricingDTOs>>(pricingdtos, "Uğurlu");
 
         }
 
-        public DataResult<List<PricingDTOs>> TGetAll()
+        public IDataResult<List<PricingDTOs>> TGetAll()
         {
             throw new NotImplementedException();
         }
 
-        public DataResult<PricingDTOs> TGetById(int id)
+        public IDataResult<PricingDTOs> TGetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Result THardDelete(PricingDTOs entity)
+        public IResult THardDelete(PricingDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public Result TUpdate(PricingDTOs entity)
+        public IResult TUpdate(PricingDTOs entity)
         {
             throw new NotImplementedException();
         }

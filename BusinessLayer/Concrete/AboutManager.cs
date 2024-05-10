@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer;
@@ -23,55 +24,55 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public Result TAdd(AboutDTOs entity)
+        public IResult TAdd(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Add(about);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result TDelete(AboutDTOs entity)
+        public IResult TDelete(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Delete(about);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result THardDelete(AboutDTOs entity)
+        public IResult THardDelete(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.HardDelete(about);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result TUpdate(AboutDTOs entity)
+        public IResult TUpdate(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Update(about);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
-        public DataResult<List<AboutDTOs>> TGetActiv()
+        public IDataResult<List<AboutDTOs>> TGetActiv()
         {
             var about = _aboutRepository.GetActiv();
             var aboutdtos = _mapper.Map<List<AboutDTOs>>(about);
 
-            return new DataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu", true);
+            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu");
         }
 
-        public DataResult<List<AboutDTOs>> TGetAll()
+        public IDataResult<List<AboutDTOs>> TGetAll()
         {
             var about = _aboutRepository.GetAll();
             var aboutdtos = _mapper.Map<List<AboutDTOs>>(about);
 
-            return new DataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu", true);
+            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu");
         }
 
-        public DataResult<AboutDTOs> TGetById(int id)
+        public IDataResult<AboutDTOs> TGetById(int id)
         {
             var about = _aboutRepository.GetById(id);
             var aboutdtos = _mapper.Map<AboutDTOs>(about);
 
-            return new DataResult<AboutDTOs>(aboutdtos, "Uğurlu", true);
+            return new SuccessDataResult<AboutDTOs>(aboutdtos, "Uğurlu");
         }
 
     }

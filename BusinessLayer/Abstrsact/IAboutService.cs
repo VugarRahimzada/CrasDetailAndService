@@ -1,16 +1,17 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 
 namespace BusinessLayer.Abstrsact
 {
     public interface IAboutService
     {
-        DataResult<List<AboutDTOs>> TGetAll();
-        DataResult<List<AboutDTOs>> TGetActiv();
-        DataResult<AboutDTOs> TGetById(int id);
-        Result TAdd(AboutDTOs entity);
-        Result TUpdate(AboutDTOs entity);
-        Result TDelete(AboutDTOs entity);
-        Result THardDelete(AboutDTOs entity);
+        IDataResult<List<AboutDTOs>> TGetAll();
+        IDataResult<List<AboutDTOs>> TGetActiv();
+        IDataResult<AboutDTOs> TGetById(int id);
+        IResult TAdd(AboutDTOs entity);
+        IResult TUpdate(AboutDTOs entity);
+        IResult TDelete(AboutDTOs entity);
+        IResult THardDelete(AboutDTOs entity);
     }
 }

@@ -1,16 +1,17 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 
 namespace BusinessLayer.Abstrsact
 {
     public interface ITeamService
     {
-        DataResult<List<TeamDTOs>> TGetAll();
-        DataResult<List<TeamDTOs>> TGetActiv();
-        DataResult<TeamDTOs> TGetById(int id);
-        Result TAdd(TeamDTOs entity);
-        Result TUpdate(TeamDTOs entity);
-        Result TDelete(TeamDTOs entity);
-        Result THardDelete(TeamDTOs entity);
+        IDataResult<List<TeamDTOs>> TGetAll();
+        IDataResult<List<TeamDTOs>> TGetActiv();
+        IDataResult<TeamDTOs> TGetById(int id);
+        IResult TAdd(TeamDTOs entity);
+        IResult TUpdate(TeamDTOs entity);
+        IResult TDelete(TeamDTOs entity);
+        IResult THardDelete(TeamDTOs entity);
     }
 }

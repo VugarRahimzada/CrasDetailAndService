@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -24,57 +25,57 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public Result TAdd(TestimonialDTOs entity)
+        public IResult TAdd(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Add(testimonial);
-            return new Result("Uğurlu",true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result TDelete(TestimonialDTOs entity)
+        public IResult TDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Delete(testimonial);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result THardDelete(TestimonialDTOs entity)
+        public IResult THardDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.HardDelete(testimonial);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
 
-        public Result TUpdate(TestimonialDTOs entity)
+        public IResult TUpdate(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Update(testimonial);
-            return new Result("Uğurlu", true);
+            return new SuccessResult("Uğurlu");
         }
-        public DataResult<List<TestimonialDTOs>> TGetActiv()
+        public IDataResult<List<TestimonialDTOs>> TGetActiv()
         {
             var value = _testimonialRepository.GetActiv();
             var valuedto = _mapper.Map<List<TestimonialDTOs>>(value);
 
-            return new DataResult<List<TestimonialDTOs>>(valuedto, "U]urlu", true);
+            return new SuccessDataResult<List<TestimonialDTOs>>(valuedto, "U]urlu");
 
         }
 
-        public DataResult<List<TestimonialDTOs>> TGetAll()
+        public IDataResult<List<TestimonialDTOs>> TGetAll()
         {
             var value = _testimonialRepository.GetAll();
             var valuedto = _mapper.Map<List<TestimonialDTOs>>(value);
 
-            return new DataResult<List<TestimonialDTOs>>(valuedto, "U]urlu", true);
+            return new SuccessDataResult<List<TestimonialDTOs>>(valuedto, "U]urlu");
 
         }
 
-        public DataResult<TestimonialDTOs> TGetById(int id)
+        public IDataResult<TestimonialDTOs> TGetById(int id)
         {
             var value = _testimonialRepository.GetActiv();
             var valuedto = _mapper.Map<TestimonialDTOs>(value);
 
-            return new DataResult<TestimonialDTOs>(valuedto, "U]urlu", true);
+            return new SuccessDataResult<TestimonialDTOs>(valuedto, "U]urlu");
 
         }
 

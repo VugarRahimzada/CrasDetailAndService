@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
 using BusinessLayer.Validation.FluentValidations;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -26,9 +27,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-
-
-        public Result TAdd(OrderDTOs entity)
+        public IResult TAdd(OrderDTOs entity)
         {
             var validation = new OrderValidation();
             var validationresult = validation.Validate(entity);
@@ -38,39 +37,39 @@ namespace BusinessLayer.Concrete
             }          
             var order = _mapper.Map<Order>(entity);
             _orderRepository.Add(order);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
         }
 
-        public Result TDelete(OrderDTOs entity)
+        public IResult TDelete(OrderDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public DataResult<List<OrderDTOs>> TGetActiv()
+        public IDataResult<List<OrderDTOs>> TGetActiv()
         {
             var order = _orderRepository.GetActiv();
        
             var oderderdto  = _mapper.Map<List<OrderDTOs>>(order);
-            return new DataResult<List<OrderDTOs>>(oderderdto, "Uğurla Əlavə Edildi", true);
+            return new SuccessDataResult<List<OrderDTOs>>(oderderdto, "Uğurla Əlavə Edildi");
 
         }
 
-        public DataResult<List<OrderDTOs>> TGetAll()
+        public IDataResult<List<OrderDTOs>> TGetAll()
         {
             throw new NotImplementedException();
         }
 
-        public DataResult<OrderDTOs> TGetById(int id)
+        public IDataResult<OrderDTOs> TGetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Result THardDelete(OrderDTOs entity)
+        public IResult THardDelete(OrderDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public Result TUpdate(OrderDTOs entity)
+        public IResult TUpdate(OrderDTOs entity)
         {
             throw new NotImplementedException();
         }

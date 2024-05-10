@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -25,93 +26,48 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public Result TAdd(ContactUsDTOs entity)
+        public IResult TAdd(ContactUsDTOs entity)
         {
             var contactus = _mapper.Map<ContactUs>(entity);
             _contactUsrepository.Add(contactus);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
         }
 
-        public Result TDelete(ContactUsDTOs entity)
+        public IResult TDelete(ContactUsDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public DataResult<List<ContactUsDTOs>> TGetActiv()
+        public IDataResult<List<ContactUsDTOs>> TGetActiv()
         {
 
             var contacts = _contactUsrepository.GetActiv();
 
             var contactUsDTOs = _mapper.Map<List<ContactUsDTOs>>(contacts);
 
-            return new DataResult<List<ContactUsDTOs>>(contactUsDTOs, "Uğurlu", true);
+            return new SuccessDataResult<List<ContactUsDTOs>>(contactUsDTOs, "Uğurlu");
 
         }
 
-        public DataResult<List<ContactUsDTOs>> TGetAll()
+        public IDataResult<List<ContactUsDTOs>> TGetAll()
         {
             throw new NotImplementedException();
         }
 
-        public DataResult<ContactUsDTOs> TGetById(int id)
+        public IDataResult<ContactUsDTOs> TGetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Result THardDelete(ContactUsDTOs entity)
+        public IResult THardDelete(ContactUsDTOs entity)
         {
             throw new NotImplementedException();
         }
 
-        public Result TUpdate(ContactUsDTOs entity)
+        public IResult TUpdate(ContactUsDTOs entity)
         {
             throw new NotImplementedException();
         }
     }
 }
 
-
-
-//public void TAdd(ContactUsDTOs entity)
-//{
-//    var contactUsEntity = _mapper.Map<ContactUs>(entity);
-//    _contactUsrepository.Add(contactUsEntity);
-//}
-
-//public void TDelete(ContactUsDTOs entity)
-//{
-//    var contactUsEntity = _mapper.Map<ContactUs>(entity);
-//    _contactUsrepository.Delete(contactUsEntity);
-//}
-
-//public IEnumerable TGetActiv()
-//{
-//    var contactus = _contactUsrepository.GetActiv();
-//    var contactUsEntity = _mapper.Map<IEnumerable<ContactUsDTOs>>(contactus);
-
-//    return contactUsEntity;
-//}
-
-//public IEnumerable TGetAll()
-//{
-//    var contactus = _contactUsrepository.GetAll();
-//    return _mapper.Map<IEnumerable<ContactUsDTOs>>(contactus);
-//}
-
-//public ContactUsDTOs TGetById(int id)
-//{
-//    var contactUsEntity = _contactUsrepository.GetById(id);
-//    return _mapper.Map<ContactUsDTOs>(contactUsEntity);
-//}
-
-//public void THardDelete(ContactUsDTOs entity)
-//{
-//    var contactUsEntity = _mapper.Map<ContactUs>(entity);
-//    _contactUsrepository.HardDelete(contactUsEntity);
-//}
-
-//public void TUpdate(ContactUsDTOs entity)
-//{
-//    var contactUsEntity = _mapper.Map<ContactUs>(entity);
-//    _contactUsrepository.Update(contactUsEntity);
-//}

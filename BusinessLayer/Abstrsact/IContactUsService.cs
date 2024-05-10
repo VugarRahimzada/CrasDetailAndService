@@ -1,4 +1,5 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 using EntityLayer.Models;
 using System;
@@ -12,12 +13,12 @@ namespace BusinessLayer.Abstrsact
 {
     public interface IContactUsService 
     {
-        DataResult<List<ContactUsDTOs>> TGetAll();
-        DataResult<List<ContactUsDTOs>> TGetActiv();
-        DataResult<ContactUsDTOs> TGetById(int id);
-        Result TAdd(ContactUsDTOs entity);
-        Result TUpdate(ContactUsDTOs entity);
-        Result TDelete(ContactUsDTOs entity);
-        Result THardDelete(ContactUsDTOs entity);
+        IDataResult<List<ContactUsDTOs>> TGetAll();
+        IDataResult<List<ContactUsDTOs>> TGetActiv();
+        IDataResult<ContactUsDTOs> TGetById(int id);
+        IResult TAdd(ContactUsDTOs entity);
+        IResult TUpdate(ContactUsDTOs entity);
+        IResult TDelete(ContactUsDTOs entity);
+        IResult THardDelete(ContactUsDTOs entity);
     }
 }

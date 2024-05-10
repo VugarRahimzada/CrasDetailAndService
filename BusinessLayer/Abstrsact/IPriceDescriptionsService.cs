@@ -1,4 +1,5 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,13 @@ namespace BusinessLayer.Abstrsact
 {
     public interface IPriceDescriptionsService
     {
-        DataResult<List<PriceDescriptionDTOs>> TGetAll();
-        DataResult<List<PriceDescriptionDTOs>> TGetActiv();
-        DataResult<PriceDescriptionDTOs> TGetById(int id);
-        Result TAdd(PriceDescriptionDTOs entity);
-        Result TUpdate(PriceDescriptionDTOs entity);
-        Result TDelete(PriceDescriptionDTOs entity);
-        Result THardDelete(PriceDescriptionDTOs entity);
-        DataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId);
+        IDataResult<List<PriceDescriptionDTOs>> TGetAll();
+        IDataResult<List<PriceDescriptionDTOs>> TGetActiv();
+        IDataResult<PriceDescriptionDTOs> TGetById(int id);
+        IResult TAdd(PriceDescriptionDTOs entity);
+        IResult TUpdate(PriceDescriptionDTOs entity);
+        IResult TDelete(PriceDescriptionDTOs entity);
+        IResult THardDelete(PriceDescriptionDTOs entity);
+        IDataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId);
     }
 }

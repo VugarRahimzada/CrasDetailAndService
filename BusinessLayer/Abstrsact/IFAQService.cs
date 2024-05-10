@@ -1,4 +1,5 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace BusinessLayer.Abstrsact
 {
 	public interface IFAQService 
 	{
-		DataResult<List<FAQDTOs>> TGetAll();
-		DataResult<List<FAQDTOs>> TGetActiv();
-		DataResult<FAQDTOs> TGetById(int id);
-		Result TAdd(FAQDTOs entity);
-		Result TUpdate(FAQDTOs entity);
-		Result TDelete(FAQDTOs entity);
-		Result THardDelete(FAQDTOs entity);
+		IDataResult<List<FAQDTOs>> TGetAll();
+        IDataResult<List<FAQDTOs>> TGetActiv();
+        IDataResult<FAQDTOs> TGetById(int id);
+		IResult TAdd(FAQDTOs entity);
+        IResult TUpdate(FAQDTOs entity);
+        IResult TDelete(FAQDTOs entity);
+        IResult THardDelete(FAQDTOs entity);
 	}
 }

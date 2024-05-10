@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Abstrsact;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Controllers
 {
     public class ServiceController : Controller
     {
+        private readonly IServiceService _serviceService;
+
+        public ServiceController(IServiceService serviceService)
+        {
+            _serviceService = serviceService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var value = _serviceService.TGetActiv().Data;
+            return View(value);
         }
         public IActionResult ServiceDetail()
         {

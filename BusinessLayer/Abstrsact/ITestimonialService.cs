@@ -1,4 +1,5 @@
-﻿using CoreLayer.Results.Concrete;
+﻿using CoreLayer.Results.Abstract;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace BusinessLayer.Abstrsact
 {
     public interface ITestimonialService
     {
-        DataResult<List<TestimonialDTOs>> TGetAll();
-        DataResult<List<TestimonialDTOs>> TGetActiv();
-        DataResult<TestimonialDTOs> TGetById(int id);
-        Result TAdd(TestimonialDTOs entity);
-        Result TUpdate(TestimonialDTOs entity);
-        Result TDelete(TestimonialDTOs entity);
-        Result THardDelete(TestimonialDTOs entity);
+        IDataResult<List<TestimonialDTOs>> TGetAll();
+        IDataResult<List<TestimonialDTOs>> TGetActiv();
+        IDataResult<TestimonialDTOs> TGetById(int id);
+        IResult TAdd(TestimonialDTOs entity);
+        IResult TUpdate(TestimonialDTOs entity);
+        IResult TDelete(TestimonialDTOs entity);
+        IResult THardDelete(TestimonialDTOs entity);
     }
 }

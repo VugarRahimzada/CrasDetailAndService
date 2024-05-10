@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer;
@@ -27,64 +28,64 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public Result TAdd(PriceDescriptionDTOs entity)
+        public IResult TAdd(PriceDescriptionDTOs entity)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
              _priceDescriptionRepository.Add(pdes);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
 
         }
 
-        public Result TDelete(PriceDescriptionDTOs entity)
+        public IResult TDelete(PriceDescriptionDTOs entity)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
             _priceDescriptionRepository.Delete(pdes);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
         }
 
-        public DataResult<List<PriceDescriptionDTOs>> TGetActiv()
+        public IDataResult<List<PriceDescriptionDTOs>> TGetActiv()
         { 
             var pdes = _priceDescriptionRepository.GetActiv();
             var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
 
-            return new DataResult<List<PriceDescriptionDTOs>>(pdesdtos,"Uğurla Əlavə Edildi", true);
+            return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos,"Uğurla Əlavə Edildi");
         }
 
-        public DataResult<List<PriceDescriptionDTOs>> TGetAll()
+        public IDataResult<List<PriceDescriptionDTOs>> TGetAll()
         {
             var pdes = _priceDescriptionRepository.GetAll();
             var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
 
-            return new DataResult<List<PriceDescriptionDTOs>>(pdesdtos, "Uğurla Əlavə Edildi", true);
+            return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos, "Uğurla Əlavə Edildi");
         }
 
-        public DataResult<PriceDescriptionDTOs> TGetById(int id)
+        public IDataResult<PriceDescriptionDTOs> TGetById(int id)
         {
             var pdes = _priceDescriptionRepository.GetById(id);
             var pdesdtos = _mapper.Map<PriceDescriptionDTOs>(pdes);
 
-            return new DataResult<PriceDescriptionDTOs>(pdesdtos, "Uğurla Əlavə Edildi", true);
+            return new SuccessDataResult<PriceDescriptionDTOs>(pdesdtos, "Uğurla Əlavə Edildi");
         }
 
-        public Result THardDelete(PriceDescriptionDTOs entity)
+        public IResult THardDelete(PriceDescriptionDTOs entity)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
             _priceDescriptionRepository.HardDelete(pdes);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
         }
 
-        public Result TUpdate(PriceDescriptionDTOs entity)
+        public IResult TUpdate(PriceDescriptionDTOs entity)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
             _priceDescriptionRepository.Update(pdes);
-            return new Result("Uğurla Əlavə Edildi", true);
+            return new SuccessResult("Uğurla Əlavə Edildi");
         }
-        public DataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId)
+        public IDataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId)
         {
             var pdes = _priceDescriptionRepository.GetActiv().Where(p => p.PricingId == pricingId).ToList();
             var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
 
-            return new DataResult<List<PriceDescriptionDTOs>>(pdesdtos, "Uğurla Əlavə Edildi", true);
+            return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos, "Uğurla Əlavə Edildi");
         }
 
     }
