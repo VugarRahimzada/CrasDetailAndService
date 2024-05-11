@@ -45,6 +45,8 @@ namespace FinalProjectVR
             builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
             builder.Services.AddScoped<IBlogService, BlogManager>();
             builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+            builder.Services.AddScoped<ICommentService, CommentManager>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,0 +1,20 @@
+﻿
+
+<div class="post-from" data-aos="fade-up">
+    <h2 class="contact-form-title ak-white-color text-uppercase">Post A Comment</h2>
+    <div class="ak-height-25 ak-height-lg-20"></div>
+    <div class="contact-form">
+        <form asp-controller="Comment" asp-action="CommentAdd" method="post">
+            <div class="from-inputs">
+                <input placeholder="Name" type="text" name="Name" id="fristname">
+                <input placeholder="Email" type="email" name="Email" id="emailid">
+                <input type="hidden" name="BlogId" value="@ViewBag.i" />
+            </div>
+            <div class="from-textarea">
+                <textarea name="Message" rows="5" placeholder="Comment"></textarea>
+            </div>
+            <div class="ak-height-40 ak-height-lg-20"></div>
+            <button type="submit" class="common-btn">Comment At</button>
+        </form>
+    </div>
+</div>

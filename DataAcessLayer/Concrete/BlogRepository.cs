@@ -1,4 +1,5 @@
 ﻿using CoreLayer.DataAccess.Concrete;
+using CoreLayer.DefaultValues;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
 using EntityLayer.Models;
@@ -11,7 +12,15 @@ namespace DataAccessLayer.Concrete
         AppDbContext AppDbContext = new AppDbContext();
         public Blog LastOrDefault(Expression<Func<Blog, bool>> filter)
         {
-            return AppDbContext.Blogs.OrderBy(post => post.CreateTime).LastOrDefault(filter);
+            return AppDbContext.Blogs.OrderBy(post => post.CreateTime)
+                                     .LastOrDefault(filter);
+        }
+        public List<Blog> LastBlog(Expression<Func<Blog, bool>> filter)
+        {
+            return AppDbContext.Blogs.Where(filter)
+                                     .OrderByDescending(x => x.CreateTime)
+                                     .Take(DefaultConstantValue.LASTBLOG)
+                                     .ToList();
         }
     }
 

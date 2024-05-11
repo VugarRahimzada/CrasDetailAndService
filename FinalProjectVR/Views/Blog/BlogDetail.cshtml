@@ -1,4 +1,6 @@
 ﻿
+@model CoreLayer.Results.Concrete.SuccessDataResult<DTOLayer.BlogDTOs>
+
 @{
     ViewData["Title"] = "BlogDetail";
 }
@@ -9,10 +11,10 @@
     <div class="container">
         <div class="d-md-flex justify-content-between align-items-center">
             <div class="common-page-title">
-                <h3 class="page-title">Single Blog</h3>
+                <h3 class="page-title">Blog</h3>
                 <div class="d-flex gap-2 align-items-center">
                     <p>Ana Səhifə /</p>
-                <a href="/Blog/Index">Single Blog</a>
+                <a href="/Blog/Index">Blog</a>
                 </div>
             </div>
         </div>
@@ -26,8 +28,8 @@
     <div class="container container-customize">
         <div>
             <div class="time-title" data-aos="fade-up" data-aos-delay="600">
-                <p class="time">17.10.2023</p>
-                <h4 class="title">Driving with Confidence: The Crucial Role of Routine Car Maintenance</h4>
+            <p class="time">@Model.Data.CreateTime.ToString("dd/MM/yyyy")</p>
+                <h4 class="title">@Model.Data.Title</h4>
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
             <div data-aos="fade-up" data-aos-delay="700">
@@ -36,154 +38,40 @@
             </div>
 
             <div data-aos="fade-up">
-                <p class="desp">Your car is more than just a means of getting from point A to point B; it's a
-                    reliable
-                    companion on
-                    your
-                    daily journey. Just like any dependable friend, your car requires regular care to ensure it
-                    remains
-                    in
-                    peak
-                    condition. In this blog post, we'll explore why routine car maintenance is not just a choice but
-                    a
-                    commitment to a safer, smoother, and more reliable driving experience.</p>
+                <p class="desp">@Model.Data.Text</p>
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
-        </div>
-        <div class="single-blog-list" data-aos="fade-up">
-            <h4 class="single-blog-title">1. Safety on the Road:</h4>
-            <p class="single-blog-desp">
-                Safety should always be the top priority when it comes to your vehicle. Regular maintenance checks,
-                including brake inspections, tire rotations, and fluid top-ups, are vital for preventing potential
-                issues that could compromise your safety on the road. Don't wait for warning signs; be proactive in
-                keeping your vehicle's safety features in optimal condition.
-            </p>
-
-        </div>
-        <div class="single-blog-list" data-aos="fade-up">
-            <h4 class="single-blog-title">2. Longevity and Durability:</h4>
-            <p class="single-blog-desp">
-                Your car is a significant investment, and routine maintenance is the key to protecting that
-                investment.
-                Regular oil changes, filter replacements, and scheduled check-ups contribute to the longevity and
-                durability of your vehicle. Think of it as giving your car a prescription for a long and healthy
-                life on
-                the road.
-            </p>
-
-        </div>
-        <div class="single-blog-list" data-aos="fade-up">
-            <h4 class="single-blog-title">3. Improved Performance and Fuel Efficiency:</h4>
-            <p class="single-blog-desp">
-                A well-maintained car performs at its best. Regular tune-ups, air filter replacements, and fuel
-                system
-                cleanings contribute to smoother operation and improved fuel efficiency. Not only does this save you
-                money at the pump, but it also enhances the overall driving experience.
-            </p>
-
-        </div>
-        <div class="single-blog-list" data-aos="fade-up">
-            <h4 class="single-blog-title">4. Prevention is Cheaper Than Cure:</h4>
-            <p class="single-blog-desp">
-                Addressing minor issues during routine maintenance can save you from major, costly repairs down the
-                road. Ignoring warning signs or delaying maintenance might seem like a short-term cost-saving
-                measure,
-                but it often leads to more extensive and expensive problems. Invest in preventive maintenance to
-                avoid
-                unexpected breakdowns and repairs.
-            </p>
         </div>
         <div data-aos="fade-up">
             <div class="primary-color-border"></div>
 
-        </div>
+       </div>
+       @if(Model.Data.CommentCounta==0)
+       {
         <div class="ak-height-125 ak-height-lg-80"></div>
         <div class="single-blog-list" data-aos="fade-up">
             <h4 class="single-blog-title">Comment (0)</h4>
             <p class="single-blog-desp">
-                No Comment Yet! Comment post comment box is empty!
+                Bu Bloga Comment Atılmayıb!!!!
             </p>
         </div>
-        <div class="ak-height-75 ak-height-lg-30"></div>
-        <!-- End Social Share -->
-        <div class="post-from" data-aos="fade-up">
-            <h2 class="contact-form-title ak-white-color text-uppercase">Post A Comment</h2>
-            <div class="ak-height-25 ak-height-lg-20"></div>
-            <div class="contact-form">
-                <form>
-                    <div class="from-inputs">
-                        <input placeholder="Name" type="text" name="fristname" id="fristname">
-                        <input placeholder="Email" type="email" name="email" id="emailid">
-                    </div>
-                    <div class="from-textarea">
-                        <textarea name="textarea" rows="5" placeholder="Comment"></textarea>
-                    </div>
-                    <div class="ak-height-40 ak-height-lg-20"></div>
-                    <button type="submit" class="common-btn">POST COMMENT</button>
-                </form>
+       }
+       else
+       {
+        <div class="ak-height-125 ak-height-lg-80"></div>
+        <div class="single-blog-list" data-aos="fade-up">
+            <h4 class="single-blog-title">Comment (@Model.Data.CommentCounta)</h4>
+            @await Component.InvokeAsync("CommentList" , new { id = @ViewBag.i })
             </div>
-        </div>
+        }
+       
+
+    @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml", new { id = ViewBag.i })
     </div>
     <!--End blog content -->
 
 
     <!-- Start Blog -->
-    <div class="ak-height-125 ak-height-lg-80"></div>
-    <div class="container">
-        <div class="center-section-heading" data-aos="fade-up">
-            <div class="ak-section-heading ak-style-1 ak-type-1">
-                <div class="background-text">BLOGLAR</div>
-                <h2 class="ak-section-title">OXŞAR BLOGLAR</h2>
-            </div>
-        </div>
-        <div class="ak-height-50 ak-height-lg-50"></div>
-        <div class="blog">
-            <div class="blog-card" data-aos="fade-up">
-                <a href="blog-single.html">
-                    <div class="blog-header-info">
-                        <img src="~/web-cras-three.vercel.app/assets/img/blog_4.jpg" alt="...">
-                    </div>
-                </a>
-                <div class="blog-body-info">
-                    <p class="blog-text">12.11.2023</p>
-                    <a href="blog-single.html" class="blog-title">From Garage to Glory: Transform Your Vehicle's
-                        Health</a>
-                </div>
-                <div class="blog-footer-info">
-                    <a href="blog-single.html" class="more-btn">VIEW MORE</a>
-                </div>
-            </div>
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="50">
-                <a href="blog-single.html">
-                    <div class="blog-header-info">
-                    <img src="~/web-cras-three.vercel.app/assets/img/blog_5.jpg" alt="...">
-                    </div>
-                </a>
-                <div class="blog-body-info">
-                    <p class="blog-text">12.11.2023</p>
-                    <a href="blog-single.html" class="blog-title">From Garage to Glory: Transform Your Vehicle's
-                        Health</a>
-                </div>
-                <div class="blog-footer-info">
-                    <a href="blog-single.html" class="more-btn">VIEW MORE</a>
-                </div>
-            </div>
-            <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
-                <a href="blog-single.html">
-                    <div class="blog-header-info">
-                        <img src="~/web-cras-three.vercel.app/assets/img/blog_6.jpg" alt="...">
-                    </div>
-                </a>
-                <div class="blog-body-info">
-                    <p class="blog-text">12.11.2023</p>
-                    <a href="blog-single.html" class="blog-title">From Garage to Glory: Transform Your Vehicle's
-                        Health</a>
-                </div>
-                <div class="blog-footer-info">
-                    <a href="blog-single.html" class="more-btn">VIEW MORE</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("LastBlogs")
     <!-- End Blog -->
 

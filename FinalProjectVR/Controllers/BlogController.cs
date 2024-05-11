@@ -17,9 +17,11 @@ namespace FinalProjectVR.Controllers
             var value = _blogservice.TGetActiv();
             return View(value);
         }
-        public IActionResult BlogDetail()
+        public IActionResult BlogDetail(int id)
         {
-            return View();
+            ViewBag.i = id;
+            var valubyid =  _blogservice.TGetById(id);
+            return View(valubyid);
         }
     }
 }

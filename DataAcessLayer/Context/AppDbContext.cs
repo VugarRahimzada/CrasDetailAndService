@@ -14,7 +14,7 @@ namespace DataAccessLayer.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=VR;Database=CrasFinalProject3Db;Trusted_Connection=True;Encrypt=false;");
+            optionsBuilder.UseSqlServer(@"Server=VR;Database=CrasFinalProject5Db;Trusted_Connection=True;Encrypt=false;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240509204532_inital")]
-    partial class inital
+    [Migration("20240511122736_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,9 +57,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(2000)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Id", "Delete")
-                        .IsUnique();
 
                     b.ToTable("Abouts");
                 });
@@ -114,7 +111,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("Email", "Delete")
                         .IsUnique();
 
                     b.ToTable("Appointments");
@@ -156,7 +153,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("Title", "Delete")
                         .IsUnique();
 
                     b.ToTable("Blogs");
@@ -165,7 +162,10 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
@@ -178,7 +178,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -186,49 +187,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id", "Delete")
-                        .IsUnique();
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("EntityLayer.Models.Contact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Delete")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -238,10 +196,12 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BlogId");
+
                     b.HasIndex("Id", "Delete")
                         .IsUnique();
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("EntityLayer.Models.ContactUs", b =>
@@ -288,7 +248,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("Email", "Delete")
                         .IsUnique();
 
                     b.ToTable("ContactUses");
@@ -379,7 +339,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("PricingId");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("LicensePlate", "Delete")
                         .IsUnique();
 
                     b.ToTable("Orders");
@@ -488,6 +448,9 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Title", "Delete")
+                        .IsUnique();
+
                     b.ToTable("Process");
                 });
 
@@ -514,15 +477,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -533,7 +487,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("Title", "Delete")
                         .IsUnique();
 
                     b.ToTable("Services");
@@ -583,7 +537,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id", "Delete")
+                    b.HasIndex("Name", "Delete")
                         .IsUnique();
 
                     b.ToTable("Teams");
@@ -633,7 +587,7 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Models.Blog", "Blog")
                         .WithMany("Comment")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

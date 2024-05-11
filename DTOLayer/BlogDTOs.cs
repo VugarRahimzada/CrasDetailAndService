@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace DTOLayer
         public string Text { get; set; }
         public int CommentCounta { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime CreateTime { get; set; } 
+        public int Id { get; set; }
+        public DateTime CreateTime { get; set; }
+        public List<Comment> Comment { get; set; }
     }
 }

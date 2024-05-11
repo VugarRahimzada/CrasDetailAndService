@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class inital : Migration
+    public partial class Inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,24 +66,6 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Blogs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contacts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Delete = table.Column<int>(type: "int", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,8 +149,6 @@ namespace DataAccessLayer.Migrations
                     Title = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Delete = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -220,10 +200,10 @@ namespace DataAccessLayer.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     BlogId = table.Column<int>(type: "int", nullable: false),
                     Delete = table.Column<int>(type: "int", nullable: false),
@@ -234,8 +214,8 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Blogs_Id",
-                        column: x => x.Id,
+                        name: "FK_Comments_Blogs_BlogId",
+                        column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -292,22 +272,21 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Abouts_Id_Delete",
-                table: "Abouts",
-                columns: new[] { "Id", "Delete" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_Id_Delete",
+                name: "IX_Appointments_Email_Delete",
                 table: "Appointments",
-                columns: new[] { "Id", "Delete" },
+                columns: new[] { "Email", "Delete" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Blogs_Id_Delete",
+                name: "IX_Blogs_Title_Delete",
                 table: "Blogs",
-                columns: new[] { "Id", "Delete" },
+                columns: new[] { "Title", "Delete" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_BlogId",
+                table: "Comments",
+                column: "BlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_Id_Delete",
@@ -316,15 +295,9 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contacts_Id_Delete",
-                table: "Contacts",
-                columns: new[] { "Id", "Delete" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ContactUses_Id_Delete",
+                name: "IX_ContactUses_Email_Delete",
                 table: "ContactUses",
-                columns: new[] { "Id", "Delete" },
+                columns: new[] { "Email", "Delete" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -334,15 +307,15 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_Id_Delete",
-                table: "Orders",
-                columns: new[] { "Id", "Delete" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_LicensePlate",
                 table: "Orders",
                 column: "LicensePlate",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_LicensePlate_Delete",
+                table: "Orders",
+                columns: new[] { "LicensePlate", "Delete" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -368,15 +341,21 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_Id_Delete",
-                table: "Services",
-                columns: new[] { "Id", "Delete" },
+                name: "IX_Process_Title_Delete",
+                table: "Process",
+                columns: new[] { "Title", "Delete" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Id_Delete",
+                name: "IX_Services_Title_Delete",
+                table: "Services",
+                columns: new[] { "Title", "Delete" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Name_Delete",
                 table: "Teams",
-                columns: new[] { "Id", "Delete" },
+                columns: new[] { "Name", "Delete" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -396,9 +375,6 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "ContactUses");

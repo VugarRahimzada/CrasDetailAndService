@@ -10,6 +10,7 @@ using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,6 +80,14 @@ namespace BusinessLayer.Concrete
             var blogdto = _mapper.Map<BlogDTOs>(blog);
 
             return new SuccessDataResult<BlogDTOs>(blogdto);
+        }
+
+        public IDataResult<List<BlogDTOs>> TLastBlog()
+        {
+            var blog = _blogRepository.LastBlog(x => x.Delete == 0);
+            var blogdto = _mapper.Map<List<BlogDTOs>>(blog);
+
+            return new SuccessDataResult<List<BlogDTOs>>(blogdto);
         }
     }
 }

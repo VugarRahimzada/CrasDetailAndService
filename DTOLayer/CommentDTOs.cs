@@ -9,7 +9,6 @@ namespace DTOLayer
     public class CommentDTOs
     {
         public string Name { get; set; }
-        public string Suraname { get; set; }
         public string Email { get; set; }
         public string Message { get; set; }
         public int BlogId { get; set; }

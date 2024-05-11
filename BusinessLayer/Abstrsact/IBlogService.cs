@@ -1,8 +1,10 @@
 ﻿using CoreLayer.Results.Abstract;
 using DTOLayer;
+using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,5 +20,6 @@ namespace BusinessLayer.Abstrsact
         IResult TDelete(BlogDTOs entity);
         IResult THardDelete(BlogDTOs entity);
         IDataResult<BlogDTOs> TLastOrDefault();
+        IDataResult<List<BlogDTOs>> TLastBlog();
     }
 }

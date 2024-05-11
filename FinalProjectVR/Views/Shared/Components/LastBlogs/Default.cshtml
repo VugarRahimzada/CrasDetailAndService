@@ -1,0 +1,34 @@
+﻿<div class="ak-height-125 ak-height-lg-80"></div>
+<div class="container">
+    <div class="center-section-heading" data-aos="fade-up">
+        <div class="ak-section-heading ak-style-1 ak-type-1">
+            <div class="background-text">BLOGLAR</div>
+            <h2 class="ak-section-title">OXŞAR BLOGLAR</h2>
+        </div>
+    </div>
+    <div class="row flex-nowrap overflow-auto">
+        @foreach (var item in Model.Data)
+        {
+            <div class="col-sm-4">
+                <div class="blog">
+                    <div class="blog-card" data-aos="fade-up">
+                        <a href="~/Blog/BlogDetail/@item.Id">
+                            <div class="blog-header-info">
+                                <img src="~/web-cras-three.vercel.app/assets/img/blog_4.jpg" alt="...">
+                            </div>
+                        </a>
+                        <div class="blog-body-info">
+                            <p class="blog-text">@item.CreateTime.ToString("dd/MM/yyyy")</p> 
+                            <a href="~/Blog/BlogDetail/@item.Id" class="blog-title">
+                                @item.Title
+                            </a>
+                        </div>
+                        <div class="blog-footer-info">
+                            <a href="~/Blog/BlogDetail/@item.Id" class="more-btn">Davamını Oxu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
