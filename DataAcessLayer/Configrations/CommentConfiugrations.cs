@@ -15,6 +15,7 @@ namespace DataAccessLayer.Configrations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x=>x.Message).IsRequired().HasMaxLength(1000);
+            builder.HasOne(x => x.Blog).WithMany(x => x.Comment).HasForeignKey(x => x.BlogId);
             builder.HasIndex(x => new { x.Id, x.Delete }).IsUnique();
         }
     }
