@@ -26,9 +26,8 @@ namespace FinalProjectVR.Controllers
             return View(value);
         }
 
-       
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Order()
         {
             var pricingOptions = _pricingService.TGetActiv().Data.Select(x => new SelectListItem
@@ -47,5 +46,14 @@ namespace FinalProjectVR.Controllers
             _orderService.TAdd(orderDTOs);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult GetOrderer(string licenseplate)
+        {
+            var order = _orderService.FirstOrDefault(licenseplate).Data;
+            return View(order);
+        }
+
+
     }
 }

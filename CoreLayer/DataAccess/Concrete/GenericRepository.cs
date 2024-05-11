@@ -3,6 +3,7 @@ using CoreLayer.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace CoreLayer.DataAccess.Concrete
 {
@@ -75,5 +76,15 @@ namespace CoreLayer.DataAccess.Concrete
                 return context.Set<TEntity>().Where(x=>x.Delete == 0).ToList();
             }
         }
+
+
+
+        //public TEntity FristOrDefault(Expression<Func<TEntity, bool>> filter)
+        //{
+        //    using (TContext context = new TContext())
+        //    {
+        //        return context.Set<TEntity>().FirstOrDefault(filter);
+        //    }
+        //}
     }
 }

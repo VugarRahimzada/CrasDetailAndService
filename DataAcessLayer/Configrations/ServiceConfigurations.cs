@@ -16,8 +16,6 @@ namespace DataAccessLayer.Configrations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(500);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
-            builder.Property(x => x.Text).IsRequired();
-            builder.Property(x => x.ImageUrl).IsRequired().HasMaxLength(200);
             builder.HasIndex(x => new { x.Title, x.Delete }).IsUnique();
         }
     }

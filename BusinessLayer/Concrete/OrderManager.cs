@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,14 @@ namespace BusinessLayer.Concrete
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+        }
+
+        public IDataResult<OrderDTOs> FirstOrDefault(string licenseplate)
+        {
+            var orderplate = _orderRepository.FirstOrDefault(x => x.LicensePlate == licenseplate);
+            var orderplatedto = _mapper.Map<OrderDTOs>(orderplate);
+
+            return new SuccessDataResult<OrderDTOs>(orderplatedto);
         }
 
         public IResult TAdd(OrderDTOs entity)
