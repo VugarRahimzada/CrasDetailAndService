@@ -11,5 +11,7 @@ namespace DTOLayer
         public string Misson { get; set; }
         public string Vision { get; set; }
         public string History { get; set; }
+        public int Id { get; set; }
+        public int Delete { get; set; }
     }
 }

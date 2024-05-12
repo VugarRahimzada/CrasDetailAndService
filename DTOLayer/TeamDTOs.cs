@@ -13,5 +13,7 @@ namespace DTOLayer
         public string Position { get; set; }
         public string ImageUrl { get; set; }
         public string? LinkedInUrl { get; set; }
+        public int Id { get; set; }
+        public int Delete { get; set; }
     }
 }

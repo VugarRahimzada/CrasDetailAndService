@@ -17,11 +17,13 @@ namespace BusinessLayer.Concrete
     public class CommentManager : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IBlogRepository _blogRepository;
         private readonly IMapper _mapper;
 
-        public CommentManager(ICommentRepository commentRepository, IMapper mapper)
+        public CommentManager(ICommentRepository commentRepository, IBlogRepository blogRepository, IMapper mapper)
         {
             _commentRepository = commentRepository;
+            _blogRepository = blogRepository;
             _mapper = mapper;
         }
 
@@ -29,27 +31,49 @@ namespace BusinessLayer.Concrete
         {
             var comment = _mapper.Map<Comment>(entity);
             _commentRepository.Add(comment);
+            _blogRepository.IncreesCommentCounta(entity.BlogId);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
         public IResult TDelete(CommentDTOs entity)
         {
-            throw new NotImplementedException();
+            var comment = _mapper.Map<Comment>(entity);
+            _commentRepository.Delete(comment);
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+        public IResult THardDelete(CommentDTOs entity)
+        {
+            var comment = _mapper.Map<Comment>(entity);
+            _commentRepository.HardDelete(comment);
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+
+        public IResult TUpdate(CommentDTOs entity)
+        {
+            var comment = _mapper.Map<Comment>(entity);
+            _commentRepository.Delete(comment);
+            return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
         public IDataResult<List<CommentDTOs>> TGetActiv()
         {
-            throw new NotImplementedException();
+            var comment = _commentRepository.GetActiv();
+            var commentdto = _mapper.Map<List<CommentDTOs>>(comment);
+            return new SuccessDataResult<List<CommentDTOs>>(commentdto);
         }
 
         public IDataResult<List<CommentDTOs>> TGetAll()
         {
-            throw new NotImplementedException();
+            var comment = _commentRepository.GetAll();
+            var commentdto = _mapper.Map<List<CommentDTOs>>(comment);
+            return new SuccessDataResult<List<CommentDTOs>>(commentdto);
         }
 
         public IDataResult<CommentDTOs> TGetById(int id)
         {
-            throw new NotImplementedException();
+            var comment = _commentRepository.GetById(id);
+            var commentdto = _mapper.Map<CommentDTOs>(comment);
+            return new SuccessDataResult<CommentDTOs>(commentdto);
         }
 
         public IDataResult<List<CommentDTOs>> TGetCommentsById(int id)
@@ -59,14 +83,5 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<List<CommentDTOs>>(commnetdto);
         }
 
-        public IResult THardDelete(CommentDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult TUpdate(CommentDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

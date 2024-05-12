@@ -1,0 +1,46 @@
+﻿@model List<DTOLayer.FAQDTOs>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+   <h1>FAQ</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sual</th>
+                <th>Cavab</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Question</td>
+                    <td>@item.Answer</td>
+                    <td>
+                        @if (item.Delete == 0)
+                        {
+                            <span class="badge badge-success">Aktiv</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-warning">Passiv</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="~/Admin/FAQ/UpdateFAQ/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                        <a href="~/Admin/FAQ/DeleteFAQ/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                        <a href="~/Admin/FAQ/HardDeleteFAQ/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+<a href="/Admin/FAQ/AddFaq" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>

@@ -22,6 +22,13 @@ namespace DataAccessLayer.Concrete
                                      .Take(DefaultConstantValue.LASTBLOG)
                                      .ToList();
         }
+
+        public void IncreesCommentCounta(int id)
+        {
+            AppDbContext.Blogs.Find(id).CommentCounta++;
+            AppDbContext.SaveChanges();
+        }
+
     }
 
 }

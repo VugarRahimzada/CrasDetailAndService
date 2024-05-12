@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
@@ -30,14 +31,29 @@ namespace BusinessLayer.Concrete
         {
             var contactus = _mapper.Map<ContactUs>(entity);
             _contactUsrepository.Add(contactus);
-            return new SuccessResult("Uğurla Əlavə Edildi");
+            return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
         public IResult TDelete(ContactUsDTOs entity)
         {
-            throw new NotImplementedException();
+            var contactus = _mapper.Map<ContactUs>(entity);
+            _contactUsrepository.Delete(contactus);
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
+        public IResult THardDelete(ContactUsDTOs entity)
+        {
+            var contactus = _mapper.Map<ContactUs>(entity);
+            _contactUsrepository.HardDelete(contactus);
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+
+        public IResult TUpdate(ContactUsDTOs entity)
+        {
+            var contactus = _mapper.Map<ContactUs>(entity);
+            _contactUsrepository.Update(contactus);
+            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
+        }
         public IDataResult<List<ContactUsDTOs>> TGetActiv()
         {
 
@@ -45,29 +61,28 @@ namespace BusinessLayer.Concrete
 
             var contactUsDTOs = _mapper.Map<List<ContactUsDTOs>>(contacts);
 
-            return new SuccessDataResult<List<ContactUsDTOs>>(contactUsDTOs, "Uğurlu");
+            return new SuccessDataResult<List<ContactUsDTOs>>(contactUsDTOs);
 
         }
 
         public IDataResult<List<ContactUsDTOs>> TGetAll()
         {
-            throw new NotImplementedException();
+            var contacts = _contactUsrepository.GetAll();
+
+            var contactUsDTOs = _mapper.Map<List<ContactUsDTOs>>(contacts);
+
+            return new SuccessDataResult<List<ContactUsDTOs>>(contactUsDTOs);
         }
 
         public IDataResult<ContactUsDTOs> TGetById(int id)
         {
-            throw new NotImplementedException();
+            var contacts = _contactUsrepository.GetById(id);
+
+            var contactUsDTOs = _mapper.Map<ContactUsDTOs>(contacts);
+
+            return new SuccessDataResult<ContactUsDTOs>(contactUsDTOs);
         }
 
-        public IResult THardDelete(ContactUsDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult TUpdate(ContactUsDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

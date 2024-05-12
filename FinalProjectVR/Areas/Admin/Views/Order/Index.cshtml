@@ -1,30 +1,48 @@
-﻿
-@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.OrderDTOs>>
+﻿@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.OrderDTOs>>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Sifarişlər</h1>
 
 <table class="table table-bordered">
-    <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>LicensePlate</th>
-        <th>Pricing</th>
-    </tr>
-
-    @foreach (var item in Model.Data)
-    {
+    <thead>
         <tr>
-            <td>@item.Name @item.Surname</td>
-            <td>@item.Email</td>
-            <td>@item.LicensePlate</td>
-            <td>@item.PricingId</td>
-            
-
+            <th>Adı Soyadı</th>
+            <th>Email</th>
+            <th>Qeydiyyat Nişanı</th>
+            <th>Qiymet</th>
+            <th>Bitiş Tarixi</th>
+            <th>Activlik</th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>@item.Name @item.Surname</td>
+                <td>@item.Email</td>
+                <td>@item.LicensePlate</td>
+                <td>@item.PricingId</td>
+                <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (item.Delete == 0)
+                    {
+                        <span class="badge badge-success">Aktiv</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">Passiv</span>
+                    }
+                </td>
+                <td><a href="~/Admin/Order/UpdateOrder/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                <a href="~/Admin/Order/DeleteOrder/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                <a href="~/Admin/Order/HardDeleteOrder/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a></td>
+            </tr>
+        }
+    </tbody>
 </table>
 
+<a href="/Admin/Order/ExportExelOrder" class="btn btn-primary">Sifariş Cədvəli Yüklə</a>

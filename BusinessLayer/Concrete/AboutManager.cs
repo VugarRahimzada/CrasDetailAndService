@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
@@ -28,35 +29,35 @@ namespace BusinessLayer.Concrete
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Add(about);
-            return new SuccessResult("Uğurlu");
+            return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
         public IResult TDelete(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Delete(about);
-            return new SuccessResult("Uğurlu");
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
         public IResult THardDelete(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.HardDelete(about);
-            return new SuccessResult("Uğurlu");
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
         public IResult TUpdate(AboutDTOs entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Update(about);
-            return new SuccessResult("Uğurlu");
+            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
         public IDataResult<List<AboutDTOs>> TGetActiv()
         {
             var about = _aboutRepository.GetActiv();
             var aboutdtos = _mapper.Map<List<AboutDTOs>>(about);
 
-            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu");
+            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos);
         }
 
         public IDataResult<List<AboutDTOs>> TGetAll()
@@ -64,7 +65,7 @@ namespace BusinessLayer.Concrete
             var about = _aboutRepository.GetAll();
             var aboutdtos = _mapper.Map<List<AboutDTOs>>(about);
 
-            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos, "Uğurlu");
+            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos);
         }
 
         public IDataResult<AboutDTOs> TGetById(int id)
@@ -72,7 +73,7 @@ namespace BusinessLayer.Concrete
             var about = _aboutRepository.GetById(id);
             var aboutdtos = _mapper.Map<AboutDTOs>(about);
 
-            return new SuccessDataResult<AboutDTOs>(aboutdtos, "Uğurlu");
+            return new SuccessDataResult<AboutDTOs>(aboutdtos);
         }
 
     }

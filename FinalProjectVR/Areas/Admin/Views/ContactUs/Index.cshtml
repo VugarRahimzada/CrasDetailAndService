@@ -10,24 +10,39 @@
 <h1>Contact Us</h1>
 
 
-    <table class="table table-bordered">
-        <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Subject</th>
-            <th>Message</th>
-        </tr>
+<table class="table table-bordered">
+    <tr>
 
-        @foreach (var item in Model.Data)
-        {
-            <tr>
-                <td>@item.Name @item.Surname</td>
-                <td>@item.Email</td>
-                <td>@item.Subject</td>
-                <td>@item.Message</td>
-            </tr>
-        }
-    </table>
+        <th>Adı Soyadı</th>
+        <th>Email</th>
+        <th>Başlıq</th>
+        <th>Messaj</th>
+        <th>Activlik</th>
+    </tr>
+
+    @foreach (var item in Model.Data)
+    {
+        <tr>
+            <td>@item.Name @item.Surname</td>
+            <td>@item.Email</td>
+            <td>@item.Subject</td>
+            <td>@item.Message</td>
+            <td>
+                @if (item.Delete == 0)
+                {
+                    <span class="badge badge-success">Aktiv</span>
+                }
+                else
+                {
+                    <span class="badge badge-warning">Passiv</span>
+                }
+            </td>
+            <td><a href="~/Admin/ContactUs/UpdateContactUs/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+            <a href="~/Admin/ContactUs/DeleteContactUs/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+            <a href="~/Admin/ContactUs/HardDeleteContactUs/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a></td>
+        </tr>
+    }
+</table>
 
 
 

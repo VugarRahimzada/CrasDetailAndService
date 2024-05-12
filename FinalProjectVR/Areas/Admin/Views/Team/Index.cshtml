@@ -1,0 +1,46 @@
+﻿@model List<DTOLayer.TeamDTOs>
+
+
+
+<h1>Komanda Üzvləri</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyadı</th>
+            <th>Vəzifə</th>
+            <th>Aktivlik</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.Position</td>
+                <td>
+                    @if (item.Delete == 0)
+                    {
+                        <span class="badge badge-success">Aktiv</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">Passiv</span>
+                    }
+                </td>
+                <td>
+                    <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                    <a href="~/Admin/Team/DeleteTeam/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                    <a href="~/Admin/Team/HardDeleteTeam/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+         
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="~/Admin/Team/AddTeam" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+

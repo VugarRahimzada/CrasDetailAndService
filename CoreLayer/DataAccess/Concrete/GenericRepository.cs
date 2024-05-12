@@ -25,10 +25,20 @@ namespace CoreLayer.DataAccess.Concrete
         {
             using (TContext context = new TContext())
             {
+                if (entity.Delete==0)
+                {
                 var deleteEntity = context.Entry(entity);
                 deleteEntity.State = EntityState.Modified;
                 entity.Delete = entity.Id;
                 entity.UpdateTime = DateTime.Now;
+                }
+                else
+                {
+                    var deleteEntity = context.Entry(entity);
+                    deleteEntity.State = EntityState.Modified;
+                    entity.Delete = 0;
+                    entity.UpdateTime = DateTime.Now;
+                }
                 context.SaveChanges();
             }
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
@@ -31,7 +32,7 @@ namespace BusinessLayer.Concrete
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Add(team);
 
-            return new SuccessResult("Uğurla Əlavə Edildi");
+            return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
       
 
@@ -40,7 +41,7 @@ namespace BusinessLayer.Concrete
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Delete(team);
 
-            return new SuccessResult("Uğurla Əlavə Edildi");
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
         public IResult THardDelete(TeamDTOs entity)
@@ -48,7 +49,7 @@ namespace BusinessLayer.Concrete
             var team = _mapper.Map<Team>(entity);
             _teamRepository.HardDelete(team);
 
-            return new SuccessResult("Uğurla Əlavə Edildi");
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
         public IResult TUpdate(TeamDTOs entity)
@@ -56,13 +57,13 @@ namespace BusinessLayer.Concrete
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Update(team);
 
-            return new SuccessResult("Uğurla Əlavə Edildi");
+            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
         public IDataResult<List<TeamDTOs>> TGetActiv()
         {
             var team = _teamRepository.GetActiv();
             var teamdto = _mapper.Map<List<TeamDTOs>>(team);
-            return new SuccessDataResult<List<TeamDTOs>>(teamdto,"Uğurlu");
+            return new SuccessDataResult<List<TeamDTOs>>(teamdto);
 
         }
 
@@ -70,14 +71,14 @@ namespace BusinessLayer.Concrete
         {
             var team = _teamRepository.GetAll();
             var teamdto = _mapper.Map<List<TeamDTOs>>(team);
-            return new SuccessDataResult<List<TeamDTOs>>(teamdto, "Uğurlu");
+            return new SuccessDataResult<List<TeamDTOs>>(teamdto);
         }
 
         public IDataResult<TeamDTOs> TGetById(int id)
         {
             var team = _teamRepository.GetById(id);
             var teamdto = _mapper.Map<TeamDTOs>(team);
-            return new SuccessDataResult<TeamDTOs>(teamdto, "Uğurlu");
+            return new SuccessDataResult<TeamDTOs>(teamdto);
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
@@ -26,41 +27,59 @@ namespace BusinessLayer.Concrete
 
         public IResult TAdd(PricingDTOs entity)
         {
-            throw new NotImplementedException();
+            var pricing = _mapper.Map<Pricing>(entity);
+            _pricingRepository.Add(pricing);
+
+            return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
         public IResult TDelete(PricingDTOs entity)
         {
-            throw new NotImplementedException();
+            var pricing = _mapper.Map<Pricing>(entity);
+            _pricingRepository.Delete(pricing);
+
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+        public IResult THardDelete(PricingDTOs entity)
+        {
+            var pricing = _mapper.Map<Pricing>(entity);
+            _pricingRepository.HardDelete(pricing);
+
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+
+        public IResult TUpdate(PricingDTOs entity)
+        {
+            var pricing = _mapper.Map<Pricing>(entity);
+            _pricingRepository.Update(pricing);
+
+            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
         public IDataResult<List<PricingDTOs>> TGetActiv()
         {
             var pricing = _pricingRepository.GetActiv();
             var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
 
-            return new SuccessDataResult<List<PricingDTOs>>(pricingdtos, "Uğurlu");
+            return new SuccessDataResult<List<PricingDTOs>>(pricingdtos);
 
         }
 
         public IDataResult<List<PricingDTOs>> TGetAll()
         {
-            throw new NotImplementedException();
+            var pricing = _pricingRepository.GetAll();
+            var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
+
+            return new SuccessDataResult<List<PricingDTOs>>(pricingdtos);
         }
 
         public IDataResult<PricingDTOs> TGetById(int id)
         {
-            throw new NotImplementedException();
+            var pricing = _pricingRepository.GetById(id);
+            var pricingdtos = _mapper.Map<PricingDTOs>(pricing);
+
+            return new SuccessDataResult<PricingDTOs>(pricingdtos);
         }
 
-        public IResult THardDelete(PricingDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult TUpdate(PricingDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

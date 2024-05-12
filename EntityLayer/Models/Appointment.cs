@@ -13,6 +13,7 @@ namespace EntityLayer.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        //DropDpwnList
         public string VehicelType { get; set; }
         public string Message { get; set; }
         public DateTime SelectDate { get; set; }

@@ -20,6 +20,7 @@ namespace BusinessLayer.Abstrsact
         IResult TDelete(OrderDTOs entity);
         IResult THardDelete(OrderDTOs entity);
         IDataResult<OrderDTOs> FirstOrDefault(string licenseplate);
+        IDataResult<MemoryStream> ExportExelOrder();
 
     }
 }

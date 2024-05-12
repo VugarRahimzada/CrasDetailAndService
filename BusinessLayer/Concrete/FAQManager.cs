@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
+using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
@@ -29,14 +30,27 @@ namespace BusinessLayer.Concrete
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Add(faq);
-			return new SuccessResult("Uğurla Əlavə Edildi");
+			return new SuccessResult(UIMessage.ADD_SUCCESS);
 		}
 
 		public IResult TDelete(FAQDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Delete(faq);
-			return new SuccessResult("Uğurla Silindi ");
+			return new SuccessResult(UIMessage.DELETE_SUCCESS);
+		}
+		public IResult THardDelete(FAQDTOs entity)
+		{
+			var faq = _mapper.Map<FAQ>(entity);
+			_faqrepository.HardDelete(faq);
+			return new SuccessResult(UIMessage.DELETE_SUCCESS);
+		}
+
+		public IResult TUpdate(FAQDTOs entity)
+		{
+			var faq = _mapper.Map<FAQ>(entity);
+			_faqrepository.Update(faq);
+			return new SuccessResult(UIMessage.UPDATE_SUCCESS);
 		}
 
 		public IDataResult<List<FAQDTOs>> TGetActiv()
@@ -44,7 +58,7 @@ namespace BusinessLayer.Concrete
 			var faq = _faqrepository.GetActiv();
 			var faqdtos = _mapper.Map<List<FAQDTOs>>(faq);
 
-			return new SuccessDataResult<List<FAQDTOs>>(faqdtos, "Uğurlu");
+			return new SuccessDataResult<List<FAQDTOs>>(faqdtos);
 		}
 
 		public IDataResult<List<FAQDTOs>> TGetAll()
@@ -52,7 +66,7 @@ namespace BusinessLayer.Concrete
 			var faq = _faqrepository.GetAll();
 			var faqdtos = _mapper.Map<List<FAQDTOs>>(faq);
 
-			return new SuccessDataResult<List<FAQDTOs>>(faqdtos, "Uğurlu");
+			return new SuccessDataResult<List<FAQDTOs>>(faqdtos);
 		}
 
 		public IDataResult<FAQDTOs> TGetById(int id)
@@ -60,21 +74,8 @@ namespace BusinessLayer.Concrete
 			var faq = _faqrepository.GetById(id);
 			var faqdtos = _mapper.Map<FAQDTOs>(faq);
 
-			return new SuccessDataResult<FAQDTOs>(faqdtos, "Uğurlu");
+			return new SuccessDataResult<FAQDTOs>(faqdtos);
 		}
 
-		public IResult THardDelete(FAQDTOs entity)
-		{
-			var faq = _mapper.Map<FAQ>(entity);
-			_faqrepository.HardDelete(faq);
-			return new SuccessResult("Uğurla DataBasadan Silindi");
-		}
-
-		public IResult TUpdate(FAQDTOs entity)
-		{
-			var faq = _mapper.Map<FAQ>(entity);
-			_faqrepository.Update(faq);
-			return new SuccessResult("Uğurla Yenil'ndi");
-		}
 	}
 }
