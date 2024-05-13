@@ -11,5 +11,6 @@ namespace DTOLayer
         public string Title { get; set; }
         public double Price { get; set; }
         public int Id { get; set; }
+        public int Delete { get; set; }
     }
 }

@@ -23,5 +23,19 @@ namespace DataAccessLayer.Concrete
         {
             return _appDbContext.Orders.FirstOrDefault(filter);
         }
+        public List<Order> CheckOrderDeadline(Expression<Func<Order, bool>> filter)
+        {
+            var value =  _appDbContext.Orders.Where(filter).ToList();
+
+
+            foreach (var item in value)
+            {
+                item.Delete = item.Id;
+                
+            }
+           _appDbContext.SaveChanges();
+            return value;
+        }
+
     }
 }

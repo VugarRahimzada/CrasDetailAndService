@@ -63,6 +63,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<OrderDTOs>> TGetActiv()
         {
+            var value = _orderRepository.CheckOrderDeadline(x => x.Deadline < DateTime.Now && x.Delete == 0);
             var order = _orderRepository.GetActiv();
 
             var oderderdto = _mapper.Map<List<OrderDTOs>>(order);
@@ -72,6 +73,9 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<OrderDTOs>> TGetAll()
         {
+
+       
+            var value = _orderRepository.CheckOrderDeadline(x=>x.Deadline<DateTime.Now && x.Delete == 0);
             var order = _orderRepository.GetAll();
 
             var oderderdto = _mapper.Map<List<OrderDTOs>>(order);

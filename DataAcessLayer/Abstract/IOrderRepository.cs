@@ -15,5 +15,6 @@ namespace DataAccessLayer.Abstract
     {
 
         Order FirstOrDefault(Expression<Func<Order, bool>> filter);
+        List<Order> CheckOrderDeadline(Expression<Func<Order, bool>> filter);
     }
 }

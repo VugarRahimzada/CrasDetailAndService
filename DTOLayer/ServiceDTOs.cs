@@ -11,5 +11,7 @@ namespace DTOLayer
         public string Title { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }
+        public int Id { get; set; }
+        public int Delete { get; set; }
     }
 }
