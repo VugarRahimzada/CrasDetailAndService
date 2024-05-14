@@ -44,6 +44,8 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _contactUsService.TDelete(value);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
         public IActionResult HardDeleteContactUs(int id)
         {
             var value = _contactUsService.TGetById(id).Data;

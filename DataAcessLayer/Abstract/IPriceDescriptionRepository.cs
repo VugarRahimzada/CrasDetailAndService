@@ -5,6 +5,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface IPriceDescriptionRepository : IGenericRepository<PriceDescription>
     {
+        List<PriceDescription> GetOrderWithPricingCategory();
     }
 
 }

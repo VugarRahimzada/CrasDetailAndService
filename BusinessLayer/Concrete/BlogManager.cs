@@ -49,7 +49,7 @@ namespace BusinessLayer.Concrete
         public IResult TUpdate(BlogDTOs entity)
         {
             var blog = _mapper.Map<Blog>(entity);
-            _blogRepository.Add(blog);
+            _blogRepository.Update(blog);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
 
@@ -62,7 +62,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<BlogDTOs>> TGetAll()
         {
-            var blog = _blogRepository.GetActiv();
+            var blog = _blogRepository.GetAll();
             var blogdto = _mapper.Map<List<BlogDTOs>>(blog);
             return new SuccessDataResult<List<BlogDTOs>>(blogdto,UIMessage.SUCCESS);
         }

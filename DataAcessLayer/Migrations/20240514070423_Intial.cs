@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class Inital : Migration
+    public partial class Intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,24 +120,6 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pricings", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Process",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Delete = table.Column<int>(type: "int", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Process", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -278,9 +260,15 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Blogs_Title_Delete",
+                name: "IX_Blogs_Id_Delete",
                 table: "Blogs",
-                columns: new[] { "Title", "Delete" },
+                columns: new[] { "Id", "Delete" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_Title",
+                table: "Blogs",
+                column: "Title",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -341,12 +329,6 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Process_Title_Delete",
-                table: "Process",
-                columns: new[] { "Title", "Delete" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Services_Title_Delete",
                 table: "Services",
                 columns: new[] { "Title", "Delete" },
@@ -387,9 +369,6 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "PriceDescriptions");
-
-            migrationBuilder.DropTable(
-                name: "Process");
 
             migrationBuilder.DropTable(
                 name: "Services");

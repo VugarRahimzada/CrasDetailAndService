@@ -19,23 +19,32 @@ namespace DataAccessLayer.Concrete
 
         AppDbContext _appDbContext = new AppDbContext();
 
+
+
         public Order FirstOrDefault(Expression<Func<Order, bool>> filter)
         {
             return _appDbContext.Orders.FirstOrDefault(filter);
         }
         public List<Order> CheckOrderDeadline(Expression<Func<Order, bool>> filter)
         {
-            var value =  _appDbContext.Orders.Where(filter).ToList();
+            var value = _appDbContext.Orders.Where(filter).ToList();
 
 
             foreach (var item in value)
             {
                 item.Delete = item.Id;
-                
+
             }
-           _appDbContext.SaveChanges();
+            _appDbContext.SaveChanges();
             return value;
         }
 
+        public List<Order> GetOrderWithPricingCategory()
+        {
+            var data = _appDbContext.Orders.Include(x => x.Pricing).ToList();
+
+            return data;
+
+        }
     }
 }

@@ -13,7 +13,9 @@ namespace DataAccessLayer.Concrete
 {
     public class AboutRepository : GenericRepository<About, AppDbContext>, IAboutRepository
     {
-
+        //public AboutRepository(AppDbContext context) : base(context)
+        //{
+        //}
     }
 }
 

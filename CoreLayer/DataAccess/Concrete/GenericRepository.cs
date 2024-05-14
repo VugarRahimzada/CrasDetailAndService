@@ -11,6 +11,7 @@ namespace CoreLayer.DataAccess.Concrete
         where TEntity : BaseEntity, new()
         where TContext : DbContext, new()
     {
+
         public void Add(TEntity entity)
         {
             using (TContext context = new TContext())

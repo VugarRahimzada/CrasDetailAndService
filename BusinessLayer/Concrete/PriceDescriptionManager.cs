@@ -52,9 +52,9 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos);
         }
 
-        public IDataResult<List<PriceDescriptionDTOs>> TGetAll()
+        public IDataResult<List<PriceDescriptionDTOs>> TGetOrderWithPricingCategory()
         {
-            var pdes = _priceDescriptionRepository.GetAll();
+            var pdes = _priceDescriptionRepository.GetOrderWithPricingCategory();
             var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
 
             return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos);

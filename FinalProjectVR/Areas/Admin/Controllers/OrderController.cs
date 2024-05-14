@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Abstrsact;
 using ClosedXML.Excel;
+using CoreLayer.DefaultValues;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DTOLayer;
+using EntityLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
@@ -18,7 +20,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var value = _orderService.TGetAll();
+            var value = _orderService.GetOrderWithPricingCategory().Data;
             return View(value);
         }
 
@@ -32,7 +34,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult UpdateOrder(OrderDTOs orderDTOs)
+        public IActionResult UpdateOrder(Order orderDTOs)
         {
 
             var value = _orderService.TUpdate(orderDTOs);
@@ -60,12 +62,10 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
         }
 
-
-
         public IActionResult ExportExelOrder()
         {
             var result = _orderService.ExportExelOrder();
-            return File(result.Data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Orders.xlsx");
+            return File(result.Data, DefaultConstantValue.ExelExport, DefaultConstantValue.ExelExporFolderName);
         }
     }
 }

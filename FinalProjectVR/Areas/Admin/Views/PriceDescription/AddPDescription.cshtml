@@ -1,0 +1,42 @@
+﻿@using DTOLayer
+@model DTOLayer.PriceDescriptionDTOs
+
+@{
+    ViewData["Title"] = "AddPDescription";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>AddPDescription</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPDescription" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Ad</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricingId" class="control-label">Kateqoriya</label>
+                <select asp-for="PricingId" class="form-control">
+                    @foreach (var item in ViewData["PriceDescription"] as IEnumerable<PricingDTOs>)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@DefaultConstantValue.ADD_MESSAGE" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@DefaultConstantValue.RETURN_TO_BACK</a>
+</div>
+
+

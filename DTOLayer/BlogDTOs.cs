@@ -16,5 +16,6 @@ namespace DTOLayer
         public int Id { get; set; }
         public DateTime CreateTime { get; set; }
         public List<Comment> Comment { get; set; }
+        public int Delete { get; set; }
     }
 }

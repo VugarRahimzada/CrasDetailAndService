@@ -1,4 +1,5 @@
-﻿@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.OrderDTOs>>
+﻿@* @model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.OrderDTOs>> *@
+@model List<EntityLayer.Models.Order>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -19,13 +20,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Data)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Name @item.Surname</td>
                 <td>@item.Email</td>
                 <td>@item.LicensePlate</td>
-                <td>@item.PricingId</td>
+                <td>@item.Pricing.Title</td>
                 <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
                 <td>
                     @if (item.Delete == 0)

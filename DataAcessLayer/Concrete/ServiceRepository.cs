@@ -7,7 +7,9 @@ namespace DataAccessLayer.Concrete
 {
     public class ServiceRepository : GenericRepository<Service, AppDbContext>, IServiceRepository
     {
-
+        //public ServiceRepository(AppDbContext context) : base(context)
+        //{
+        //}
     }
 
 }

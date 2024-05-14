@@ -8,9 +8,12 @@ namespace CoreLayer.DefaultValues
 {
     public class DefaultConstantValue
     {
+        public const string ExelExport ="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        public const string ExelExporFolderName ="Orders.xlsx";
         public const int LASTBLOG = 3;
         public const string ADD_MESSAGE = "Əlavə et";
         public const string Update_MESSAGE = "Redakte et";
         public const string RETURN_TO_BACK = "Əvvələ Qayıt";
+
     }
 }

@@ -61,11 +61,15 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _teamService.TDelete(teamMember);
             return RedirectToAction("Index");
         }
+
+
+        [HttpPost]
         public IActionResult HardDeleteTeam(int id)
         {
             var teamMember = _teamService.TGetById(id).Data;
             _teamService.THardDelete(teamMember);
             return RedirectToAction("Index");
         }
+
     }
 }

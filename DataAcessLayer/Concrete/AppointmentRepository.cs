@@ -7,7 +7,9 @@ namespace DataAccessLayer.Concrete
 {
     public class AppointmentRepository : GenericRepository<Appointment, AppDbContext>, IAppointmentRepository
     {
-
+        //public AppointmentRepository(AppDbContext context) : base(context)
+        //{
+        //}
     }
 
 }

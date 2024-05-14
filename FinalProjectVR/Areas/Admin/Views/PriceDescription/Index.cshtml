@@ -1,15 +1,20 @@
-﻿@model List<DTOLayer.TeamDTOs>
+﻿@model List<DTOLayer.PriceDescriptionDTOs>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
 
 
-<h1>Komanda Üzvləri</h1>
+
+<h1>Qiymet Acıqlamaları</h1>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Ad</th>
-            <th>Soyadı</th>
-            <th>Vəzifə</th>
+            <th>Acıqlama</th>
+            <th>Qiymet Acıqlama</th>
             <th>Aktivlik</th>
             <th></th>
         </tr>
@@ -18,9 +23,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Surname</td>
-                <td>@item.Position</td>
+                <td>@item.Description</td>
+                <td>@item.Pricing.Title</td>
                 <td>
                     @if (item.Delete == 0)
                     {
@@ -32,20 +36,20 @@
                     }
                 </td>
                 <td>
-                    <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/Team/DeleteTeam/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
+                    <a href="~/Admin/PriceDescription/UpdatePDescription/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                    <a href="~/Admin/PriceDescription/DeletePDescription/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Description">
                         <i class="fas fa-trash"></i>
-                    </a>       
+                    </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="~/Admin/Team/AddTeam" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+<a href="~/Admin/PriceDescription/AddPDescription" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
 
- 
+
 
 @section Scripts {
     <script>
@@ -66,7 +70,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/Team/HardDeleteTeam/",
+                        url: "/Admin/PriceDescription/HardDeletePDescription/",
                         data: {
                             id: itemId
                         },
@@ -93,3 +97,4 @@
         });
     </script>
 }
+

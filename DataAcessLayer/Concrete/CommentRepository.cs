@@ -8,11 +8,14 @@ namespace DataAccessLayer.Concrete
 {
     public class CommentRepository : GenericRepository<Comment, AppDbContext>, ICommentRepository
     {
-        AppDbContext appdb = new AppDbContext();
+        AppDbContext Context = new AppDbContext();
+        //public CommentRepository(AppDbContext context) : base(context)
+        //{
+        //}
 
         public List<Comment> GetCommentsById(Expression<Func<Comment,bool>>filt)
         {
-            return appdb.Comments.Where(filt).ToList();
+            return Context.Comments.Where(filt).ToList();
         }
     }
 

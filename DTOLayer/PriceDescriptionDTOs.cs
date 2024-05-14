@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,8 @@ namespace DTOLayer
     {
         public string Description { get; set; }
         public int PricingId { get; set; }
+        public virtual Pricing Pricing { get; set; }
+        public int Id { get; set; }
+        public int Delete { get; set; }
     }
 }

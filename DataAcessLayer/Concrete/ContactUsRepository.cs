@@ -8,7 +8,9 @@ namespace DataAccessLayer.Concrete
 {
     public class ContactUsRepository : GenericRepository<ContactUs, AppDbContext>, IContactUsRepository
     {
-       
+        //public ContactUsRepository(AppDbContext context) : base(context)
+        //{
+        //}
     }
 
 }

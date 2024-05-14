@@ -54,7 +54,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
-        public IResult TDelete(OrderDTOs entity)
+        public IResult TDelete(Order entity)
         {
             var order = _mapper.Map<Order>(entity);
             _orderRepository.Delete(order);
@@ -71,33 +71,33 @@ namespace BusinessLayer.Concrete
 
         }
 
-        public IDataResult<List<OrderDTOs>> TGetAll()
+        public IDataResult<List<Order>> GetOrderWithPricingCategory()
         {
 
-       
-            var value = _orderRepository.CheckOrderDeadline(x=>x.Deadline<DateTime.Now && x.Delete == 0);
-            var order = _orderRepository.GetAll();
 
-            var oderderdto = _mapper.Map<List<OrderDTOs>>(order);
-            return new SuccessDataResult<List<OrderDTOs>>(oderderdto);
+            var value = _orderRepository.CheckOrderDeadline(x => x.Deadline < DateTime.Now && x.Delete == 0);
+            var order = _orderRepository.GetOrderWithPricingCategory();
+
+            var oderderdto = _mapper.Map<List<Order>>(order);
+            return new SuccessDataResult<List<Order>>(oderderdto);
         }
 
-        public IDataResult<OrderDTOs> TGetById(int id)
+        public IDataResult<Order> TGetById(int id)
         {
             var order = _orderRepository.GetById(id);
 
-            var oderderdto = _mapper.Map<OrderDTOs>(order);
-            return new SuccessDataResult<OrderDTOs>(oderderdto);
+            var oderderdto = _mapper.Map<Order>(order);
+            return new SuccessDataResult<Order>(oderderdto);
         }
 
-        public IResult THardDelete(OrderDTOs entity)
+        public IResult THardDelete(Order entity)
         {
             var order = _mapper.Map<Order>(entity);
             _orderRepository.HardDelete(order);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(OrderDTOs entity)
+        public IResult TUpdate(Order entity)
         {
             var order = _mapper.Map<Order>(entity);
             _orderRepository.Update(order);

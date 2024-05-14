@@ -36,7 +36,7 @@ namespace FinalProjectVR.Controllers
                 Text = x.Title
             }).ToList();
             ViewBag.PricingOptions = pricingOptions;
-
+    
             return View();
         }
         [HttpPost]

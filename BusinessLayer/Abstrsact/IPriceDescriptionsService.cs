@@ -11,7 +11,7 @@ namespace BusinessLayer.Abstrsact
 {
     public interface IPriceDescriptionsService
     {
-        IDataResult<List<PriceDescriptionDTOs>> TGetAll();
+        IDataResult<List<PriceDescriptionDTOs>> TGetOrderWithPricingCategory();
         IDataResult<List<PriceDescriptionDTOs>> TGetActiv();
         IDataResult<PriceDescriptionDTOs> TGetById(int id);
         IResult TAdd(PriceDescriptionDTOs entity);

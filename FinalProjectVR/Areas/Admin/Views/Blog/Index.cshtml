@@ -1,8 +1,103 @@
-﻿
+﻿@model List<DTOLayer.BlogDTOs>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+@* Buttonla Commenterinə Get *@
+
+
+
+<h1>Blog</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Başlıq</th>
+            <th>Text</th>
+            <th>CommentSayı</th>
+            <th>Aktivlik</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Text</td>
+                <td>@item.CommentCounta</td>
+                <td>
+                    @if (item.Delete == 0)
+                    {
+                        <span class="badge badge-success">Aktiv</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">Passiv</span>
+                    }
+                </td>
+                <td>
+                    <a href="~/Admin/Blog/UpdateBlog/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                    <a href="~/Admin/Blog/DeleteBlog/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Title">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="~/Admin/Blog/AddBlog" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+
+
+
+@section Scripts {
+    <script>
+        $(".btnDelete").click(function () {
+            var itemId = $(this).data("id");
+            var itemName = $(this).data("name");
+
+            Swal.fire({
+                title: 'Əminsən?',
+                text: "Geri döndərə bilməyəcəksiz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: "Ləğv et",
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Bəli '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Admin/Blog/HardDeleteBlog/",
+                        data: {
+                            id: itemId
+                        },
+                        success: function () {
+                            Swal.fire({
+                                title: 'Silindi!',
+                                text: "'" + itemName + "' silindi",
+                                icon: 'success',
+                                onClose: function () {
+                                    window.location.reload();
+                                }
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                title: 'Xəta!',
+                                text: "Silinmə zamanı xəta baş verdi",
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
 
