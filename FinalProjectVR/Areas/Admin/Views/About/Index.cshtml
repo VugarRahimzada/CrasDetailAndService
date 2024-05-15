@@ -1,43 +1,60 @@
-﻿@model List<DTOLayer.AboutDTOs>
+﻿@model List<AboutDTOs>
 
 
-<h1>About</h1>
+<title>Haqqımızda</title>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Misson</th>
-            <th>Vision</th>
-            <th>History</th>
-            <th>Aktiv</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Misson</td>
-                <td>@item.Vision</td>
-                <td>@item.History</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/About/UpdateAbout/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/About/DeleteAbout/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
 
 
+    @if ((bool)ViewBag.ShowButton)
+    {
+        <form action="About/Create" method="get">
+            <p>
+                <button class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</button>
+            </p>
+        </form>
+    }
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Misson</th>
+                            <th>Vision</th>
+                            <th>History</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Misson</td>
+                                <td>@item.Vision</td>
+                                <td>@item.History</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/About/UpdateAbout/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/About/DeleteAbout/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 

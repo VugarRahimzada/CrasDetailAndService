@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
 using DTOLayer;
+using DTOLayer.AboutDTO;
+using DTOLayer.BlogDTO;
+using DTOLayer.ContactUs;
+using DTOLayer.FAQDTO;
+using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -13,12 +18,23 @@ namespace BusinessLayer.Mapper
     {
         public DTOMapper()
         {
+            #region About
             CreateMap<AboutDTOs, About>().ReverseMap();
+            CreateMap<AboutGetActivDTOs, About>().ReverseMap();
+            CreateMap<AboutCreate, About>().ReverseMap();
+            #endregion
+
             CreateMap<AppointmentDTOs, Appointment>().ReverseMap();
             CreateMap<BlogDTOs, Blog>().ReverseMap();
             CreateMap<CommentDTOs, Comment>().ReverseMap();
+            #region ContactUs
             CreateMap<ContactUsDTOs, ContactUs>().ReverseMap(); 
+            CreateMap<ContactUsCreateDTOs, ContactUs>().ReverseMap();
+            #endregion
+            #region FAQ
             CreateMap<FAQDTOs, FAQ>().ReverseMap();
+            CreateMap<FAQCreateDTOs, FAQ>().ReverseMap();
+            #endregion
             CreateMap<PriceDescriptionDTOs, PriceDescription>().ReverseMap();
             CreateMap<PricingDTOs, Pricing>().ReverseMap();
             CreateMap<ServiceDTOs, Service>().ReverseMap();

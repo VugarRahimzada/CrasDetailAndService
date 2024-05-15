@@ -1,10 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
-using DataAccessLayer.Context;
-using DTOLayer;
-using EntityLayer.Models;
+using DTOLayer.OrderDTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinalProjectVR.Controllers
 {
@@ -28,16 +24,20 @@ namespace FinalProjectVR.Controllers
 
 
         [HttpGet]
-        public IActionResult Order()
+        public IActionResult Order(int id)
         {
-            var pricingOptions = _pricingService.TGetActiv().Data.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Title
-            }).ToList();
-            ViewBag.PricingOptions = pricingOptions;
+            var data = _orderService.TGetById(id).Data;
+            //var test = _pricingService.TGetActiv().Data;
+            ViewData["Prices"] = _pricingService.TGetActiv().Data;
+
+            //var pricingOptions = _pricingService.TGetActiv().Data.Select(x => new SelectListItem
+            //{
+            //    Value = x.Id.ToString(),
+            //    Text = x.Title
+            //}).ToList();
+            //ViewBag.PricingOptions = pricingOptions;
     
-            return View();
+            return View(data);
         }
         [HttpPost]
         public IActionResult Order(OrderDTOs orderDTOs)

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOLayer
+namespace DTOLayer.OrderDTO
 {
     public class OrderDTOs
     {
@@ -15,8 +15,5 @@ namespace DTOLayer
         public string LicensePlate { get; set; }
         public DateTime Deadline { get; set; } = DateTime.Now.AddMonths(6);
         public int PricingId { get; set; }
-        public Pricing Pricing { get; set; }
-        public int Delete { get; set; }
-        //public int Id { get; set; }
     }
 }

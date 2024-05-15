@@ -1,20 +1,14 @@
 ﻿using CoreLayer.Results.Abstract;
-using CoreLayer.Results.Concrete;
-using DTOLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DTOLayer.FAQDTO;
 
 namespace BusinessLayer.Abstrsact
 {
-	public interface IFAQService 
+    public interface IFAQService 
 	{
 		IDataResult<List<FAQDTOs>> TGetAll();
-        IDataResult<List<FAQDTOs>> TGetActiv();
+        IDataResult<List<FAQCreateDTOs>> TGetActiv();
         IDataResult<FAQDTOs> TGetById(int id);
-		IResult TAdd(FAQDTOs entity);
+		IResult TAdd(FAQCreateDTOs entity);
         IResult TUpdate(FAQDTOs entity);
         IResult TDelete(FAQDTOs entity);
         IResult THardDelete(FAQDTOs entity);

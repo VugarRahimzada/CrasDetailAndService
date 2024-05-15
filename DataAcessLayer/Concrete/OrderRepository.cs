@@ -43,6 +43,11 @@ namespace DataAccessLayer.Concrete
         {
             var data = _appDbContext.Orders.Include(x => x.Pricing).ToList();
 
+            //var result = (from order in _appDbContext.Orders
+            //              join pricing in _appDbContext.Pricings
+            //              on order.PricingId equals pricing.Id
+            //              select order).ToList();
+
             return data;
 
         }

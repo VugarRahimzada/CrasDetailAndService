@@ -6,6 +6,7 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DTOLayer;
+using DTOLayer.ContactUs;
 using EntityLayer.Models;
 using System;
 using System.Collections;
@@ -27,7 +28,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(ContactUsDTOs entity)
+        public IResult TAdd(ContactUsCreateDTOs entity)
         {
             var contactus = _mapper.Map<ContactUs>(entity);
             _contactUsrepository.Add(contactus);

@@ -1,6 +1,7 @@
 ﻿using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DTOLayer;
+using DTOLayer.ContactUs;
 using EntityLayer.Models;
 using System;
 using System.Collections;
@@ -16,7 +17,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<ContactUsDTOs>> TGetAll();
         IDataResult<List<ContactUsDTOs>> TGetActiv();
         IDataResult<ContactUsDTOs> TGetById(int id);
-        IResult TAdd(ContactUsDTOs entity);
+        IResult TAdd(ContactUsCreateDTOs entity);
         IResult TUpdate(ContactUsDTOs entity);
         IResult TDelete(ContactUsDTOs entity);
         IResult THardDelete(ContactUsDTOs entity);

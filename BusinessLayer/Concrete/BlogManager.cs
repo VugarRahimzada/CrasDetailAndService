@@ -4,15 +4,8 @@ using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
-using DTOLayer;
+using DTOLayer.BlogDTO;
 using EntityLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {

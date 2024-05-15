@@ -1,4 +1,4 @@
-﻿@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.ContactUsDTOs>>
+﻿@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.ContactUs.ContactUsDTOs>>
 
 
 @{
@@ -8,42 +8,63 @@
 
 
 <h1>Contact Us</h1>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
 
 
-<table class="table table-bordered">
-    <tr>
 
-        <th>Adı Soyadı</th>
-        <th>Email</th>
-        <th>Başlıq</th>
-        <th>Messaj</th>
-        <th>Activlik</th>
-    </tr>
+                <p>
+                    <a href="/Admin/ContactUs/AddContactUs" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                </p>
 
-    @foreach (var item in Model.Data)
-    {
-        <tr>
-            <td>@item.Name @item.Surname</td>
-            <td>@item.Email</td>
-            <td>@item.Subject</td>
-            <td>@item.Message</td>
-            <td>
-                @if (item.Delete == 0)
-                {
-                    <span class="badge badge-success">Aktiv</span>
-                }
-                else
-                {
-                    <span class="badge badge-warning">Passiv</span>
-                }
-            </td>
-            <td><a href="~/Admin/ContactUs/UpdateContactUs/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-            <a href="~/Admin/ContactUs/DeleteContactUs/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-            <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
-                <i class="fas fa-trash"></i>
-        </tr>
-    }
-</table>
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    
+                    <thead>
+                    <tr>
+
+                        <th>Adı Soyadı</th>
+                        <th>Email</th>
+                        <th>Başlıq</th>
+                        <th>Messaj</th>
+                        <th>Activlik</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.Name @item.Surname</td>
+                            <td>@item.Email</td>
+                            <td>@item.Subject</td>
+                            <td>@item.Message</td>
+                            <td>
+                                @if (item.Delete == 0)
+                                {
+                                    <span class="badge badge-success">Aktiv</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning">Passiv</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="~/Admin/ContactUs/UpdateContactUs/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                <a href="~/Admin/ContactUs/DeleteContactUs/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
+                                    <i class="fas fa-trash"></i>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

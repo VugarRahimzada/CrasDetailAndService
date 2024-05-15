@@ -1,7 +1,8 @@
-﻿@model CoreLayer.Results.Concrete.SuccessDataResult<DTOLayer.BlogDTOs>
+﻿@model CoreLayer.Results.Concrete.SuccessDataResult<DTOLayer.BlogDTO.BlogDTOs>
 
-
-
+@{
+    string trimmedText = Model.Data.Text.Length > 150 ? Model.Data.Text.Substring(0, 150) + "..." : Model.Data.Text;
+}
 
 <div class="ak-height-75 ak-height-lg-80"></div>
 <section class="container">
@@ -10,7 +11,7 @@
             <p class="data">@Model.Data.CreateTime.ToString("dd.MM.yyyy")</p>
             <h4 class="title">@Model.Data.Title</h4>
             <p class="desp">
-                     @Model.Data.Text
+                @trimmedText
             </p>
             <a href="~/Blog/BlogDetail/@Model.Data.Id" class="more-btn">Davamını Oxu</a>
         </div>

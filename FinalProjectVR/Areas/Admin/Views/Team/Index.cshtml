@@ -3,92 +3,112 @@
 
 
 <h1>Komanda Üzvləri</h1>
+<hr />
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Ad</th>
-            <th>Soyadı</th>
-            <th>Vəzifə</th>
-            <th>Aktivlik</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Surname</td>
-                <td>@item.Position</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/Team/DeleteTeam/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
-                        <i class="fas fa-trash"></i>
-                    </a>       
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
 
-<a href="~/Admin/Team/AddTeam" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
 
- 
+                <p>
+
+                    <a href="~/Admin/Team/AddTeam" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+
+                </p>
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ad</th>
+                            <th>Soyadı</th>
+                            <th>Vəzifə</th>
+                            <th>Aktivlik</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Surname</td>
+                                <td>@item.Position</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/Team/DeleteTeam/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section Scripts {
     <script>
-        $(".btnDelete").click(function () {
-            var itemId = $(this).data("id");
-            var itemName = $(this).data("name");
+        $(document).ready(function () {
+            $(".btnDelete").click(function (e) {
+                e.preventDefault(); 
 
-            Swal.fire({
-                title: 'Əminsən?',
-                text: "Geri döndərə bilməyəcəksiz!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonText: "Ləğv et",
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Bəli '
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        method: "POST",
-                        url: "/Admin/Team/HardDeleteTeam/",
-                        data: {
-                            id: itemId
-                        },
-                        success: function () {
-                            Swal.fire({
-                                title: 'Silindi!',
-                                text: "'" + itemName + "' silindi",
-                                icon: 'success',
-                                onClose: function () {
-                                    window.location.reload();
-                                }
-                            });
-                        },
-                        error: function () {
-                            Swal.fire({
-                                title: 'Xəta!',
-                                text: "Silinmə zamanı xəta baş verdi",
-                                icon: 'error'
-                            });
-                        }
-                    });
-                }
+                var itemId = $(this).data("id");
+                var itemName = $(this).data("name");
+
+                Swal.fire({
+                    title: 'Əminsən?',
+                    text: "Geri döndərə bilməyəcəksiz!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonText: "Ləğv et",
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: "POST",
+                            url: "/Admin/Team/HardDeleteTeam/",
+                            data: {
+                                id: itemId
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    title: 'Silindi!',
+                                    text: "'" + itemName + "' silindi",
+                                    icon: 'success',
+                                    onClose: function () {
+                                        location.reload(); 
+                                    }
+                                });
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    title: 'Xəta!',
+                                    text: "Silinmə zamanı xəta baş verdi",
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>

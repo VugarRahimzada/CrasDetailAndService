@@ -9,9 +9,9 @@ namespace DTOLayer
 {
     public class PricingDTOs
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
-        public int Id { get; set; }
         public int Delete { get; set; }
         public List<PriceDescription> PriceDescription { get; set; }
     }

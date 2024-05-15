@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
+using DTOLayer.ContactUs;
 using EntityLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace FinalProjectVR.Controllers
 
 
         [HttpPost]
-        public IActionResult Index(ContactUsDTOs contactUs)
+        public IActionResult Index(ContactUsCreateDTOs contactUs)
         {
 
             _contactusservice.TAdd(contactUs);

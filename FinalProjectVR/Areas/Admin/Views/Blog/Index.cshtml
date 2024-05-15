@@ -1,4 +1,4 @@
-﻿@model List<DTOLayer.BlogDTOs>
+﻿@model List<BlogDTOs>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,46 +11,56 @@
 
 <h1>Blog</h1>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Başlıq</th>
-            <th>Text</th>
-            <th>CommentSayı</th>
-            <th>Aktivlik</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Text</td>
-                <td>@item.CommentCounta</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/Blog/UpdateBlog/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/Blog/DeleteBlog/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Title">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <p>
+                    <a href="~/Admin/Blog/AddBlog" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                </p>
 
-<a href="~/Admin/Blog/AddBlog" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Başlıq</th>
+                            <th>Text</th>
+                            <th>CommentSayı</th>
+                            <th>Aktivlik</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@(item.Text.Length > 20 ? item.Text.Substring(0, 20) + "..." : item.Text)</td>
+                                <td>@item.CommentCounta</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/Blog/UpdateBlog/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/Blog/DeleteBlog/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Title">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

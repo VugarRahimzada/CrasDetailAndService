@@ -5,45 +5,56 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Sifarişlər</h1>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <p>
+                    <a href="/Admin/Order/ExportExelOrder" class="btn btn-primary">Sifariş Cədvəli Yüklə</a>
+                </p>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Adı Soyadı</th>
+                            <th>Email</th>
+                            <th>Qeydiyyat Nişanı</th>
+                            <th>Qiymet</th>
+                            <th>Bitiş Tarixi</th>
+                            <th>Activlik</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name @item.Surname</td>
+                                <td>@item.Email</td>
+                                <td>@item.LicensePlate</td>
+                                <td>@item.Pricing.Title</td>
+                                <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/Order/UpdateOrder/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/Order/DeleteOrder/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="~/Admin/Order/HardDeleteOrder/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Adı Soyadı</th>
-            <th>Email</th>
-            <th>Qeydiyyat Nişanı</th>
-            <th>Qiymet</th>
-            <th>Bitiş Tarixi</th>
-            <th>Activlik</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name @item.Surname</td>
-                <td>@item.Email</td>
-                <td>@item.LicensePlate</td>
-                <td>@item.Pricing.Title</td>
-                <td>@item.Deadline.ToString("dd/MM/yyyy")</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td><a href="~/Admin/Order/UpdateOrder/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                <a href="~/Admin/Order/DeleteOrder/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                <a href="~/Admin/Order/HardDeleteOrder/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a></td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-<a href="/Admin/Order/ExportExelOrder" class="btn btn-primary">Sifariş Cədvəli Yüklə</a>

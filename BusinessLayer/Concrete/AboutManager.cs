@@ -5,6 +5,7 @@ using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer;
+using DTOLayer.AboutDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(AboutDTOs entity)
+        public IResult TAdd(AboutCreate entity)
         {
             var about = _mapper.Map<About>(entity);
             _aboutRepository.Add(about);
@@ -52,12 +53,12 @@ namespace BusinessLayer.Concrete
             _aboutRepository.Update(about);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<AboutDTOs>> TGetActiv()
+        public IDataResult<List<AboutGetActivDTOs>> TGetActiv()
         {
             var about = _aboutRepository.GetActiv();
-            var aboutdtos = _mapper.Map<List<AboutDTOs>>(about);
+            var aboutdtos = _mapper.Map<List<AboutGetActivDTOs>>(about);
 
-            return new SuccessDataResult<List<AboutDTOs>>(aboutdtos);
+            return new SuccessDataResult<List<AboutGetActivDTOs>>(aboutdtos);
         }
 
         public IDataResult<List<AboutDTOs>> TGetAll()

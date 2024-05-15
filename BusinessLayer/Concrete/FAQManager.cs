@@ -6,6 +6,7 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DTOLayer;
+using DTOLayer.FAQDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace BusinessLayer.Concrete
 			_mapper = mapper;
 		}
 
-		public IResult TAdd(FAQDTOs entity)
+		public IResult TAdd(FAQCreateDTOs entity)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
 			_faqrepository.Add(faq);
@@ -53,12 +54,12 @@ namespace BusinessLayer.Concrete
 			return new SuccessResult(UIMessage.UPDATE_SUCCESS);
 		}
 
-		public IDataResult<List<FAQDTOs>> TGetActiv()
+		public IDataResult<List<FAQCreateDTOs>> TGetActiv()
 		{
 			var faq = _faqrepository.GetActiv();
-			var faqdtos = _mapper.Map<List<FAQDTOs>>(faq);
+			var faqdtos = _mapper.Map<List<FAQCreateDTOs>>(faq);
 
-			return new SuccessDataResult<List<FAQDTOs>>(faqdtos);
+			return new SuccessDataResult<List<FAQCreateDTOs>>(faqdtos);
 		}
 
 		public IDataResult<List<FAQDTOs>> TGetAll()

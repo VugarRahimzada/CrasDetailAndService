@@ -7,44 +7,60 @@
 
 
 
-<h1>Qiymətlərimiz</h1>
-<br />
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Başlıq</th>
-            <th>Qiymət</th>
-            <th>Aktivliyi</th>
-            <th></th>
-        </tr>
-    </thead>
 
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Price</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Inactive</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/Pricing/UpdatePricing/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/Pricing/DeletePricing/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a href="~/Admin/Pricing/HardDeletePricing/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-<a href="~/Admin/Pricing/AddPricing" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+
+
+                <p>
+                    <a href="~/Admin/Pricing/AddPricing" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                </p>
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                    <thead>
+                        <tr>
+                            <th>Başlıq</th>
+                            <th>Qiymət</th>
+                            <th>Aktivliyi</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Inactive</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/Pricing/UpdatePricing/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/Pricing/DeletePricing/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="~/Admin/Pricing/HardDeletePricing/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 

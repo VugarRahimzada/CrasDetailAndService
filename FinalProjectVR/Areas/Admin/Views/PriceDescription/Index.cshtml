@@ -8,47 +8,60 @@
 
 
 
+
 <h1>Qiymet Acıqlamaları</h1>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Acıqlama</th>
-            <th>Qiymet Acıqlama</th>
-            <th>Aktivlik</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Description</td>
-                <td>@item.Pricing.Title</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/PriceDescription/UpdatePDescription/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/PriceDescription/DeletePDescription/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Description">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-<a href="~/Admin/PriceDescription/AddPDescription" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                <p>
 
+
+                    <a href="~/Admin/PriceDescription/AddPDescription" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                </p>
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Acıqlama</th>
+                            <th>Qiymet Acıqlama</th>
+                            <th>Aktivlik</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Description</td>
+                                <td>@item.Pricing.Title</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/PriceDescription/UpdatePDescription/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/PriceDescription/DeletePDescription/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Description">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section Scripts {

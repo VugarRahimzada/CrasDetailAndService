@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
+using DTOLayer.FAQDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
@@ -25,7 +26,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddFAQ(FAQDTOs faqdtos)
+        public IActionResult AddFAQ(FAQCreateDTOs faqdtos)
         {
             var value = _faqService.TAdd(faqdtos);
             if (value.IsSuccess)

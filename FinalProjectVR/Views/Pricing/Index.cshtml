@@ -28,7 +28,7 @@
 
                     @await Component.InvokeAsync("PricingDescription", new { pricingId = item.Id })
                 </div>
-            <a href="~/Pricing/Order/@item.Id" class="get-started-btn">
+                <a asp-action="Order" asp-route-id="@item.Id" class="get-started-btn">
                     <span>
                         Xidmətə <span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"

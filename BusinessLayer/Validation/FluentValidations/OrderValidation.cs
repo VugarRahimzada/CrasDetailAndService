@@ -1,4 +1,4 @@
-﻿using DTOLayer;
+﻿using DTOLayer.OrderDTO;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

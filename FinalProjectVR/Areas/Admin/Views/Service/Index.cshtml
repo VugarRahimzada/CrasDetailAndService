@@ -7,42 +7,55 @@
 
 <h1>Xidmətlərimiz</h1>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Başlıq</th>
-            <th>Acıqlama</th>
-            <th>Icon</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Description</td>
-                <td>@item.Icon</td>
-                <td>
-                    @if (item.Delete == 0)
-                    {
-                        <span class="badge badge-success">Aktiv</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-warning">Passiv</span>
-                    }
-                </td>
-                <td>
-                    <a href="~/Admin/Service/UpdateService/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <a href="~/Admin/Service/DeleteService/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                    <a href="~/Admin/Service/HardDeleteService/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-<a href="~/Admin/Service/AddService" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                <p>
+                    <a href="~/Admin/Service/AddService" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
+                </p>
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Başlıq</th>
+                            <th>Acıqlama</th>
+                            <th>Icon</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Description</td>
+                                <td>@item.Icon</td>
+                                <td>
+                                    @if (item.Delete == 0)
+                                    {
+                                        <span class="badge badge-success">Aktiv</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Passiv</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Admin/Service/UpdateService/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="~/Admin/Service/DeleteService/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="~/Admin/Service/HardDeleteService/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 

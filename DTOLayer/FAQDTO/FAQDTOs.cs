@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOLayer
+namespace DTOLayer.FAQDTO
 {
     public class FAQDTOs
     {

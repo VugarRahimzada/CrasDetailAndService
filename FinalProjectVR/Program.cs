@@ -25,8 +25,11 @@ namespace FinalProjectVR
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
 
+            //builder.Services.AddScoped
+            //builder.Services.AddTransient
+            //builder.Services.AddSingleton
 
-            
+
             builder.Services.AddScoped<IContactUsService, ContactUsManager>();
             builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
             builder.Services.AddScoped<IOrderService, OrderManager>();

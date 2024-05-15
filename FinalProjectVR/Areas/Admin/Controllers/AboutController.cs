@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
+using DTOLayer.AboutDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
@@ -17,7 +18,25 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var about = _aboutService.TGetAll().Data;
+            ViewBag.ShowButton = about.Count() == 0;
             return View(about);
+        }
+
+        [HttpGet]
+        public IActionResult AddAbout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddAbout(AboutCreate aboutDTOs)
+        {
+            var result = _aboutService.TAdd(aboutDTOs);
+            if (result.IsSuccess)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(aboutDTOs);
         }
 
         [HttpGet]
