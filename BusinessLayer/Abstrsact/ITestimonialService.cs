@@ -12,9 +12,9 @@ namespace BusinessLayer.Abstrsact
     public interface ITestimonialService
     {
         IDataResult<List<TestimonialDTOs>> TGetAll();
-        IDataResult<List<TestimonialDTOs>> TGetActiv();
+        IDataResult<List<TestimonialActiveDTOs>> TGetActiv();
         IDataResult<TestimonialDTOs> TGetById(int id);
-        IResult TAdd(TestimonialDTOs entity);
+        IResult TAdd(TestimonialCreateDTOs entity);
         IResult TUpdate(TestimonialDTOs entity);
         IResult TDelete(TestimonialDTOs entity);
         IResult THardDelete(TestimonialDTOs entity);

@@ -26,7 +26,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(ServiceDTOs entity)
+        public IResult TAdd(ServiceCreateDTOs entity)
         {
             var value = _mapper.Map<Service>(entity);
             _serviceRepository.Add(value);
@@ -40,11 +40,11 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IDataResult<List<ServiceDTOs>> TGetActiv()
+        public IDataResult<List<ServiceActivDTOs>> TGetActiv()
         {
             var service = _serviceRepository.GetActiv();
-            var servicedal = _mapper.Map<List<ServiceDTOs>>(service);
-            return new SuccessDataResult<List<ServiceDTOs>>(servicedal, UIMessage.SUCCESS);
+            var servicedal = _mapper.Map<List<ServiceActivDTOs>>(service);
+            return new SuccessDataResult<List<ServiceActivDTOs>>(servicedal, UIMessage.SUCCESS);
         }
 
         public IDataResult<List<ServiceDTOs>> TGetAll()

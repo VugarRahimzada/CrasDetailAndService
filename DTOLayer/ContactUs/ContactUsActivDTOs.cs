@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOLayer.CommentDTO
+namespace DTOLayer.ContactUs
 {
-    public class CommentDTOs
+    public class ContactUsActivDTOs
     {
-        public int Id { get; set; }
-        public int Delete { get; set; }
         public string Name { get; set; }
+        public string Surname { get; set; }
         public string Email { get; set; }
+        public string Subject { get; set; }
         public string Message { get; set; }
-        public int BlogId { get; set; }
     }
 }

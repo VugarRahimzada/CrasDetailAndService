@@ -14,9 +14,9 @@ namespace BusinessLayer.Abstrsact
     {
         IDataResult<List<PricingDTOs>> TGetAll();
 
-        IDataResult<List<PricingDTOs>> TGetActiv();
+        IDataResult<List<PricingActivDTOs>> TGetActiv();
         IDataResult<PricingDTOs> TGetById(int id);
-        IResult TAdd(PricingDTOs entity);
+        IResult TAdd(PricingCreateDTOs entity);
         IResult TUpdate(PricingDTOs entity);
         IResult TDelete(PricingDTOs entity);
         IResult THardDelete(PricingDTOs entity);

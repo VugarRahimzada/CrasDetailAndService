@@ -26,7 +26,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(TestimonialDTOs entity)
+        public IResult TAdd(TestimonialCreateDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Add(testimonial);
@@ -53,12 +53,12 @@ namespace BusinessLayer.Concrete
             _testimonialRepository.Update(testimonial);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<TestimonialDTOs>> TGetActiv()
+        public IDataResult<List<TestimonialActiveDTOs>> TGetActiv()
         {
             var value = _testimonialRepository.GetActiv();
-            var valuedto = _mapper.Map<List<TestimonialDTOs>>(value);
+            var valuedto = _mapper.Map<List<TestimonialActiveDTOs>>(value);
 
-            return new SuccessDataResult<List<TestimonialDTOs>>(valuedto);
+            return new SuccessDataResult<List<TestimonialActiveDTOs>>(valuedto);
 
         }
 

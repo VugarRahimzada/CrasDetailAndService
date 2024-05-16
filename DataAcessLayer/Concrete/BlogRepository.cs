@@ -33,7 +33,14 @@ namespace DataAccessLayer.Concrete
             _appDbContext.Blogs.Find(id).CommentCounta++;
             _appDbContext.SaveChanges();
         }
+        public void DecreaseCommentCounta(int id)
+        {
+            _appDbContext.Blogs.Find(id).CommentCounta--;
+            _appDbContext.SaveChanges();
+        }
 
+
+        
     }
 
 }

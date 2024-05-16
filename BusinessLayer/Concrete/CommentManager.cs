@@ -6,11 +6,6 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer.CommentDTO;
 using EntityLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
@@ -27,7 +22,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(CommentDTOs entity)
+        public IResult TAdd(CommentCreateDTOs entity)
         {
             var comment = _mapper.Map<Comment>(entity);
             _commentRepository.Add(comment);
@@ -45,6 +40,7 @@ namespace BusinessLayer.Concrete
         {
             var comment = _mapper.Map<Comment>(entity);
             _commentRepository.HardDelete(comment);
+            _blogRepository.DecreaseCommentCounta(entity.BlogId);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
@@ -55,11 +51,11 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
-        public IDataResult<List<CommentDTOs>> TGetActiv()
+        public IDataResult<List<CommentActiveDTOs>> TGetActiv()
         {
             var comment = _commentRepository.GetActiv();
-            var commentdto = _mapper.Map<List<CommentDTOs>>(comment);
-            return new SuccessDataResult<List<CommentDTOs>>(commentdto);
+            var commentdto = _mapper.Map<List<CommentActiveDTOs>>(comment);
+            return new SuccessDataResult<List<CommentActiveDTOs>>(commentdto);
         }
 
         public IDataResult<List<CommentDTOs>> TGetAll()
@@ -82,6 +78,11 @@ namespace BusinessLayer.Concrete
             var commnetdto = _mapper.Map<List<CommentDTOs>>(comment);
             return new SuccessDataResult<List<CommentDTOs>>(commnetdto);
         }
-
+        public IDataResult<List<CommentDTOs>> TGetCommentsByIdAdmin(int id)
+        {
+            var comment = _commentRepository.GetCommentsByIdAdmin(x => x.BlogId == id);
+            var commnetdto = _mapper.Map<List<CommentDTOs>>(comment);
+            return new SuccessDataResult<List<CommentDTOs>>(commnetdto);
+        }
     }
 }

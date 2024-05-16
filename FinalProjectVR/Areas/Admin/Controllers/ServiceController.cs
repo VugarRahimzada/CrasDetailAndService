@@ -26,14 +26,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddService(ServiceDTOs serviceDTOs)
+        public IActionResult AddService(ServiceCreateDTOs serviceDTOs)
         {
             var result = _serviceService.TAdd(serviceDTOs);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
             }
-            return View(serviceDTOs);
+            return View();
         }
 
         [HttpGet]

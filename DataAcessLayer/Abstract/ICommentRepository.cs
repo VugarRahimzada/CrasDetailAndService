@@ -8,7 +8,6 @@ namespace DataAccessLayer.Abstract
     {
 
         List<Comment> GetCommentsById(Expression<Func<Comment, bool>> filt);
-     
+        List<Comment> GetCommentsByIdAdmin(Expression<Func<Comment, bool>> filt);
     }  
-
 }

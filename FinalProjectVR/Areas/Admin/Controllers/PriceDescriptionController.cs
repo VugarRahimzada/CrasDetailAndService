@@ -30,7 +30,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPDescription(PriceDescriptionDTOs priceDescriptionDTOs)
+        public IActionResult AddPDescription(PricingDescriptionCreateDTOs priceDescriptionDTOs)
         {
             var result = _priceDescriptionsService.TAdd(priceDescriptionDTOs);
             if (result.IsSuccess)

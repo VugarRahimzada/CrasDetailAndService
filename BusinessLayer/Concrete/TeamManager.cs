@@ -27,7 +27,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(TeamDTOs entity)
+        public IResult TAdd(TeamCreateDTOs entity)
         {
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Add(team);
@@ -59,11 +59,11 @@ namespace BusinessLayer.Concrete
 
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<TeamDTOs>> TGetActiv()
+        public IDataResult<List<TeamActiveDTOs>> TGetActiv()
         {
             var team = _teamRepository.GetActiv();
-            var teamdto = _mapper.Map<List<TeamDTOs>>(team);
-            return new SuccessDataResult<List<TeamDTOs>>(teamdto);
+            var teamdto = _mapper.Map<List<TeamActiveDTOs>>(team);
+            return new SuccessDataResult<List<TeamActiveDTOs>>(teamdto);
 
         }
 

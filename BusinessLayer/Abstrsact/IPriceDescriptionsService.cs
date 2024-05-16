@@ -12,12 +12,12 @@ namespace BusinessLayer.Abstrsact
     public interface IPriceDescriptionsService
     {
         IDataResult<List<PriceDescriptionDTOs>> TGetOrderWithPricingCategory();
-        IDataResult<List<PriceDescriptionDTOs>> TGetActiv();
+        IDataResult<List<PriceDescriptionActiveDTOs>> TGetActiv();
         IDataResult<PriceDescriptionDTOs> TGetById(int id);
-        IResult TAdd(PriceDescriptionDTOs entity);
+        IResult TAdd(PricingDescriptionCreateDTOs entity);
         IResult TUpdate(PriceDescriptionDTOs entity);
         IResult TDelete(PriceDescriptionDTOs entity);
         IResult THardDelete(PriceDescriptionDTOs entity);
-        IDataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId);
+        IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId);
     }
 }

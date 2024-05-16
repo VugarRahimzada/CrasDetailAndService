@@ -6,7 +6,7 @@ namespace BusinessLayer.Abstrsact
     public interface IFAQService 
 	{
 		IDataResult<List<FAQDTOs>> TGetAll();
-        IDataResult<List<FAQCreateDTOs>> TGetActiv();
+        IDataResult<List<FAQActivDTOs>> TGetActiv();
         IDataResult<FAQDTOs> TGetById(int id);
 		IResult TAdd(FAQCreateDTOs entity);
         IResult TUpdate(FAQDTOs entity);

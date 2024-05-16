@@ -9,6 +9,7 @@ namespace DataAccessLayer.Abstract
         Blog LastOrDefault(Expression<Func<Blog, bool>> filter);
         List<Blog> LastBlog(Expression<Func<Blog, bool>> filter);
         void IncreesCommentCounta(int id);
+        void DecreaseCommentCounta(int id);
     }
 
 }

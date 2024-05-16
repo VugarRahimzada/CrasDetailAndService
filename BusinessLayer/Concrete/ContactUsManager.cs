@@ -55,14 +55,14 @@ namespace BusinessLayer.Concrete
             _contactUsrepository.Update(contactus);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<ContactUsDTOs>> TGetActiv()
+        public IDataResult<List<ContactUsActivDTOs>> TGetActiv()
         {
 
             var contacts = _contactUsrepository.GetActiv();
 
-            var contactUsDTOs = _mapper.Map<List<ContactUsDTOs>>(contacts);
+            var contactUsDTOs = _mapper.Map<List<ContactUsActivDTOs>>(contacts);
 
-            return new SuccessDataResult<List<ContactUsDTOs>>(contactUsDTOs);
+            return new SuccessDataResult<List<ContactUsActivDTOs>>(contactUsDTOs);
 
         }
 

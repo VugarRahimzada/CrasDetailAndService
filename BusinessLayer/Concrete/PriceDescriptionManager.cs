@@ -29,7 +29,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(PriceDescriptionDTOs entity)
+        public IResult TAdd(PricingDescriptionCreateDTOs entity)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
              _priceDescriptionRepository.Add(pdes);
@@ -44,12 +44,12 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IDataResult<List<PriceDescriptionDTOs>> TGetActiv()
+        public IDataResult<List<PriceDescriptionActiveDTOs>> TGetActiv()
         { 
             var pdes = _priceDescriptionRepository.GetActiv();
-            var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
+            var pdesdtos = _mapper.Map<List<PriceDescriptionActiveDTOs>>(pdes);
 
-            return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos);
+            return new SuccessDataResult<List<PriceDescriptionActiveDTOs>>(pdesdtos);
         }
 
         public IDataResult<List<PriceDescriptionDTOs>> TGetOrderWithPricingCategory()
@@ -81,12 +81,12 @@ namespace BusinessLayer.Concrete
             _priceDescriptionRepository.Update(pdes);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<PriceDescriptionDTOs>> TGetActivByPricingId(int pricingId)
+        public IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId)
         {
             var pdes = _priceDescriptionRepository.GetActiv().Where(p => p.PricingId == pricingId).ToList();
-            var pdesdtos = _mapper.Map<List<PriceDescriptionDTOs>>(pdes);
+            var pdesdtos = _mapper.Map<List<PriceDescriptionActiveDTOs>>(pdes);
 
-            return new SuccessDataResult<List<PriceDescriptionDTOs>>(pdesdtos);
+            return new SuccessDataResult<List<PriceDescriptionActiveDTOs>>(pdesdtos);
         }
 
     }

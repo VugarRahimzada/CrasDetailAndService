@@ -25,7 +25,7 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(PricingDTOs entity)
+        public IResult TAdd(PricingCreateDTOs entity)
         {
             var pricing = _mapper.Map<Pricing>(entity);
             _pricingRepository.Add(pricing);
@@ -55,12 +55,12 @@ namespace BusinessLayer.Concrete
 
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<PricingDTOs>> TGetActiv()
+        public IDataResult<List<PricingActivDTOs>> TGetActiv()
         {
             var pricing = _pricingRepository.GetActiv();
-            var pricingdtos = _mapper.Map<List<PricingDTOs>>(pricing);
+            var pricingdtos = _mapper.Map<List<PricingActivDTOs>>(pricing);
 
-            return new SuccessDataResult<List<PricingDTOs>>(pricingdtos);
+            return new SuccessDataResult<List<PricingActivDTOs>>(pricingdtos);
 
         }
 

@@ -16,7 +16,7 @@ namespace FinalProjectVR.Areas.Admin.ViewComponents
 
         public IViewComponentResult Invoke(int id)
         {
-            var value = _commentService.TGetCommentsById(id).Data;
+            var value = _commentService.TGetCommentsByIdAdmin(id).Data;
             return View(value);
         }
     }

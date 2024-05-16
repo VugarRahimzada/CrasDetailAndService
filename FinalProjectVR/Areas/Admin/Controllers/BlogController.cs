@@ -12,7 +12,6 @@ namespace FinalProjectVR.Areas.Admin.Controllers
     {
 
         private readonly IBlogService _blogService;
-        private readonly ICommentService _commentService;
 
         public BlogController(IBlogService blogService)
         {
@@ -81,23 +80,6 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             var blog = _blogService.TGetById(id).Data;
             _blogService.THardDelete(blog);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult DeleteComment(int id)
-        {
-            var commentDTOs = _commentService.TGetById(id).Data;
-            _commentService.TDelete(commentDTOs);
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
-        public IActionResult HardDeleteComment(int id)
-        {
-            var commentDTOs = _commentService.TGetById(id).Data;
-            _commentService.THardDelete(commentDTOs);
             return RedirectToAction("Index");
         }
     }

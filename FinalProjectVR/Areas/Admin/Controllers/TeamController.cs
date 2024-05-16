@@ -26,14 +26,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeam(TeamDTOs teamDTOs)
+        public IActionResult AddTeam(TeamCreateDTOs teamDTOs)
         {
             var result = _teamService.TAdd(teamDTOs);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
             }
-            return View(teamDTOs);
+            return View();
         }
 
 

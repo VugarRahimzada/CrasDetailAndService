@@ -15,7 +15,7 @@ namespace BusinessLayer.Abstrsact
     public interface IContactUsService 
     {
         IDataResult<List<ContactUsDTOs>> TGetAll();
-        IDataResult<List<ContactUsDTOs>> TGetActiv();
+        IDataResult<List<ContactUsActivDTOs>> TGetActiv();
         IDataResult<ContactUsDTOs> TGetById(int id);
         IResult TAdd(ContactUsCreateDTOs entity);
         IResult TUpdate(ContactUsDTOs entity);

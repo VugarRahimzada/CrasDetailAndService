@@ -12,11 +12,6 @@ using DTOLayer.ServiceDTO;
 using DTOLayer.TeamDTO;
 using DTOLayer.TestimonialDTO;
 using EntityLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Mapper
 {
@@ -31,22 +26,59 @@ namespace BusinessLayer.Mapper
             #endregion
 
             CreateMap<AppointmentDTOs, Appointment>().ReverseMap();
+
             CreateMap<BlogDTOs, Blog>().ReverseMap();
+
+            #region Comment
             CreateMap<CommentDTOs, Comment>().ReverseMap();
+            CreateMap<CommentActiveDTOs, Comment>().ReverseMap();
+            CreateMap<CommentCreateDTOs, Comment>().ReverseMap();
+            #endregion
+
             #region ContactUs
             CreateMap<ContactUsDTOs, ContactUs>().ReverseMap(); 
             CreateMap<ContactUsCreateDTOs, ContactUs>().ReverseMap();
+            CreateMap<ContactUsActivDTOs, ContactUs>().ReverseMap();
             #endregion
+
             #region FAQ
             CreateMap<FAQDTOs, FAQ>().ReverseMap();
             CreateMap<FAQCreateDTOs, FAQ>().ReverseMap();
+            CreateMap<FAQActivDTOs, FAQ>().ReverseMap();
             #endregion
-            CreateMap<PriceDescriptionDTOs, PriceDescription>().ReverseMap();
-            CreateMap<PricingDTOs, Pricing>().ReverseMap();
-            CreateMap<ServiceDTOs, Service>().ReverseMap();
-            CreateMap<TeamDTOs, Team>().ReverseMap();
-            CreateMap<TestimonialDTOs, Testimonial>().ReverseMap();
+
             CreateMap<OrderDTOs, Order>().ReverseMap();
+
+            #region PriceDescriptionDTOs
+            CreateMap<PriceDescriptionDTOs, PriceDescription>().ReverseMap();
+            CreateMap<PriceDescriptionActiveDTOs, PriceDescription>().ReverseMap();
+            CreateMap<PricingDescriptionCreateDTOs, PriceDescription>().ReverseMap();
+            #endregion
+
+            #region Pricing
+            CreateMap<PricingDTOs, Pricing>().ReverseMap();
+            CreateMap<PricingActivDTOs, Pricing>().ReverseMap();
+            CreateMap<PricingCreateDTOs, Pricing>().ReverseMap();
+
+            #endregion
+
+            #region Service
+            CreateMap<ServiceDTOs, Service>().ReverseMap();
+            CreateMap<ServiceActivDTOs, Service>().ReverseMap();
+            CreateMap<ServiceCreateDTOs, Service>().ReverseMap();
+            #endregion
+
+            #region Team
+            CreateMap<TeamDTOs, Team>().ReverseMap();
+            CreateMap<TeamActiveDTOs, Team>().ReverseMap();
+            CreateMap<TeamCreateDTOs, Team>().ReverseMap();
+            #endregion
+
+            #region Testimonial
+            CreateMap<TestimonialDTOs, Testimonial>().ReverseMap();
+            CreateMap<TestimonialCreateDTOs, Testimonial>().ReverseMap();
+            CreateMap<TestimonialActiveDTOs, Testimonial>().ReverseMap();
+            #endregion
         }
     }
 }

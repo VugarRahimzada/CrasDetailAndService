@@ -28,14 +28,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddTestimonial(TestimonialDTOs testimonialDTOs)
+        public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs)
         {
             var value = _testimonialService.TAdd(testimonialDTOs);
             if (value.IsSuccess)
             {
                 return RedirectToAction("Index");
             }
-            return View(testimonialDTOs);
+            return View();
         }
 
         [HttpGet]

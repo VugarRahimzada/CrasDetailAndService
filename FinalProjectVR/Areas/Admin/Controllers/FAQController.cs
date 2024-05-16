@@ -33,7 +33,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             {  
             return RedirectToAction("Index");
             }
-            return View(faqdtos);
+            return View();
         }
 
 

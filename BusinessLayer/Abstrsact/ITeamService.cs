@@ -7,9 +7,9 @@ namespace BusinessLayer.Abstrsact
     public interface ITeamService
     {
         IDataResult<List<TeamDTOs>> TGetAll();
-        IDataResult<List<TeamDTOs>> TGetActiv();
+        IDataResult<List<TeamActiveDTOs>> TGetActiv();
         IDataResult<TeamDTOs> TGetById(int id);
-        IResult TAdd(TeamDTOs entity);
+        IResult TAdd(TeamCreateDTOs entity);
         IResult TUpdate(TeamDTOs entity);
         IResult TDelete(TeamDTOs entity);
         IResult THardDelete(TeamDTOs entity);

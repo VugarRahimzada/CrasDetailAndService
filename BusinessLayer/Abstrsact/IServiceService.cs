@@ -11,9 +11,9 @@ namespace BusinessLayer.Abstrsact
     public interface IServiceService
     {
         IDataResult<List<ServiceDTOs>> TGetAll();
-        IDataResult<List<ServiceDTOs>> TGetActiv();
+        IDataResult<List<ServiceActivDTOs>> TGetActiv();
         IDataResult<ServiceDTOs> TGetById(int id);
-        IResult TAdd(ServiceDTOs entity);
+        IResult TAdd(ServiceCreateDTOs entity);
         IResult TUpdate(ServiceDTOs entity);
         IResult TDelete(ServiceDTOs entity);
         IResult THardDelete(ServiceDTOs entity);

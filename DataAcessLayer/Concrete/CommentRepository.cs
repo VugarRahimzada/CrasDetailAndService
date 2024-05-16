@@ -19,8 +19,13 @@ namespace DataAccessLayer.Concrete
         {
             return _appDbContext.Comments.Where(filt).Where(x=>x.Delete==0).ToList();
         }
-    }
 
+        public List<Comment> GetCommentsByIdAdmin(Expression<Func<Comment, bool>> filt)
+        {
+            return _appDbContext.Comments.Where(filt).ToList();
+        }
+    }
 }
+
 
 

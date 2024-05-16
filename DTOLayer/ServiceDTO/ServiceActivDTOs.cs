@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.ServiceDTO
 {
-    public class ServiceDTOs
+    public class ServiceActivDTOs
     {
-        public int Id { get; set; }
-        public int Delete { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }

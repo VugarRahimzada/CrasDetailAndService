@@ -45,7 +45,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPricing(PricingDTOs pricingDTOs)
+        public IActionResult AddPricing(PricingCreateDTOs pricingDTOs)
         {
             var result = _pricingService.TAdd(pricingDTOs);
             if (result.IsSuccess)

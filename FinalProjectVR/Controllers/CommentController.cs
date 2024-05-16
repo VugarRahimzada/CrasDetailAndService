@@ -22,7 +22,7 @@ namespace FinalProjectVR.Controllers
         }
 
         [HttpPost]
-        public IActionResult CommentAdd(CommentDTOs commentDTOs)
+        public IActionResult CommentAdd(CommentCreateDTOs commentDTOs)
         {
             _commentService.TAdd(commentDTOs);
             return RedirectToAction("Index", "Blog");

@@ -54,12 +54,12 @@ namespace BusinessLayer.Concrete
 			return new SuccessResult(UIMessage.UPDATE_SUCCESS);
 		}
 
-		public IDataResult<List<FAQCreateDTOs>> TGetActiv()
+		public IDataResult<List<FAQActivDTOs>> TGetActiv()
 		{
 			var faq = _faqrepository.GetActiv();
-			var faqdtos = _mapper.Map<List<FAQCreateDTOs>>(faq);
+			var faqdtos = _mapper.Map<List<FAQActivDTOs>>(faq);
 
-			return new SuccessDataResult<List<FAQCreateDTOs>>(faqdtos);
+			return new SuccessDataResult<List<FAQActivDTOs>>(faqdtos);
 		}
 
 		public IDataResult<List<FAQDTOs>> TGetAll()
