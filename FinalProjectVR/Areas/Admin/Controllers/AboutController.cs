@@ -57,6 +57,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View(aboutDTOs);
         }
 
+        [HttpPost]
         public IActionResult DeleteAbout(int id)
         {
             var value = _aboutService.TGetById(id).Data;

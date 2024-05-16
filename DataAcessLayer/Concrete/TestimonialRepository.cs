@@ -7,9 +7,7 @@ namespace DataAccessLayer.Concrete
 {
     public class TestimonialRepository : GenericRepository<Testimonial, AppDbContext>, ITestimonialRepository
     {
-        //public TestimonialRepository(AppDbContext context) : base(context)
-        //{
-        //}
+       
     }
 
 }

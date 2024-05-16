@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive overflow-hidden">
 
 
                 <p>
@@ -46,8 +46,11 @@
                                 </td>
                                 <td>
                                     <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                    <a href="~/Admin/Team/DeleteTeam/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                                    <a class="btn btn-danger btnDelete" data-id="@item.Id" data-name="@item.Name">
+
+                                    <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Name">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Name">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -61,12 +64,12 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $(".btnDelete").click(function (e) {
+            $(".btnHardDelete").click(function (e) {
                 e.preventDefault(); 
 
                 var itemId = $(this).data("id");
@@ -112,4 +115,53 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $(".btnDelete").click(function (e) {
+                e.preventDefault();
+
+                var itemId = $(this).data("id");
+                var itemName = $(this).data("name");
+
+                Swal.fire({
+                    title: 'Əminsən?',
+                    text: "!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonText: "Ləğv et",
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: "POST",
+                            url: "/Admin/Team/DeleteTeam/",
+                            data: {
+                                id: itemId
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    title: 'Aktivlik Vəziyyəti Dəyişdi!',
+                                    text: "'" + itemName + "' Uğurlu",
+                                    icon: 'success',
+                                    onClose: function () {
+                                        location.reload();
+                                    }
+                                });
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    title: 'Xəta!',
+                                    text: "Dəyişmə zamanı xəta baş verdi",
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 }

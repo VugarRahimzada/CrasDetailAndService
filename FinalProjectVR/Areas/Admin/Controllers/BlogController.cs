@@ -57,6 +57,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View(blogDTOs);
         }
 
+        [HttpPost]
         public IActionResult DeleteBlog(int id)
         {
             var blog = _blogService.TGetById(id).Data;

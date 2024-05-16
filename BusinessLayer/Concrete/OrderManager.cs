@@ -9,6 +9,7 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace BusinessLayer.Concrete
     public class OrderManager : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IValidator<Order> _validator;
         private readonly IMapper _mapper;
 
         public OrderManager(IOrderRepository orderRepository, IMapper mapper)
@@ -43,13 +45,12 @@ namespace BusinessLayer.Concrete
 
         public IResult TAdd(OrderDTOs entity)
         {
-            var validation = new OrderValidation();
-            var validationresult = validation.Validate(entity);
-            if (!validationresult.IsValid)
-            {
-                throw new Exception();
-            }
             var order = _mapper.Map<Order>(entity);
+            var validation = _validator.Validate(order);
+            if (!validation.IsValid)
+            {
+                return (validation.Errors.Select(x => x.ErrorMessage).ToList());
+            }
             _orderRepository.Add(order);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }

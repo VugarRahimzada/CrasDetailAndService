@@ -7,9 +7,7 @@ namespace DataAccessLayer.Concrete
 {
     public class TeamRepository : GenericRepository<Team, AppDbContext>, ITeamRepository
     {
-        //public TeamRepository(AppDbContext context) : base(context)
-        //{
-        //}
+      
     }
 
 }

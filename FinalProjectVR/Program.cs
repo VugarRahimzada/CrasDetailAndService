@@ -2,10 +2,13 @@ using AutoMapper;
 using BusinessLayer.Abstrsact;
 using BusinessLayer.Concrete;
 using BusinessLayer.Mapper;
+using BusinessLayer.Validation.FluentValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Context;
+
 using EntityLayer.Models;
+using FluentValidation;
 
 namespace FinalProjectVR
 {
@@ -29,6 +32,8 @@ namespace FinalProjectVR
             //builder.Services.AddTransient
             //builder.Services.AddSingleton
 
+            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddScoped<IValidator<About>, AboutValidation>();
 
             builder.Services.AddScoped<IContactUsService, ContactUsManager>();
             builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();

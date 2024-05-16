@@ -7,11 +7,7 @@ namespace DataAccessLayer.Concrete
 {
     public class FAQRepository : GenericRepository<FAQ, AppDbContext>, IFAQRepository
     {
-        //public FAQRepository(AppDbContext context) : base(context)
-        //{
-        //}
     }
-
 }
 
 

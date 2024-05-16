@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive overflow-hidden">
 
 
                 <p>
@@ -46,9 +46,12 @@
                                 </td>
                                 <td>
                                     <a href="~/Admin/Service/UpdateService/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                    <a href="~/Admin/Service/DeleteService/@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
-                                    <a href="~/Admin/Service/HardDeleteService/@item.Id" class="btn btn-danger"><i class="fas fa-times"></i></a>
-
+                                    <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Title">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Title">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -59,3 +62,94 @@
     </div>
 </div>
 
+
+@section Scripts {
+    <script>
+        $(".btnHardDelete").click(function () {
+            var itemId = $(this).data("id");
+            var itemName = $(this).data("name");
+
+            Swal.fire({
+                title: 'Əminsən?',
+                text: "Geri döndərə bilməyəcəksiz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: "Ləğv et",
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Bəli '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Admin/Service/HardDeleteService/",
+                        data: {
+                            id: itemId
+                        },
+                        success: function () {
+                            Swal.fire({
+                                title: 'Silindi!',
+                                text: "'" + itemName + "' silindi",
+                                icon: 'success',
+                                onClose: function () {
+                                    window.location.reload();
+                                }
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                title: 'Xəta!',
+                                text: "Silinmə zamanı xəta baş verdi",
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        $(".btnDelete").click(function () {
+            var itemId = $(this).data("id");
+            var itemName = $(this).data("name");
+
+            Swal.fire({
+                title: 'Əminsən?',
+                text: "!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: "Ləğv et",
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Bəli '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/Admin/Service/HardDeleteService/",
+                        data: {
+                            id: itemId
+                        },
+                        success: function () {
+                            Swal.fire({
+                                title: 'Aktivlik Vəziyyəti Dəyişdi!!',
+                                text: "'" + itemName + "' Uğurlu",
+                                icon: 'success',
+                                onClose: function () {
+                                    window.location.reload();
+                                }
+                            });
+                        },
+                        error: function () {
+                            Swal.fire({
+                                title: 'Xəta!',
+                                text: "Dəyişmə zamanı xəta baş verdi",
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
