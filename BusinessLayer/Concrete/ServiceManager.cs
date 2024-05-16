@@ -5,7 +5,7 @@ using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
-using DTOLayer;
+using DTOLayer.ServiceDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;

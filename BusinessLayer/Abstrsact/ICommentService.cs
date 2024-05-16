@@ -1,5 +1,5 @@
 ﻿using CoreLayer.Results.Abstract;
-using DTOLayer;
+using DTOLayer.CommentDTO;
 
 namespace BusinessLayer.Abstrsact
 {

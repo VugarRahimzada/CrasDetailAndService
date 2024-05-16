@@ -4,7 +4,7 @@ using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DTOLayer;
+using DTOLayer.PriceDescriptionDTO;
 using EntityLayer.Models;
 using Microsoft.AspNetCore.Authentication;
 using System;

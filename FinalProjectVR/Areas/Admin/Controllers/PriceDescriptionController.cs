@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Abstrsact;
-using DTOLayer;
+using DTOLayer.PriceDescriptionDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers

@@ -46,11 +46,11 @@ namespace BusinessLayer.Concrete
         public IResult TAdd(OrderDTOs entity)
         {
             var order = _mapper.Map<Order>(entity);
-            var validation = _validator.Validate(order);
-            if (!validation.IsValid)
-            {
-                return (validation.Errors.Select(x => x.ErrorMessage).ToList());
-            }
+            //var validation = _validator.Validate(order);
+            //if (!validation.IsValid)
+            //{
+            //    return (validation.Errors.Select(x => x.ErrorMessage).ToList());
+            //}
             _orderRepository.Add(order);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }

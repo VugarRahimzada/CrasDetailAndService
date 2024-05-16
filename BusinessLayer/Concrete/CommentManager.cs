@@ -4,7 +4,7 @@ using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DTOLayer;
+using DTOLayer.CommentDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;

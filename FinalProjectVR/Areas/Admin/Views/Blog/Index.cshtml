@@ -55,6 +55,9 @@
                                     <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Title">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    <a class="btn btn-primary"  asp-action="DetailBlog" asp-controller="Blog" asp-route-id="@item.Id">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }

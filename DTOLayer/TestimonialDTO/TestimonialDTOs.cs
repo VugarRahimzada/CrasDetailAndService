@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOLayer
+namespace DTOLayer.TestimonialDTO
 {
-    public class TeamDTOs
+    public class TestimonialDTOs
     {
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Position { get; set; }
-        public string ImageUrl { get; set; }
-        public string? LinkedInUrl { get; set; }
+        public string Suranme { get; set; }
+        public string Message { get; set; }
         public int Id { get; set; }
         public int Delete { get; set; }
     }

@@ -7,6 +7,7 @@ using DataAccessLayer.Abstract;
 using DTOLayer;
 using DTOLayer.AboutDTO;
 using EntityLayer.Models;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace BusinessLayer.Concrete
     {
         private readonly IAboutRepository _aboutRepository;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         public AboutManager(IAboutRepository aboutRepository, IMapper mapper)
         {

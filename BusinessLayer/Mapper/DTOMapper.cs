@@ -1,10 +1,16 @@
 ﻿using AutoMapper;
-using DTOLayer;
 using DTOLayer.AboutDTO;
+using DTOLayer.AppointmentDTO;
 using DTOLayer.BlogDTO;
+using DTOLayer.CommentDTO;
 using DTOLayer.ContactUs;
 using DTOLayer.FAQDTO;
 using DTOLayer.OrderDTO;
+using DTOLayer.PriceDescriptionDTO;
+using DTOLayer.PricingDTO;
+using DTOLayer.ServiceDTO;
+using DTOLayer.TeamDTO;
+using DTOLayer.TestimonialDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;

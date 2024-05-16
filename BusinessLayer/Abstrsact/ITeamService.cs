@@ -1,6 +1,6 @@
 ﻿using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
-using DTOLayer;
+using DTOLayer.TeamDTO;
 
 namespace BusinessLayer.Abstrsact
 {

@@ -1,0 +1,29 @@
+﻿@model BlogDTOs
+
+@{
+    ViewData["Title"] = "DetailBlog";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="blog-content">
+                <p>@Model.Text</p>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="comments-section">
+                <h2>Comments</h2>
+                @await Component.InvokeAsync("CommentListAdmin", new { id = ViewBag.i })
+            </div>
+        </div>
+    </div>
+</div>

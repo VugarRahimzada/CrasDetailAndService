@@ -1,71 +1,27 @@
-﻿@model List<PricingDTOs>
+﻿@model IEnumerable<CommentDTOs>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+
+@foreach (var item in Model)
+{
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div class="single-blog-desp" style="margin: 0;">
+            <p style="font-weight: 700;">@item.Name</p>
+            <hr style="margin: 5px 0;">
+            <p>@item.Message</p>
+        </div>
+      @*   <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Name">
+            <i class="fas fa-trash"></i>
+        </a>
+        <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Name">
+            <i class="fas fa-trash"></i>
+        </a> *@
+  @*       <a asp-action="DeleteComment" asp-controller="Blog" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-trash-alt"></i></a>
+    </div> *@
 }
 
 
-
-
-
-<h1>Qiymətlərimiz</h1>
-
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive overflow-hidden">
-                <p>
-                    <a href="~/Admin/Pricing/AddPricing" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
-                </p>
-
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                    <thead>
-                        <tr>
-                            <th>Başlıq</th>
-                            <th>Qiymət</th>
-                            <th>Aktivliyi</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.Title</td>
-                                <td>@item.Price</td>
-                                <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Active</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Inactive</span>
-                                    }
-                                </td>
-                                <td>
-                                    <a href="~/Admin/Pricing/UpdatePricing/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Title">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Title">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-@section Scripts {
+@* @section Scripts {
     <script>
         $(".btnHardDelete").click(function () {
             var itemId = $(this).data("id");
@@ -84,7 +40,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/Pricing/HardDeletePricing/",
+                        url: "/Admin/Blog/HardDeleteComment/",
                         data: {
                             id: itemId
                         },
@@ -128,7 +84,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/Pricing/DeletePricing/",
+                        url: "/Admin/Blog/DeleteComment/",
                         data: {
                             id: itemId
                         },
@@ -155,3 +111,4 @@
         });
     </script>
 }
+ *@

@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Abstrsact;
-using DTOLayer;
+using DTOLayer.CommentDTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.AccessControl;
 

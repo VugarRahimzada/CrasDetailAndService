@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Abstrsact;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DTOLayer;
 using DTOLayer.BlogDTO;
+using EntityLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
@@ -10,6 +12,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
     {
 
         private readonly IBlogService _blogService;
+        private readonly ICommentService _commentService;
 
         public BlogController(IBlogService blogService)
         {
@@ -19,6 +22,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var value = _blogService.TGetAll().Data;
+            return View(value);
+        }
+
+        public IActionResult DetailBlog(BlogDTOs blogDTOs)
+        {
+            ViewBag.i = blogDTOs.Id;
+            var value = _blogService.TGetById(blogDTOs.Id).Data;
             return View(value);
         }
 
@@ -71,6 +81,23 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             var blog = _blogService.TGetById(id).Data;
             _blogService.THardDelete(blog);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteComment(int id)
+        {
+            var commentDTOs = _commentService.TGetById(id).Data;
+            _commentService.TDelete(commentDTOs);
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult HardDeleteComment(int id)
+        {
+            var commentDTOs = _commentService.TGetById(id).Data;
+            _commentService.THardDelete(commentDTOs);
             return RedirectToAction("Index");
         }
     }

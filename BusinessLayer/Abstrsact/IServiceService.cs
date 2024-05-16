@@ -1,5 +1,5 @@
 ﻿using CoreLayer.Results.Abstract;
-using DTOLayer;
+using DTOLayer.ServiceDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
