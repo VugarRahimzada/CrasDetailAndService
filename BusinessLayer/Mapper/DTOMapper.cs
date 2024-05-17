@@ -72,6 +72,7 @@ namespace BusinessLayer.Mapper
             CreateMap<TeamDTOs, Team>().ReverseMap();
             CreateMap<TeamActiveDTOs, Team>().ReverseMap();
             CreateMap<TeamCreateDTOs, Team>().ReverseMap();
+
             #endregion
 
             #region Testimonial

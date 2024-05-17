@@ -6,6 +6,7 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DTOLayer.ServiceDTO;
+using DTOLayer.TeamDTO;
 using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,13 @@ namespace BusinessLayer.Concrete
             var service = _serviceRepository.GetById(id);
             var servicedal = _mapper.Map<ServiceDTOs>(service);
             return new SuccessDataResult<ServiceDTOs>(servicedal, UIMessage.SUCCESS);
+        }
+
+        public IDataResult<List<ServiceActivDTOs>> TGetServiceHomePage()
+        {
+            var service = _serviceRepository.GetServiceHomePage(x => x.isHomePage == true).ToList();
+            var servicedto = _mapper.Map<List<ServiceActivDTOs>>(service);
+            return new SuccessDataResult<List<ServiceActivDTOs>>(servicedto);
         }
 
         public IResult THardDelete(ServiceDTOs entity)

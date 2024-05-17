@@ -6,7 +6,6 @@ using BusinessLayer.Validation.FluentValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Context;
-
 using EntityLayer.Models;
 using FluentValidation;
 
@@ -20,6 +19,8 @@ namespace FinalProjectVR
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddAutoMapper(typeof(DTOMapper));
+
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
@@ -27,6 +28,7 @@ namespace FinalProjectVR
             });
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
+
 
             //builder.Services.AddScoped
             //builder.Services.AddTransient
@@ -88,7 +90,7 @@ namespace FinalProjectVR
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=About}/{action=Index}/{id?}"
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
 

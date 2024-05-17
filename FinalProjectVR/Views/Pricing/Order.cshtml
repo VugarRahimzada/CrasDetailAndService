@@ -54,7 +54,7 @@
                     <div class="type_1">
                      <label asp-for="PricingId" class="form-label">Paket Seç</label>
                      <select asp-for="PricingId"  class="form-control">
-                     @foreach (var option in ViewData["Prices"] as IEnumerable<PricingDTOs>)
+                     @foreach (var option in ViewData["Prices"] as IEnumerable<PricingActivDTOs>)
                      {
                       <option value="@option.Id">@option.Title</option>
                      }

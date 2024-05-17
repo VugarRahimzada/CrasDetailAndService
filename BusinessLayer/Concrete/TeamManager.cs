@@ -95,5 +95,11 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<TeamDTOs>(teamdto);
         }
 
+        public IDataResult<List<TeamActiveDTOs>> TGetTeamHomePage()
+        {
+            var team = _teamRepository.GetTeamHomePage(x=>x.isHomePage==true).ToList();
+            var teamdto = _mapper.Map<List<TeamActiveDTOs>>(team);
+            return new SuccessDataResult<List<TeamActiveDTOs>>(teamdto);
+        }
     }
 }
