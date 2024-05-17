@@ -22,10 +22,10 @@ namespace FinalProjectVR.Controllers
         }
 
         [HttpPost]
-        public IActionResult CommentAdd(CommentCreateDTOs commentDTOs)
+        public IActionResult CommentAdd(CommentCreateDTOs commentDTOs, int BlogId)
         {
             _commentService.TAdd(commentDTOs);
-            return RedirectToAction("Index", "Blog");
+            return RedirectToAction("BlogDetail", "Blog", new { id = BlogId });
         }
     }
 }
