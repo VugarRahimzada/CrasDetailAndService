@@ -3,8 +3,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddBlog" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="AddBlog" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Text</label>
                 <input asp-for="Title" class="form-control" />
@@ -18,6 +18,11 @@
             <div class="form-group">
                 <label asp-for="ImageUrl" class="control-label">Şəkil</label>
                 <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label">Şəkil</label>
+                <input asp-for="ImageUrl" name="photoUrl" class="form-control" type="file" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">

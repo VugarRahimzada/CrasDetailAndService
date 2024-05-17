@@ -11,20 +11,17 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive overflow-hidden">
-
-
                 <p>
-
                     <a href="~/Admin/Team/AddTeam" class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</a>
 
                 </p>
-
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Ad</th>
                             <th>Soyadı</th>
                             <th>Vəzifə</th>
+                            <th>Şəkil</th>
                             <th>Aktivlik</th>
                             <th></th>
                         </tr>
@@ -36,6 +33,7 @@
                                 <td>@item.Name</td>
                                 <td>@item.Surname</td>
                                 <td>@item.Position</td>
+                                <td><img src="@item.ImageUrl" style="width:100px; height:100px" alt="Image" /></td>
                                 <td>
                                     @if (item.Delete == 0)
                                     {
@@ -59,7 +57,6 @@
                             </tr>
                         }
                     </tbody>
-
                 </table>
             </div>
         </div>
@@ -72,7 +69,7 @@
     <script>
         $(document).ready(function () {
             $(".btnHardDelete").click(function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
 
                 var itemId = $(this).data("id");
                 var itemName = $(this).data("name");
@@ -100,7 +97,7 @@
                                     text: "'" + itemName + "' silindi",
                                     icon: 'success',
                                     onClose: function () {
-                                        location.reload(); 
+                                        location.reload();
                                     }
                                 });
                             },

@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="UpdateBlog">
+        <form asp-action="UpdateBlog" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -22,17 +22,17 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label">Image URL</label>
-                <input asp-for="ImageUrl" class="form-control" />
+                <label asp-for="ImageUrl" class="control-label">Şəkil</label>
+                <input name="photoUrl" class="form-control" type="file" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Update Blog" class="btn btn-primary" />
+                <input type="submit" value="@DefaultConstantValue.Update_MESSAGE" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Return to Blogs</a>
+    <a asp-action="Index">@DefaultConstantValue.RETURN_TO_BACK</a>
 </div>

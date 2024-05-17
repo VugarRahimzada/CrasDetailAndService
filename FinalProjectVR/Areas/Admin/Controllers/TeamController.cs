@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.TeamDTO;
+using DTOLayer.TestimonialDTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
@@ -26,9 +27,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeam(TeamCreateDTOs teamDTOs)
+        public IActionResult AddTeam(TeamCreateDTOs teamDTOs,IFormFile photoUrl)
         {
-            var result = _teamService.TAdd(teamDTOs);
+            var result = _teamService.TAdd(teamDTOs, photoUrl);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
@@ -45,9 +46,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTeam(TeamDTOs teamDTOs)
+        public IActionResult UpdateTeam(TeamDTOs teamDTOs,IFormFile photoUrl)
         {
-            var result = _teamService.TUpdate(teamDTOs);
+            var result = _teamService.TUpdate(teamDTOs, photoUrl);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");

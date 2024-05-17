@@ -1,6 +1,7 @@
 ﻿using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DTOLayer.TeamDTO;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -9,9 +10,9 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<TeamDTOs>> TGetAll();
         IDataResult<List<TeamActiveDTOs>> TGetActiv();
         IDataResult<TeamDTOs> TGetById(int id);
-        IResult TAdd(TeamCreateDTOs entity);
-        IResult TUpdate(TeamDTOs entity);
-        IResult TDelete(TeamDTOs entity);
-        IResult THardDelete(TeamDTOs entity);
+        CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TDelete(TeamDTOs entity);
+        CoreLayer.Results.Abstract.IResult THardDelete(TeamDTOs entity);
     }
 }

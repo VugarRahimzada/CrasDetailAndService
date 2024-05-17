@@ -38,9 +38,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBlog(BlogDTOs blogDTOs)
+        public IActionResult AddBlog(BlogDTOs blogDTOs,IFormFile photoUrl)
         {
-            var result = _blogService.TAdd(blogDTOs);
+            var result = _blogService.TAdd(blogDTOs,photoUrl);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
@@ -56,9 +56,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateBlog(BlogDTOs blogDTOs)
+        public IActionResult UpdateBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
         {
-            var result = _blogService.TUpdate(blogDTOs);
+            var result = _blogService.TUpdate(blogDTOs, photoUrl);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");

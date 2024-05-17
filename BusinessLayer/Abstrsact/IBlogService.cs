@@ -1,5 +1,6 @@
 ﻿using CoreLayer.Results.Abstract;
 using DTOLayer.BlogDTO;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -8,11 +9,11 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<BlogDTOs>> TGetAll();
         IDataResult<List<BlogDTOs>> TGetActiv();
         IDataResult<BlogDTOs> TGetById(int id);
-        IResult TAdd(BlogDTOs entity);
-        IResult TUpdate(BlogDTOs entity);
-        IResult TDelete(BlogDTOs entity);
-        IResult THardDelete(BlogDTOs entity);
         IDataResult<BlogDTOs> TLastOrDefault();
         IDataResult<List<BlogDTOs>> TLastBlog();
+        CoreLayer.Results.Abstract.IResult TAdd(BlogDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TDelete(BlogDTOs entity);
+        CoreLayer.Results.Abstract.IResult THardDelete(BlogDTOs entity);
     }
 }

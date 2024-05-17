@@ -5,25 +5,62 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-
+<div class="container my-5">
+    <!-- Blog Title -->
     <div class="row">
-        <div class="col-md-8">
-            <div class="blog-content">
-                <p>@Model.Text</p>
+        <div class="col-12 text-center">
+            <h1 class="display-4">Blog Detail</h1>
+            <hr class="my-4" />
+        </div>
+    </div>
+
+    <!-- Blog Image and Content -->
+    <div class="row my-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="text-center mt-4">
+                    <img src="@Model.ImageUrl" class="img-fluid rounded" style="width: 350px; height: 350px;" alt="Blog Image" />
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.Text</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <hr />
-
-    <div class="row">
-        <div class="col-md-8">
-            <div class="comments-section">
-                <h2>Comments</h2>
-                @await Component.InvokeAsync("CommentListAdmin", new { id = ViewBag.i })
+    <!-- Comments Section -->
+    <div class="row my-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Comments</h2>
+                </div>
+                <div class="card-body">
+                    @await Component.InvokeAsync("CommentListAdmin", new { id = ViewBag.i })
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Custom CSS for additional styling -->
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+</style>

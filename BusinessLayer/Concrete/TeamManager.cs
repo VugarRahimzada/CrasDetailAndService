@@ -1,42 +1,47 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
 using BusinessLayer.BaseMessage;
+using CoreLayer.Extension;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer.TeamDTO;
 using EntityLayer.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using IResult = CoreLayer.Results.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Net.NetworkInformation;
 namespace BusinessLayer.Concrete
 {
     public class TeamManager : ITeamService
     {
 
         private readonly ITeamRepository _teamRepository;
-
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
 
-        public TeamManager(ITeamRepository teamRepository, IMapper mapper)
+        public TeamManager(ITeamRepository teamRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             _teamRepository = teamRepository;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        public IResult TAdd(TeamCreateDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl)
         {
+            entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Add(team);
-
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
       
 
-        public IResult TDelete(TeamDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TDelete(TeamDTOs entity)
         {
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Delete(team);
@@ -44,7 +49,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult THardDelete(TeamDTOs entity)
+        public CoreLayer.Results.Abstract.IResult THardDelete(TeamDTOs entity)
         {
             var team = _mapper.Map<Team>(entity);
             _teamRepository.HardDelete(team);
@@ -52,8 +57,17 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(TeamDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity,IFormFile photoUrl)
         {
+            var existData = TGetById(entity.Id).Data;
+            if (photoUrl!= null)
+            {
+                entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
+            }
+            else
+            {
+                entity.ImageUrl = existData.ImageUrl;
+            }
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Update(team);
 
