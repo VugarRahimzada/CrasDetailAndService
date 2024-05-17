@@ -16,6 +16,7 @@ namespace DTOLayer.BlogDTO
         public int CommentCounta { get; set; }
         public string ImageUrl { get; set; }
         public DateTime CreateTime { get; set; } = DateTime.Now;
+
         //public List<Comment> Comment { get; set; }
     }
 }

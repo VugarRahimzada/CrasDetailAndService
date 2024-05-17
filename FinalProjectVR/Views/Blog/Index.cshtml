@@ -1,4 +1,4 @@
-﻿@model CoreLayer.Results.Concrete.SuccessDataResult<System.Collections.Generic.List<DTOLayer.BlogDTO.BlogDTOs>>
+﻿@model List<BlogDTOs>
 
 
 @{
@@ -16,16 +16,16 @@
     </div>
     <div class="primary-color-border"></div>
 </div>
-<!-- End common page title  -->
+
 
 
 @await Component.InvokeAsync("LastBlog")
 
-<!-- Start Blog -->
+
 <div class="ak-height-50 ak-height-lg-50"></div>
 <div class="container">
     <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 g-5 g-lg-4 pagination-wrapper">
-        @foreach (var item in Model.Data)
+        @foreach (var item in Model)
         {
             <div class="col">
                 <div class="blog-card" data-aos="fade-up">
@@ -46,4 +46,3 @@
         }
     </div>
 </div>
-<!-- End Blog -->

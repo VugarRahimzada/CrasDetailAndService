@@ -1,11 +1,6 @@
 ﻿using CoreLayer.Results.Abstract;
-using CoreLayer.Results.Concrete;
 using DTOLayer.TestimonialDTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -14,9 +9,9 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<TestimonialDTOs>> TGetAll();
         IDataResult<List<TestimonialActiveDTOs>> TGetActiv();
         IDataResult<TestimonialDTOs> TGetById(int id);
-        IResult TAdd(TestimonialCreateDTOs entity);
-        IResult TUpdate(TestimonialDTOs entity);
-        IResult TDelete(TestimonialDTOs entity);
-        IResult THardDelete(TestimonialDTOs entity);
+        CoreLayer.Results.Abstract.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl);
+        CoreLayer.Results.Abstract.IResult TDelete(TestimonialDTOs entity);
+        CoreLayer.Results.Abstract.IResult THardDelete(TestimonialDTOs entity);
     }
 }

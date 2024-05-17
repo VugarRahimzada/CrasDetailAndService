@@ -14,13 +14,13 @@ namespace FinalProjectVR.Controllers
 
         public IActionResult Index()
         {
-            var value = _blogservice.TGetActiv();
+            var value = _blogservice.TGetActiv().Data;
             return View(value);
         }
         public IActionResult BlogDetail(int id)
         {
             ViewBag.i = id;
-            var valubyid =  _blogservice.TGetById(id);
+            var valubyid =  _blogservice.TGetById(id).Data;
             return View(valubyid);
         }
     }

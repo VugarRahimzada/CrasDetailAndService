@@ -1,54 +1,64 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
 using BusinessLayer.BaseMessage;
+using CoreLayer.Extension;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
+using DocumentFormat.OpenXml.Drawing;
 using DTOLayer.TestimonialDTO;
 using EntityLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLayer.Concrete
 {
     public class TestimonialManager : ITestimonialService
     {
         protected readonly ITestimonialRepository _testimonialRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         protected readonly IMapper _mapper;
 
-        public TestimonialManager(ITestimonialRepository testimonialRepository, IMapper mapper)
+        public TestimonialManager(ITestimonialRepository testimonialRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             _testimonialRepository = testimonialRepository;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        public IResult TAdd(TestimonialCreateDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl)
         {
+            entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Add(testimonial);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
-        public IResult TDelete(TestimonialDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Delete(testimonial);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult THardDelete(TestimonialDTOs entity)
+        public CoreLayer.Results.Abstract.IResult THardDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.HardDelete(testimonial);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(TestimonialDTOs entity)
+        public CoreLayer.Results.Abstract.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl)
         {
+            var existData = TGetById(entity.Id).Data;
+            if (photoUrl != null)
+            {
+                entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
+            }
+            else
+            {
+                entity.ImageUrl = existData.ImageUrl;
+            }
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Update(testimonial);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);

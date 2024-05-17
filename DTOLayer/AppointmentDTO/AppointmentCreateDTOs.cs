@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.AppointmentDTO
 {
-    public class AppointmentDTOs
+    public class AppointmentCreateDTOs
     {
-        public int Id { get; set; }
-        public int Delete { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

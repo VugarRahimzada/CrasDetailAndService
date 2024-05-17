@@ -1,12 +1,11 @@
-﻿
-@model CoreLayer.Results.Concrete.SuccessDataResult<DTOLayer.BlogDTO.BlogDTOs>
+﻿@model BlogDTOs
 
 @{
     ViewData["Title"] = "BlogDetail";
 }
 
 
-    <!-- Start common page title  -->
+
     <div class="ak-height-125 ak-height-lg-80"></div>
     <div class="container">
         <div class="d-md-flex justify-content-between align-items-center">
@@ -20,16 +19,13 @@
         </div>
         <div class="primary-color-border"></div>
     </div>
-    <!-- End common page title  -->
 
-
-    <!--Start blog content -->
     <div class="ak-height-75 ak-height-lg-80"></div>
     <div class="container container-customize">
         <div>
             <div class="time-title" data-aos="fade-up" data-aos-delay="600">
-            <p class="time">@Model.Data.CreateTime.ToString("dd/MM/yyyy")</p>
-                <h4 class="title">@Model.Data.Title</h4>
+            <p class="time">@Model.CreateTime.ToString("dd/MM/yyyy")</p>
+                <h4 class="title">@Model.Title</h4>
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
             <div data-aos="fade-up" data-aos-delay="700">
@@ -38,7 +34,7 @@
             </div>
 
             <div data-aos="fade-up">
-                <p class="desp">@Model.Data.Text</p>
+                <p class="desp">@Model.Text</p>
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
         </div>
@@ -46,7 +42,7 @@
             <div class="primary-color-border"></div>
 
        </div>
-       @if(Model.Data.CommentCounta==0)
+       @if(Model.CommentCounta==0)
        {
         <div class="ak-height-125 ak-height-lg-80"></div>
         <div class="single-blog-list" data-aos="fade-up">
@@ -60,7 +56,7 @@
        {
         <div class="ak-height-125 ak-height-lg-80"></div>
         <div class="single-blog-list" data-aos="fade-up">
-            <h4 class="single-blog-title">Comment (@Model.Data.CommentCounta)</h4>
+            <h4 class="single-blog-title">Comment (@Model.CommentCounta)</h4>
             @await Component.InvokeAsync("CommentList" , new { id = @ViewBag.i })
             </div>
         }
@@ -68,10 +64,7 @@
 
     @await Html.PartialAsync("~/Views/Comment/CommentAdd.cshtml", new { id = ViewBag.i })
     </div>
-    <!--End blog content -->
 
 
-    <!-- Start Blog -->
     @await Component.InvokeAsync("LastBlogs")
-    <!-- End Blog -->
 

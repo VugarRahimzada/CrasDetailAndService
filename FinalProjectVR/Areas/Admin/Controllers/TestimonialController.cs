@@ -9,10 +9,12 @@ namespace FinalProjectVR.Areas.Admin.Controllers
     {
       
         private readonly ITestimonialService _testimonialService;
+        //private readonly IWebHostEnvironment _env;
 
         public TestimonialController(ITestimonialService testimonialService)
         {
             _testimonialService = testimonialService;
+            //_env = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -28,9 +30,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs)
+        public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs,IFormFile photoUrl)
         {
-            var value = _testimonialService.TAdd(testimonialDTOs);
+            var value = _testimonialService.TAdd(testimonialDTOs,photoUrl);
             if (value.IsSuccess)
             {
                 return RedirectToAction("Index");
@@ -46,9 +48,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTestimonial(TestimonialDTOs testimonialDTOs)
+        public IActionResult UpdateTestimonial(TestimonialDTOs testimonialDTOs,IFormFile photoUrl)
         {
-            var result = _testimonialService.TUpdate(testimonialDTOs);
+            var result = _testimonialService.TUpdate(testimonialDTOs, photoUrl);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
