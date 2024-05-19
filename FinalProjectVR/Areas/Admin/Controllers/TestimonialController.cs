@@ -1,20 +1,20 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.TestimonialDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class TestimonialController : Controller
     {
       
         private readonly ITestimonialService _testimonialService;
-        //private readonly IWebHostEnvironment _env;
 
         public TestimonialController(ITestimonialService testimonialService)
         {
             _testimonialService = testimonialService;
-            //_env = webHostEnvironment;
         }
 
         public IActionResult Index()

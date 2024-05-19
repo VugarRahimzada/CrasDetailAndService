@@ -22,6 +22,7 @@
                             <th>Soyadı</th>
                             <th>Vəzifə</th>
                             <th>Şəkil</th>
+                            <th>Ana Ekranda</th>
                             <th>Aktivlik</th>
                             <th></th>
                         </tr>
@@ -34,6 +35,16 @@
                                 <td>@item.Surname</td>
                                 <td>@item.Position</td>
                                 <td><img src="@item.ImageUrl" style="width:100px; height:100px" alt="Image" /></td>
+                                <td>
+                                    @if (item.isHomePage == true)
+                                    {
+                                        <span class="badge badge-success">Hə</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Yox</span>
+                                    }
+                                </td>
                                 <td>
                                     @if (item.Delete == 0)
                                     {

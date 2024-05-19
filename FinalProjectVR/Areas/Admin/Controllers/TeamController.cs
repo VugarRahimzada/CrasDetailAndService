@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.TeamDTO;
 using DTOLayer.TestimonialDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class TeamController : Controller
     {
         private readonly ITeamService _teamService;

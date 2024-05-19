@@ -4,11 +4,13 @@ using CoreLayer.DefaultValues;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DTOLayer;
 using EntityLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;

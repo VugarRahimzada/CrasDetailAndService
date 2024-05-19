@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
 using DTOLayer.AboutDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AboutController : Controller
     {
         private readonly IAboutService _aboutService;

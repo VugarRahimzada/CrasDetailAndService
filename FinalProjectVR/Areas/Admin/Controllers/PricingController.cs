@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.PricingDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class PricingController : Controller
     {
         private readonly IPricingService _pricingService;

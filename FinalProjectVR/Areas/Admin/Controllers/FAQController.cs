@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
 using DTOLayer.FAQDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class FAQController : Controller
     {
         private readonly IFAQService _faqService;

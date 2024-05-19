@@ -6,6 +6,7 @@ using BusinessLayer.Validation.FluentValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Context;
+using EntityLayer.Membership;
 using EntityLayer.Models;
 using FluentValidation;
 
@@ -33,8 +34,13 @@ namespace FinalProjectVR
             //builder.Services.AddScoped
             //builder.Services.AddTransient
             //builder.Services.AddSingleton
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
 
-            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>()
+                .AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
             builder.Services.AddScoped<IValidator<About>, AboutValidation>();
 
             builder.Services.AddScoped<IContactUsService, ContactUsManager>();
@@ -46,7 +52,7 @@ namespace FinalProjectVR
             builder.Services.AddScoped<IFAQRepository, FAQRepository>();
             builder.Services.AddScoped<IFAQService, FAQManager>();
             builder.Services.AddScoped<IPriceDescriptionsService, PriceDescriptionManager>();
-            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>(); 
+            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>();
             builder.Services.AddScoped<ITeamService, TeamManager>();
             builder.Services.AddScoped<ITeamRepository, TeamRepository>();
             builder.Services.AddScoped<IAboutService, AboutManager>();
@@ -75,7 +81,7 @@ namespace FinalProjectVR
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //app.MapControllerRoute(

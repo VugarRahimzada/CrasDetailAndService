@@ -1,12 +1,14 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
 using DTOLayer.ContactUs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.AccessControl;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ContactUsController : Controller
     {
 

@@ -3,11 +3,13 @@ using DocumentFormat.OpenXml.Office2010.Excel;
 using DTOLayer;
 using DTOLayer.BlogDTO;
 using EntityLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BlogController : Controller
     {
 

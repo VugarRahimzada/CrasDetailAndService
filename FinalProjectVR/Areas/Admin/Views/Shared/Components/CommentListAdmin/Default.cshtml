@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<CommentDTOs>
 
 
-
 @foreach (var item in Model)
 {
     <div style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
@@ -33,6 +32,15 @@
             </button>
         </form>
     </div>
+
+
+    <div class="container mt-3">
+        <a asp-action="Index" class="btn btn-primary ">@DefaultConstantValue.RETURN_TO_BACK</a>
+    </div>
+
+
+    <div class="container mt-3">
+        <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success hover-effect"> Redakte Et</a>
+    </div>
+
 }
-
-

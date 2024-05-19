@@ -23,6 +23,7 @@
                             <th>Başlıq</th>
                             <th>Acıqlama</th>
                             <th>Icon</th>
+                            <th>Ana Ekranda</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -34,6 +35,16 @@
                                 <td>@item.Title</td>
                                 <td>@item.Description</td>
                                 <td>@item.Icon</td>
+                                <td>
+                                    @if (item.isHomePage == true)
+                                    {
+                                        <span class="badge badge-success">Hə</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Yox</span>
+                                    }
+                                </td>
                                 <td>
                                     @if (item.Delete == 0)
                                     {
