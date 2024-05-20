@@ -1,38 +1,32 @@
-﻿@model CoreLayer.Results.Concrete.DataResult<List<DTOLayer.ContactUs.ContactUsDTOs>>
-
-
+﻿@model List<EmailSubscriptionDTOs>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 
-<h1>Contact Us</h1>
+
+
+<h1>Maile Abone Olanlar</h1>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive overflow-hidden">
+
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
                     <thead>
                         <tr>
-
-                            <th>Adı Soyadı</th>
                             <th>Email</th>
-                            <th>Başlıq</th>
-                            <th>Messaj</th>
                             <th>Activlik</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Data)
+                        @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.Name @item.Surname</td>
-                                <td>@item.Email</td>
-                                <td>@item.Subject</td>
-                                <td>@item.Message</td>
+                                <td>@item.Email </td>
                                 <td>
                                     @if (item.Delete == 0)
                                     {
@@ -46,10 +40,10 @@
                                 <td>
                                     <a href="~/Admin/ContactUs/UpdateContactUs/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
 
-                                    <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Name">
+                                    <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Email">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Name">
+                                    <a class="btn btn-danger btnHardDelete" data-id="@item.Id" data-name="@item.Email">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -83,7 +77,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/ContactUs/HardDeleteContactUs/",
+                            url: "/Admin/EmailSubscription/HardDelete/",
                         data: {
                             id: itemId
                         },
@@ -127,7 +121,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/ContactUs/DeleteContactUs/",
+                            url: "/Admin/EmailSubscription/Delete/",
                         data: {
                             id: itemId
                         },
@@ -154,3 +148,4 @@
         });
     </script>
 }
+

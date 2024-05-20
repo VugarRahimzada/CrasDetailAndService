@@ -4,6 +4,7 @@ using DTOLayer.AppointmentDTO;
 using DTOLayer.BlogDTO;
 using DTOLayer.CommentDTO;
 using DTOLayer.ContactUs;
+using DTOLayer.EmailSubscriptionDTO;
 using DTOLayer.FAQDTO;
 using DTOLayer.OrderDTO;
 using DTOLayer.PriceDescriptionDTO;
@@ -79,6 +80,10 @@ namespace BusinessLayer.Mapper
             CreateMap<TestimonialDTOs, Testimonial>().ReverseMap();
             CreateMap<TestimonialCreateDTOs, Testimonial>().ReverseMap();
             CreateMap<TestimonialActiveDTOs, Testimonial>().ReverseMap();
+            #endregion
+            #region EmailSubscription
+            CreateMap<EmailSubscriptionDTOs, EmailSubscription>().ReverseMap();
+            CreateMap<EmailSubscriptionCreateDTOs, EmailSubscription>().ReverseMap();
             #endregion
         }
     }
