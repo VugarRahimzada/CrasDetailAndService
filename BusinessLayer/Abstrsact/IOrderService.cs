@@ -23,5 +23,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<OrderDTOs> FirstOrDefault(string licenseplate);
         IDataResult<MemoryStream> ExportExelOrder();
 
+        IDataResult<int> TCount();
+
     }
 }

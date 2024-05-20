@@ -17,5 +17,6 @@ namespace BusinessLayer.Abstrsact
         CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity, IFormFile photoUrl);
         CoreLayer.Results.Abstract.IResult TDelete(TeamDTOs entity);
         CoreLayer.Results.Abstract.IResult THardDelete(TeamDTOs entity);
+        IDataResult<int> TCount();
     }
 }

@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using DataAccessLayer.Concrete;
 namespace BusinessLayer.Concrete
 {
     public class TeamManager : ITeamService
@@ -100,6 +101,14 @@ namespace BusinessLayer.Concrete
             var team = _teamRepository.GetTeamHomePage(x=>x.isHomePage==true).ToList();
             var teamdto = _mapper.Map<List<TeamActiveDTOs>>(team);
             return new SuccessDataResult<List<TeamActiveDTOs>>(teamdto);
+        }
+
+
+        public IDataResult<int> TCount()
+        {
+            var value = _teamRepository.GetActiv().Count();
+
+            return new SuccessDataResult<int>(value);
         }
     }
 }

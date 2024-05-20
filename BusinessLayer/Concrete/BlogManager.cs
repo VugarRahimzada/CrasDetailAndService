@@ -98,5 +98,11 @@ namespace BusinessLayer.Concrete
 
             return new SuccessDataResult<List<BlogDTOs>>(blogdto);
         }
+
+        public IDataResult<int> TCount()
+        {
+            var value = _blogRepository.GetActiv().Count();
+            return new SuccessDataResult<int>(value);
+        }
     }
 }

@@ -9,6 +9,7 @@ using DataAccessLayer.Context;
 using EntityLayer.Membership;
 using EntityLayer.Models;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 
 namespace FinalProjectVR
 {
@@ -40,6 +41,17 @@ namespace FinalProjectVR
             builder.Services.AddDbContext<AppDbContext>()
                 .AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 5;
+
+                options.User.RequireUniqueEmail = true;
+            });
 
             builder.Services.AddScoped<IValidator<About>, AboutValidation>();
 

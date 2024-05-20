@@ -7,6 +7,7 @@ using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DocumentFormat.OpenXml.Vml.Office;
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using FluentValidation;
@@ -135,6 +136,13 @@ namespace BusinessLayer.Concrete
                 stream.Position = 0;
                 return new SuccessDataResult<MemoryStream>(stream);
             }
+        }
+
+        public IDataResult<int> TCount()
+        {
+            var value =_orderRepository.GetActiv().Count();
+
+            return new SuccessDataResult<int>(value);
         }
     }
 }
