@@ -1,17 +1,17 @@
 ﻿using CoreLayer.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityLayer.Models
 {
     public class Pricing : BaseEntity
     {
+        public Pricing()
+        {
+            PriceDescription = new HashSet<PriceDescription>();
+            Order = new HashSet<Order>();
+        }
         public string Title { get; set; }
         public double Price { get; set; }
-        public List<PriceDescription> PriceDescription { get; set; }
-        public List<Order> Order { get; set; }
+        public ICollection<PriceDescription> PriceDescription { get; set; }
+        public ICollection<Order> Order { get; set; }
     }
 }

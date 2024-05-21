@@ -37,17 +37,12 @@
                                 <td>@item.Title</td>
                                 <td>@item.Price</td>
                                 <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Active</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Inactive</span>
-                                    }
+                                    <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                        @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                    </span>
                                 </td>
                                 <td>
-                                    <a href="~/Admin/Pricing/UpdatePricing/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="Pricing" asp-route-id="@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                     <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Title">
                                         <i class="fas fa-trash"></i>
                                     </a>

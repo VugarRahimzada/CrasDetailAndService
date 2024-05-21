@@ -34,17 +34,12 @@
                             <td>@item.Question</td>
                             <td>@item.Answer</td>
                             <td>
-                                @if (item.Delete == 0)
-                                {
-                                    <span class="badge badge-success">Aktiv</span>
-                                }
-                                else
-                                {
-                                    <span class="badge badge-warning">Passiv</span>
-                                }
+                                <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                    @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                </span>
                             </td>
                             <td>
-                                <a href="~/Admin/FAQ/UpdateFAQ/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                <a asp-action="UpdateFAQ" asp-route-id=@item.Id class="btn btn-success"><i class="fas fa-edit"></i></a>
 
 
                                 <button class="btn btn-warning btnDelete" data-id="@item.Id"><i class="fas fa-trash-alt"></i></button>

@@ -1,9 +1,4 @@
 ﻿using CoreLayer.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityLayer.Models
 {
@@ -13,7 +8,6 @@ namespace EntityLayer.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        //DropDpwnList
         public string VehicelType { get; set; }
         public string Message { get; set; }
         public DateTime SelectDate { get; set; }

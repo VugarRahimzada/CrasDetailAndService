@@ -5,8 +5,6 @@
 }
 
 
-
-
 <h1>Maile Abone Olanlar</h1>
 <div class="container-fluid">
     <div class="card shadow mb-4">
@@ -28,17 +26,11 @@
                             <tr>
                                 <td>@item.Email </td>
                                 <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Aktiv</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Passiv</span>
-                                    }
+                                    <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                        @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                    </span>
                                 </td>
                                 <td>
-                                    <a href="~/Admin/ContactUs/UpdateContactUs/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
 
                                     <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Email">
                                         <i class="fas fa-trash"></i>

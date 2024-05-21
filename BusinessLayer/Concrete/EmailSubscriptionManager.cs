@@ -74,6 +74,11 @@ namespace BusinessLayer.Concrete
             var emaildto = _mapper.Map<EmailSubscriptionDTOs>(email);
             return new SuccessDataResult<EmailSubscriptionDTOs>(emaildto);
         }
+        public IDataResult<int> TCount()
+        {
+            var value = _emailrepository.GetActiv().Count();
 
+            return new SuccessDataResult<int>(value);
+        }
     }
 }

@@ -36,27 +36,17 @@
                                 <td>@item.Position</td>
                                 <td><img src="@item.ImageUrl" style="width:100px; height:100px" alt="Image" /></td>
                                 <td>
-                                    @if (item.isHomePage == true)
-                                    {
-                                        <span class="badge badge-success">Hə</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Yox</span>
-                                    }
+                                    <span class="badge @(item.isHomePage == true ? "badge-success" : "badge-warning")">
+                                        @(item.isHomePage == true ? "Hə" : "Yox")
+                                    </span>
                                 </td>
                                 <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Aktiv</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Passiv</span>
-                                    }
+                                    <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                        @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                    </span>
                                 </td>
                                 <td>
-                                    <a href="~/Admin/Team/UpdateTeam/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="UpdateTeam" asp-route-id="@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
 
                                     <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Name">
                                         <i class="fas fa-trash"></i>

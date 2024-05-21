@@ -1,29 +1,28 @@
 ﻿@model List<AboutDTOs>
 
 
-<title>Haqqımızda</title>
+<h1>Haqqımızda</h1>
 
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive overflow-hidden">
 
-
-    @if ((bool)ViewBag.ShowButton)
-    {
-        <form action="About/Create" method="get">
-            <p>
-                <button class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</button>
-            </p>
-        </form>
-    }
+                @if ((bool)ViewBag.ShowButton)
+                {
+                    <form action="AddAbout" method="get">
+                        <p>
+                            <button class="btn btn-primary">@DefaultConstantValue.ADD_MESSAGE</button>
+                        </p>
+                    </form>
+                }
 
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Misson</th>
-                            <th>Vision</th>
-                            <th>History</th>
+                            <th>Misyamız</th>
+                            <th>Vizyonumuz</th>
+                            <th>Tariximiz</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -36,17 +35,12 @@
                                 <td>@item.Vision</td>
                                 <td>@item.History</td>
                                 <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Aktiv</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Passiv</span>
-                                    }
+                                    <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                        @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                    </span>
                                 </td>
                                 <td>
-                                    <a href="~/Admin/About/UpdateAbout/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="UpdateAbout" asp-route-id="@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                  
                                     <button class="btn btn-warning delete-button" data-id="@item.Id"><i class="fas fa-trash-alt"></i></button>
 

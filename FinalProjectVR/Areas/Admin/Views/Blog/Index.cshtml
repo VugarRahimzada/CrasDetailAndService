@@ -34,17 +34,12 @@
                                 <td>@(item.Text.Length > 20 ? item.Text.Substring(0, 20) + "..." : item.Text)</td>
                                 <td>@item.CommentCounta</td>
                                 <td>
-                                    @if (item.Delete == 0)
-                                    {
-                                        <span class="badge badge-success">Aktiv</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Passiv</span>
-                                    }
+                                    <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">
+                                        @(item.Delete == 0 ? "Aktiv" : "Passiv")
+                                    </span>
                                 </td>
                                 <td>
-                                    <a href="~/Admin/Blog/UpdateBlog/@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="UpdateBlog" asp-route-id="@item.Id" class="btn btn-success"><i class="fas fa-edit"></i></a>
                              
                                     <a class="btn btn-warning btnDelete" data-id="@item.Id" data-name="@item.Title">
                                         <i class="fas fa-trash"></i>

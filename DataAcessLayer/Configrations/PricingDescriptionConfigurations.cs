@@ -1,11 +1,6 @@
 ﻿using EntityLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Configrations
 {
@@ -14,8 +9,13 @@ namespace DataAccessLayer.Configrations
         public void Configure(EntityTypeBuilder<PriceDescription> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(500);
-            builder.HasOne(x => x.Pricing).WithMany(x => x.PriceDescription).HasForeignKey(x => x.PricingId);
+
+            builder.Property(x => x.Description)
+                   .IsRequired()
+                   .HasMaxLength(500);
+            builder.HasOne(x => x.Pricing)
+                   .WithMany(x => x.PriceDescription)
+                   .HasForeignKey(x => x.PricingId);
 
             builder.HasIndex(x => new { x.Id, x.Delete }).IsUnique();
         }

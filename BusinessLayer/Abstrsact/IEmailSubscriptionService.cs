@@ -18,5 +18,6 @@ namespace BusinessLayer.Abstrsact
         IResult TUpdate(EmailSubscriptionDTOs entity);
         IResult TDelete(EmailSubscriptionDTOs entity);
         IResult THardDelete(EmailSubscriptionDTOs entity);
+        IDataResult<int> TCount();
     }
 }
