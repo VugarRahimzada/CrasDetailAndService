@@ -2,6 +2,7 @@
 using CoreLayer.Results.Concrete;
 using DTOLayer.PricingDTO;
 using EntityLayer.Models;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace BusinessLayer.Abstrsact
 
         IDataResult<List<PricingActivDTOs>> TGetActiv();
         IDataResult<PricingDTOs> TGetById(int id);
-        IResult TAdd(PricingCreateDTOs entity);
-        IResult TUpdate(PricingDTOs entity);
+        IResult TAdd(PricingCreateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(PricingDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(PricingDTOs entity);
         IResult THardDelete(PricingDTOs entity);
     }
 }
+

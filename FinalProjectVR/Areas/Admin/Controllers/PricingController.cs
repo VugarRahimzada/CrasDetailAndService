@@ -1,5 +1,8 @@
 ﻿using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Concrete;
+using DocumentFormat.OpenXml.Math;
 using DTOLayer.PricingDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +10,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class PricingController : Controller
+    public class PricingController : BaseController
     {
         private readonly IPricingService _pricingService;
 
@@ -32,12 +35,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdatePricing(PricingDTOs pricingDTOs)
         {
-            var result = _pricingService.TUpdate(pricingDTOs);
-            if (result.IsSuccess)
+            var result = _pricingService.TUpdate(pricingDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(pricingDTOs);
             }
-            return View(pricingDTOs);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -49,12 +53,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddPricing(PricingCreateDTOs pricingDTOs)
         {
-            var result = _pricingService.TAdd(pricingDTOs);
-            if (result.IsSuccess)
+            var result = _pricingService.TAdd(pricingDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return  View(pricingDTOs);
             }
-            return View(pricingDTOs);
+                return RedirectToAction("Index");
         }
         
         public IActionResult DeletePricing(int id)

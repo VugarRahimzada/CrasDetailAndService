@@ -1,20 +1,27 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer;
 using DTOLayer.AboutDTO;
+using DTOLayer.PricingDTO;
+using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class AboutController : Controller
+    public class AboutController : BaseController
     {
         private readonly IAboutService _aboutService;
-
-        public AboutController(IAboutService aboutService)
+        private readonly IValidator<About> _validator;
+        public AboutController(IAboutService aboutService, IValidator<About> validator)
         {
             _aboutService = aboutService;
+            _validator = validator;
         }
 
         public IActionResult Index()
@@ -33,12 +40,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddAbout(AboutCreate aboutDTOs)
         {
-            var result = _aboutService.TAdd(aboutDTOs);
-            if (result.IsSuccess)
+
+            var result = _aboutService.TAdd(aboutDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(aboutDTOs);
             }
-            return View(aboutDTOs);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -51,12 +60,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateAbout(AboutDTOs aboutDTOs)
         {
-            var result = _aboutService.TUpdate(aboutDTOs);
-            if (result.IsSuccess)
+            var result = _aboutService.TUpdate(aboutDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(aboutDTOs);
             }
-            return View(aboutDTOs);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -1,26 +1,20 @@
-﻿@model PricingDTOs
-
-
+﻿@model PricingCreateDTOs
 
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddPricing" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Başlıq</label>
+                <label asp-for="Title"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label">Qiymət</label>
+                <label asp-for="Price"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <input type="submit" value="@DefaultConstantValue.ADD_MESSAGE" class="btn btn-primary" />
-            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

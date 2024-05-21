@@ -14,15 +14,23 @@ namespace BusinessLayer.Validation.FluentValidations
     {
         public AboutValidation()
         {
-            RuleFor(x => x.Misson).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Misson).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.Misson)
+                   .NotEmpty()
+                   .WithMessage("Boş buraxıla bilməz")
+                   .MinimumLength(3)
+                   .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
-            RuleFor(x => x.Vision).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Vision).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.Vision)
+                   .NotEmpty()
+                   .WithMessage("Boş buraxıla bilməz")
+                   .MinimumLength(3)
+                   .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
-            RuleFor(x => x.History).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.History).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
-
+            RuleFor(x => x.History)
+                   .NotEmpty()
+                   .WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                   .MinimumLength(3)
+                   .WithMessage(ValidationBaseMessage.MIN_LENGHT);
         }
     }
 }

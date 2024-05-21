@@ -6,23 +6,37 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer.AboutDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace BusinessLayer.Concrete
 {
     public class AboutManager : IAboutService
     {
         private readonly IAboutRepository _aboutRepository;
+        private readonly IValidator<About> _validator;
         private readonly IMapper _mapper;
 
-        public AboutManager(IAboutRepository aboutRepository, IMapper mapper)
+        public AboutManager(IAboutRepository aboutRepository, IMapper mapper, IValidator<About> aboutValidator)
         {
             _aboutRepository = aboutRepository;
             _mapper = mapper;
+            _validator = aboutValidator;
         }
 
-        public IResult TAdd(AboutCreate entity)
+        public IResult TAdd(AboutCreate entity, out List<ValidationFailure> errors)
         {
             var about = _mapper.Map<About>(entity);
+            var validationResult = _validator.Validate(about);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _aboutRepository.Add(about);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
@@ -41,9 +55,19 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(AboutDTOs entity)
+        public IResult TUpdate(AboutDTOs entity, out List<ValidationFailure> errors)
         {
             var about = _mapper.Map<About>(entity);
+            var validationResult = _validator.Validate(about);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _aboutRepository.Update(about);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
@@ -71,5 +95,14 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<AboutDTOs>(aboutdtos);
         }
 
+        public IResult TAdd(AboutCreate entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult TUpdate(AboutDTOs entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

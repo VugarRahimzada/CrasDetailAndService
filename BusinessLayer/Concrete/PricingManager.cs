@@ -4,32 +4,48 @@ using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
+using DocumentFormat.OpenXml.Wordprocessing;
 using DTOLayer.PricingDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
 
 namespace BusinessLayer.Concrete
 {
     public class PricingManager : IPricingService
     {
         private readonly IPricingRepository _pricingRepository;
+        private readonly IValidator<Pricing> _validator;
         private readonly IMapper _mapper;
 
-        public PricingManager(IPricingRepository pricingRepository, IMapper mapper)
+        public PricingManager(IPricingRepository pricingRepository, IMapper mapper, IValidator<Pricing> validator)
         {
             _pricingRepository = pricingRepository;
             _mapper = mapper;
+            _validator = validator;
         }
 
-        public IResult TAdd(PricingCreateDTOs entity)
+        public IResult TAdd(PricingCreateDTOs entity, out List<ValidationFailure> errors)
         {
-            var pricing = _mapper.Map<Pricing>(entity);
-            _pricingRepository.Add(pricing);
 
+            var pricing = _mapper.Map<Pricing>(entity);
+            var validationResult = _validator.Validate(pricing);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
+            _pricingRepository.Add(pricing);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
@@ -48,9 +64,19 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(PricingDTOs entity)
+        public IResult TUpdate(PricingDTOs entity, out List<ValidationFailure> errors)
         {
             var pricing = _mapper.Map<Pricing>(entity);
+            var validationResult = _validator.Validate(pricing);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _pricingRepository.Update(pricing);
 
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);

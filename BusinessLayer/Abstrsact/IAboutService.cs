@@ -2,6 +2,7 @@
 using CoreLayer.Results.Concrete;
 using DTOLayer;
 using DTOLayer.AboutDTO;
+using FluentValidation.Results;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -10,8 +11,8 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<AboutDTOs>> TGetAll();
         IDataResult<List<AboutGetActivDTOs>> TGetActiv();
         IDataResult<AboutDTOs> TGetById(int id);
-        IResult TAdd(AboutCreate entity);
-        IResult TUpdate(AboutDTOs entity);
+        IResult TAdd(AboutCreate entity,out List<ValidationFailure> errors);
+        IResult TUpdate(AboutDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(AboutDTOs entity);
         IResult THardDelete(AboutDTOs entity);
     }

@@ -1,8 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DTOLayer;
 using DTOLayer.BlogDTO;
-using EntityLayer.Models;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +8,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class BlogController : Controller
+    public class BlogController : BaseController
     {
 
         private readonly IBlogService _blogService;
@@ -42,12 +40,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddBlog(BlogDTOs blogDTOs,IFormFile photoUrl)
         {
-            var result = _blogService.TAdd(blogDTOs,photoUrl);
-            if (result.IsSuccess)
+            var result = _blogService.TAdd(blogDTOs,photoUrl,out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(blogDTOs);
             }
-            return View(blogDTOs);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -60,12 +59,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
         {
-            var result = _blogService.TUpdate(blogDTOs, photoUrl);
-            if (result.IsSuccess)
+            var result = _blogService.TUpdate(blogDTOs, photoUrl, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(blogDTOs);
             }
-            return View(blogDTOs);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

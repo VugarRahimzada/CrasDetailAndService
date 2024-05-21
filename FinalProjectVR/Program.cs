@@ -8,6 +8,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.Context;
 using EntityLayer.Membership;
 using EntityLayer.Models;
+using FinalProjectVR.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 
@@ -53,32 +54,7 @@ namespace FinalProjectVR
                 options.User.RequireUniqueEmail = true;
             });
 
-            builder.Services.AddScoped<IValidator<About>, AboutValidation>();
-
-            builder.Services.AddScoped<IContactUsService, ContactUsManager>();
-            builder.Services.AddScoped<IContactUsRepository, ContactUsRepository>();
-            builder.Services.AddScoped<IOrderService, OrderManager>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            builder.Services.AddScoped<IPricingService, PricingManager>();
-            builder.Services.AddScoped<IPricingRepository, PricingRepository>();
-            builder.Services.AddScoped<IFAQRepository, FAQRepository>();
-            builder.Services.AddScoped<IFAQService, FAQManager>();
-            builder.Services.AddScoped<IPriceDescriptionsService, PriceDescriptionManager>();
-            builder.Services.AddScoped<IPriceDescriptionRepository, PriceDescriptionRepository>();
-            builder.Services.AddScoped<ITeamService, TeamManager>();
-            builder.Services.AddScoped<ITeamRepository, TeamRepository>();
-            builder.Services.AddScoped<IAboutService, AboutManager>();
-            builder.Services.AddScoped<IAboutRepository, AboutRepository>();
-            builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
-            builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
-            builder.Services.AddScoped<IServiceService, ServiceManager>();
-            builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
-            builder.Services.AddScoped<IBlogService, BlogManager>();
-            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-            builder.Services.AddScoped<ICommentService, CommentManager>();
-            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-            builder.Services.AddScoped<IEmailSubscriptionRepository, EmailSubscriptionRepository>();
-            builder.Services.AddScoped<IEmailSubscriptionService, EmailSubscriptionManager>();
+            builder.Services.AddCustomService();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -98,9 +74,6 @@ namespace FinalProjectVR
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.MapControllerRoute(
-            //    name: "default",
-            //    pattern: "{controller=About}/{action=Index}/{id?}");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -1,33 +1,25 @@
 ﻿@model AboutCreate
 
-@{
-    ViewData["Title"] = "AddAbout";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-}
-
-
-
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddAbout" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Misson" class="control-label">Misson</label>
-                <input asp-for="Misson" class="form-control" />
+                <label asp-for="Misson" class="control-label">Misya</label>
+                <textarea asp-for="Misson" class="form-control"></textarea>
                 <span asp-validation-for="Misson" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Vision" class="control-label">Vizyonumuz</label>
-                <input asp-for="Vision" class="form-control" />
+                <label asp-for="Vision" class="control-label">Vizyon</label>
+                <textarea asp-for="Vision" class="form-control"></textarea>
                 <span asp-validation-for="Vision" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="History" class="control-label">Tariximiz</label>
-                <input asp-for="History" class="form-control" />
+                <label asp-for="History" class="control-label">Tarix</label>
+                <textarea asp-for="History" class="form-control"></textarea>
                 <span asp-validation-for="History" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="@DefaultConstantValue.ADD_MESSAGE" class="btn btn-primary" />
             </div>
