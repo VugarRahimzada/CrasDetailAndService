@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstrsact;
+using DTOLayer.AboutDTO;
 using DTOLayer.PriceDescriptionDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +9,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class PriceDescriptionController : Controller
+    public class PriceDescriptionController : BaseController
     {
          private readonly IPriceDescriptionsService _priceDescriptionsService;
         private readonly IPricingService _pricingService;
@@ -34,18 +36,22 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddPDescription(PricingDescriptionCreateDTOs priceDescriptionDTOs)
         {
-            var result = _priceDescriptionsService.TAdd(priceDescriptionDTOs);
-            if (result.IsSuccess)
+            var result = _priceDescriptionsService.TAdd(priceDescriptionDTOs,out List<ValidationFailure> errors);
+            ViewData["PriceDescription"] = _pricingService.TGetAll().Data;
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(priceDescriptionDTOs);
             }
-            return View(priceDescriptionDTOs);
+            return RedirectToAction("Index");
         }
 
 
         [HttpGet]
         public IActionResult UpdatePDescription(int id)
         {
+    
+            ViewData["PriceDescription"] = _pricingService.TGetAll().Data;
             var teamMember = _priceDescriptionsService.TGetById(id).Data;
             return View(teamMember);
         }
@@ -53,12 +59,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdatePDescription(PriceDescriptionDTOs priceDescriptionDTOs)
         {
-            var result = _priceDescriptionsService.TUpdate(priceDescriptionDTOs);
-            if (result.IsSuccess)
+            var result = _priceDescriptionsService.TUpdate(priceDescriptionDTOs, out List<ValidationFailure> errors);
+            ViewData["PriceDescription"] = _pricingService.TGetAll().Data;
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(priceDescriptionDTOs);
             }
-            return View(priceDescriptionDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeletePDescription(int id)

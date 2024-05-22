@@ -6,16 +6,12 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer.CommentDTO;
 using EntityLayer.Models;
-using FluentValidation;
-using FluentValidation.Results;
-using System.Reflection.Metadata;
 
 namespace BusinessLayer.Concrete
 {
     public class CommentManager : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
-        private readonly IValidator<Comment> _validator;
         private readonly IBlogRepository _blogRepository;
         private readonly IMapper _mapper;
 
@@ -26,19 +22,9 @@ namespace BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IResult TAdd(CommentCreateDTOs entity, out List<ValidationFailure> errors)
+        public IResult TAdd(CommentCreateDTOs entity)
         {
             var comment = _mapper.Map<Comment>(entity);
-            var validationResult = _validator.Validate(comment);
-            errors = new List<ValidationFailure>();
-            if (!validationResult.IsValid)
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    errors.Add(item);
-                }
-                return new ErrorResult("Error");
-            }
             _commentRepository.Add(comment);
             _blogRepository.IncreesCommentCounta(entity.BlogId);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
@@ -58,19 +44,9 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(CommentDTOs entity, out List<ValidationFailure> errors)
+        public IResult TUpdate(CommentDTOs entity)
         {
             var comment = _mapper.Map<Comment>(entity);
-            var validationResult = _validator.Validate(comment);
-            errors = new List<ValidationFailure>();
-            if (!validationResult.IsValid)
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    errors.Add(item);
-                }
-                return new ErrorResult("Error");
-            }
             _commentRepository.Delete(comment);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }

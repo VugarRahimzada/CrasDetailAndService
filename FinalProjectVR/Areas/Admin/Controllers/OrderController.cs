@@ -1,9 +1,12 @@
 ﻿using BusinessLayer.Abstrsact;
 using ClosedXML.Excel;
 using CoreLayer.DefaultValues;
+using CoreLayer.Results.Concrete;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DTOLayer;
+using DTOLayer.AboutDTO;
 using EntityLayer.Models;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +14,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
 
@@ -39,12 +42,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         public IActionResult UpdateOrder(Order orderDTOs)
         {
 
-            var value = _orderService.TUpdate(orderDTOs);
-            if (value.IsSuccess)
+            var result = _orderService.TUpdate(orderDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-            return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(orderDTOs);
             }
-             return View(orderDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteOrder(int id)

@@ -12,6 +12,7 @@ namespace DTOLayer.TestimonialDTO
         public string Suranme { get; set; }
         public string Message { get; set; }
         public string ImageUrl { get; set; }
+        public bool isHomePage { get; set; } = false;
 
     }
 }

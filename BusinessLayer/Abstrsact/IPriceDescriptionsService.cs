@@ -1,6 +1,7 @@
 ﻿using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DTOLayer.PriceDescriptionDTO;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<PriceDescriptionDTOs>> TGetOrderWithPricingCategory();
         IDataResult<List<PriceDescriptionActiveDTOs>> TGetActiv();
         IDataResult<PriceDescriptionDTOs> TGetById(int id);
-        IResult TAdd(PricingDescriptionCreateDTOs entity);
-        IResult TUpdate(PriceDescriptionDTOs entity);
+        IResult TAdd(PricingDescriptionCreateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(PriceDescriptionDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(PriceDescriptionDTOs entity);
         IResult THardDelete(PriceDescriptionDTOs entity);
         IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId);

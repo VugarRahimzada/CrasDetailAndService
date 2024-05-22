@@ -1,10 +1,15 @@
 ﻿using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Concrete;
+using DTOLayer.AboutDTO;
 using DTOLayer.OrderDTO;
+using EntityLayer.Models;
+using FinalProjectVR.Areas.Admin.Controllers;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Controllers
 {
-    public class PricingController : Controller
+    public class PricingController : BaseController
     {
         private readonly IOrderService _orderService;
         private readonly IPricingService _pricingService;
@@ -27,23 +32,21 @@ namespace FinalProjectVR.Controllers
         public IActionResult Order(int id)
         {
             var data = _orderService.TGetById(id).Data;
-            //var test = _pricingService.TGetActiv().Data;
             ViewData["Prices"] = _pricingService.TGetActiv().Data;
-
-            //var pricingOptions = _pricingService.TGetActiv().Data.Select(x => new SelectListItem
-            //{
-            //    Value = x.Id.ToString(),
-            //    Text = x.Title
-            //}).ToList();
-            //ViewBag.PricingOptions = pricingOptions;
     
             return View(data);
         }
         [HttpPost]
-        public IActionResult Order(OrderDTOs orderDTOs)
+        public IActionResult Order(Order orderDTOs)
         {
+            var result = _orderService.TAdd(orderDTOs, out List<ValidationFailure> errors);
+            ViewData["Prices"] = _pricingService.TGetActiv().Data;
+            if (!result.IsSuccess)
+            {
 
-            _orderService.TAdd(orderDTOs);
+                AddModelError(errors);
+                return View(orderDTOs);
+            }
             return RedirectToAction("Index");
         }
 

@@ -1,20 +1,51 @@
-﻿
+﻿@{
+    ViewBag.Title = "Post A Comment";
+}
 
 <div class="post-from" data-aos="fade-up">
     <h2 class="contact-form-title ak-white-color text-uppercase">Post A Comment</h2>
     <div class="ak-height-25 ak-height-lg-20"></div>
     <div class="contact-form">
-        <form asp-controller="Comment" asp-action="CommentAdd" method="post">
+        <form asp-controller="Comment" asp-action="CommentAdd" method="post" onsubmit="return validateForm()">
             <div class="from-inputs">
-                <input placeholder="Name" type="text" name="Name" id="fristname">
-                <input placeholder="Email" type="email" name="Email" id="emailid">
+                <input placeholder="Name" type="text" name="Name" id="firstname" required>
+                <input placeholder="Email" type="email" name="Email" id="emailid" required>
                 <input type="hidden" name="BlogId" value="@ViewBag.i" />
             </div>
             <div class="from-textarea">
-                <textarea name="Message" rows="5" placeholder="Comment"></textarea>
+                <textarea name="Message" rows="5" placeholder="Comment" required></textarea>
             </div>
             <div class="ak-height-40 ak-height-lg-20"></div>
             <button type="submit" class="common-btn">Comment At</button>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function validateForm() {
+            var name = document.getElementById('firstname').value.trim();
+            var email = document.getElementById('emailid').value.trim();
+            var message = document.querySelector('textarea[name="Message"]').value.trim();
+
+            if (name === "") {
+                alert("Name field cannot be empty.");
+                return false;
+            }
+            if (email === "") {
+                alert("Email field cannot be empty.");
+                return false;
+            }
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            if (message === "") {
+                alert("Comment field cannot be empty.");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+}

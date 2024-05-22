@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Abstrsact;
+using DTOLayer.AboutDTO;
 using DTOLayer.TeamDTO;
 using DTOLayer.TestimonialDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +10,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class TeamController : Controller
+    public class TeamController : BaseController
     {
         private readonly ITeamService _teamService;
 
@@ -29,14 +31,15 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeam(TeamCreateDTOs teamDTOs,IFormFile photoUrl)
+        public IActionResult AddTeam(TeamCreateDTOs teamcreateDTOs,IFormFile photoUrl)
         {
-            var result = _teamService.TAdd(teamDTOs, photoUrl);
-            if (result.IsSuccess)
+            var result = _teamService.TAdd(teamcreateDTOs, photoUrl,out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(teamcreateDTOs);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
 
@@ -50,12 +53,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateTeam(TeamDTOs teamDTOs,IFormFile photoUrl)
         {
-            var result = _teamService.TUpdate(teamDTOs, photoUrl);
-            if (result.IsSuccess)
+            var result = _teamService.TUpdate(teamDTOs, photoUrl, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(teamDTOs);
             }
-            return View(teamDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteTeam(int id)

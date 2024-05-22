@@ -11,6 +11,7 @@ using DocumentFormat.OpenXml.Vml.Office;
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class OrderManager : IOrderService
+    public class OrderManager : IOrderService   
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IValidator<Order> _validator;
         private readonly IMapper _mapper;
 
-        public OrderManager(IOrderRepository orderRepository, IMapper mapper)
+        public OrderManager(IOrderRepository orderRepository, IMapper mapper, IValidator<Order> validator)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _validator = validator;
         }
 
         public IDataResult<OrderDTOs> FirstOrDefault(string licenseplate)
@@ -44,15 +46,21 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<OrderDTOs>(orderplatedto);
         }
 
-        public IResult TAdd(OrderDTOs entity)
+        public IResult TAdd(Order entity, out List<ValidationFailure> errors)
         {
             var order = _mapper.Map<Order>(entity);
-            //var validation = _validator.Validate(order);
-            //if (!validation.IsValid)
-            //{
-            //    return (validation.Errors.Select(x => x.ErrorMessage).ToList());
-            //}
+            var validationResult = _validator.Validate(order);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _orderRepository.Add(order);
+
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
@@ -99,9 +107,19 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(Order entity)
+        public IResult TUpdate(Order entity, out List<ValidationFailure> errors)
         {
             var order = _mapper.Map<Order>(entity);
+            var validationResult = _validator.Validate(order);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _orderRepository.Update(order);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }

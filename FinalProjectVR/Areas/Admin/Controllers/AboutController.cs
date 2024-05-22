@@ -1,14 +1,8 @@
 ﻿using BusinessLayer.Abstrsact;
-using DTOLayer;
 using DTOLayer.AboutDTO;
-using DTOLayer.PricingDTO;
-using EntityLayer.Models;
-using FluentValidation;
 using FluentValidation.Results;
-using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
@@ -17,11 +11,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
     public class AboutController : BaseController
     {
         private readonly IAboutService _aboutService;
-        private readonly IValidator<About> _validator;
-        public AboutController(IAboutService aboutService, IValidator<About> validator)
+        public AboutController(IAboutService aboutService)
         {
             _aboutService = aboutService;
-            _validator = validator;
         }
 
         public IActionResult Index()

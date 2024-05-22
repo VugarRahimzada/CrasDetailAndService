@@ -4,8 +4,12 @@ using BusinessLayer.BaseMessage;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Office2013.Drawing.Chart;
 using DTOLayer.PriceDescriptionDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Collections.Generic;
@@ -19,20 +23,32 @@ namespace BusinessLayer.Concrete
     {
 
         private readonly IPriceDescriptionRepository _priceDescriptionRepository;
+        private readonly IValidator<PriceDescription> _validator;
         private readonly IPricingRepository _pricingRepository;
         private readonly IMapper _mapper;
 
-        public PriceDescriptionManager(IPriceDescriptionRepository priceDescriptionRepository, IPricingRepository pricingRepository , IMapper mapper)
+        public PriceDescriptionManager(IPriceDescriptionRepository priceDescriptionRepository, IPricingRepository pricingRepository, IMapper mapper, IValidator<PriceDescription> validator)
         {
             _priceDescriptionRepository = priceDescriptionRepository;
             _pricingRepository = pricingRepository;
             _mapper = mapper;
+            _validator = validator;
         }
 
-        public IResult TAdd(PricingDescriptionCreateDTOs entity)
+        public IResult TAdd(PricingDescriptionCreateDTOs entity, out List<ValidationFailure> errors)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
-             _priceDescriptionRepository.Add(pdes);
+            var validationResult = _validator.Validate(pdes);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
+            _priceDescriptionRepository.Add(pdes);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
 
         }
@@ -75,10 +91,19 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(PriceDescriptionDTOs entity)
+        public IResult TUpdate(PriceDescriptionDTOs entity, out List<ValidationFailure> errors)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
-            _priceDescriptionRepository.Update(pdes);
+            var validationResult = _validator.Validate(pdes);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
         public IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId)

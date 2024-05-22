@@ -8,6 +8,8 @@ using DataAccessLayer.Concrete;
 using DTOLayer.ServiceDTO;
 using DTOLayer.TeamDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +21,29 @@ namespace BusinessLayer.Concrete
     public class ServiceManager : IServiceService
     {
         private readonly IServiceRepository _serviceRepository;
+        private readonly IValidator<Service> _validator;
         private readonly IMapper _mapper;
 
-        public ServiceManager(IServiceRepository serviceRepository, IMapper mapper)
+        public ServiceManager(IServiceRepository serviceRepository, IMapper mapper, IValidator<Service> validator)
         {
             _serviceRepository = serviceRepository;
             _mapper = mapper;
+            _validator = validator;
         }
 
-        public IResult TAdd(ServiceCreateDTOs entity)
+        public IResult TAdd(ServiceCreateDTOs entity,out List<ValidationFailure> errors)
         {
             var value = _mapper.Map<Service>(entity);
+            var validationResult = _validator.Validate(value);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _serviceRepository.Add(value);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
@@ -72,13 +86,24 @@ namespace BusinessLayer.Concrete
         public IResult THardDelete(ServiceDTOs entity)
         {
             var value = _mapper.Map<Service>(entity);
+
             _serviceRepository.HardDelete(value);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(ServiceDTOs entity)
+        public IResult TUpdate(ServiceDTOs entity, out List<ValidationFailure> errors)
         {
             var value = _mapper.Map<Service>(entity);
+            var validationResult = _validator.Validate(value);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _serviceRepository.Update(value);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }

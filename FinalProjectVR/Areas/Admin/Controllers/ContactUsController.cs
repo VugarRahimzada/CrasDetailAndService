@@ -1,6 +1,10 @@
 ﻿using BusinessLayer.Abstrsact;
+using CoreLayer.Entity;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
+using DTOLayer.AboutDTO;
 using DTOLayer.ContactUs;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.AccessControl;
@@ -9,7 +13,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class ContactUsController : Controller
+    public class ContactUsController : BaseController
     {
 
         private readonly IContactUsService _contactUsService;
@@ -33,13 +37,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateContactUs(ContactUsDTOs contactUsDTOs)
         {
-            var value = _contactUsService.TUpdate(contactUsDTOs);
-            if(value.IsSuccess)
+            var result = _contactUsService.TUpdate(contactUsDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                
-            return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(contactUsDTOs);
             }
-            return View(contactUsDTOs);
+            return RedirectToAction("Index");
         }
         public IActionResult DeleteContactUs(int id)
         {

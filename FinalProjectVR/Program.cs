@@ -6,11 +6,13 @@ using BusinessLayer.Validation.FluentValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Context;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using EntityLayer.Membership;
 using EntityLayer.Models;
 using FinalProjectVR.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
 
 namespace FinalProjectVR
 {
@@ -31,6 +33,11 @@ namespace FinalProjectVR
             });
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
+            builder.Services.AddScoped<IValidator<Testimonial>, TestimonialValidation>();
+            builder.Services.AddControllersWithViews()
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ContactUsValidation>());
+            builder.Services.AddControllersWithViews()
+             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrderValidation>());
 
 
             //builder.Services.AddScoped

@@ -21,7 +21,7 @@ namespace FinalProjectVR.Controllers
         public IActionResult EmailSubscription(EmailSubscriptionCreateDTOs emailSubscriptionCreateDTOs)
         {
             _emailSubscriptionService.TAdd(emailSubscriptionCreateDTOs);
-            return RedirectToAction("Index" , "Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

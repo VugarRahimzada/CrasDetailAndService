@@ -1,7 +1,4 @@
-﻿@using DTOLayer
-@using EntityLayer.Models
-
-@model Order
+﻿@model EntityLayer.Models.Order
 @{
     ViewData["Title"] = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,20 +7,20 @@
 <div class="container">
     <div class="contact-content">
         <div class="ak-height-125 ak-height-lg-80"></div>
-<div class="container">
-    <div class="common-page-title">
-        <h3 class="page-title">Sərfəli Paketlərimiz</h3>
-        <div class="d-flex gap-2 align-items-center">
-            <p>Ana səhifə /</p>
-            <a href="~/Pricing/Index">Paketlərimiz</a>
+        <div class="container">
+            <div class="common-page-title">
+                <h3 class="page-title">Sərfəli Paketlərimiz</h3>
+                <div class="d-flex gap-2 align-items-center">
+                    <p>Ana səhifə /</p>
+                    <a href="~/Pricing/Index">Paketlərimiz</a>
+                </div>
+            </div>
+            <div class="primary-color-border"></div>
         </div>
-    </div>
-    <div class="primary-color-border"></div>
-</div
-<div class="ak-height-125 ak-height-lg-80"></div>
+        <div class="ak-height-125 ak-height-lg-80"></div>
         <div class="ak-height-25 ak-height-lg-20"></div>
         <div class="contact-form" data-aos="fade-up" data-aos-delay="750">
-            <div>       
+            <div>
                 <h5 class="mb-3">Sərfəli Paketlərimiz Əldə Etmek İsdəyirsiniz?</h5>
                 <p>
                     Xanalara Doğru Bir Şəkildə Doldurun Sərfəli Paketlərimizdən Faydalanın
@@ -34,32 +31,37 @@
                 <div class="from-inputs ">
                     <div class="type_1">
                         <label for="name" class="form-label">Ad</label>
-                        <input type="text" name="Name" id="Name">
+                        <input type="text" name="Name" id="Name" value="@Model.Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="type_1">
                         <label for="suraname" class="form-label">Soyad</label>
-                        <input type="text" name="Surname" id="suranameid">
+                        <input type="text" name="Surname" id="suranameid" value="@Model.Surname">
+                        <span asp-validation-for="Surname" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="from-inputs ">
                     <div class="type_1">
                         <label for="mail" class="form-label">Email</label>
-                        <input type="text" name="Email" id="emailid">
+                        <input type="text" name="Email" id="emailid" value="@Model.Email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="type_1">
-                     <label for="LicensePlate" class="form-label">Qeydiyyat nişanı</label>
-                     <input type="text" name="LicensePlate" id="LicensePlate" pattern="[0-9]{2}-[A-Z]{2}-[0-9]{3}" title=" XX-XX-XXX" required>
-                     </div>
+                        <label for="LicensePlate" class="form-label">Qeydiyyat nişanı</label>
+                        <input type="text" name="LicensePlate" id="LicensePlate" pattern="[0-9]{2}-[A-Z]{2}-[0-9]{3}" title=" XX-XX-XXX" required value="@Model.LicensePlate">
+                        <span asp-validation-for="LicensePlate" class="text-danger"></span>
+                    </div>
                 </div>
-                    <div class="type_1">
-                     <label asp-for="PricingId" class="form-label">Paket Seç</label>
-                     <select asp-for="PricingId"  class="form-control">
-                     @foreach (var option in ViewData["Prices"] as IEnumerable<PricingActivDTOs>)
-                     {
-                      <option value="@option.Id">@option.Title</option>
-                     }
-                     </select>
-                   </div>
+                <div class="type_1">
+                    <label asp-for="PricingId" class="form-label">Paket Seç</label>
+                    <select asp-for="PricingId" class="form-control">
+                        @foreach (var option in ViewData["Prices"] as IEnumerable<PricingActivDTOs>)
+                        {
+                            <option value="@option.Id">@option.Title</option>
+                        }
+                    </select>
+                    <span asp-validation-for="PricingId" class="text-danger"></span>
+                </div>
                 <div class="ak-height-40 ak-height-lg-20"></div>
                 <button type="submit" class="common-btn">Sifarişi Tamamla</button>
             </form>

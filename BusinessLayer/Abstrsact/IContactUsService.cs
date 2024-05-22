@@ -3,6 +3,7 @@ using CoreLayer.Results.Concrete;
 using DTOLayer;
 using DTOLayer.ContactUs;
 using EntityLayer.Models;
+using FluentValidation.Results;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<ContactUsDTOs>> TGetAll();
         IDataResult<List<ContactUsActivDTOs>> TGetActiv();
         IDataResult<ContactUsDTOs> TGetById(int id);
-        IResult TAdd(ContactUsCreateDTOs entity);
-        IResult TUpdate(ContactUsDTOs entity);
+        IResult TAdd(ContactUsCreateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(ContactUsDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(ContactUsDTOs entity);
         IResult THardDelete(ContactUsDTOs entity);
     }

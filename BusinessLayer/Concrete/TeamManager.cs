@@ -17,26 +17,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using DataAccessLayer.Concrete;
+using FluentValidation.Results;
+using FluentValidation;
 namespace BusinessLayer.Concrete
 {
     public class TeamManager : ITeamService
     {
 
         private readonly ITeamRepository _teamRepository;
+        private readonly IValidator<Team> _validator;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
 
-        public TeamManager(ITeamRepository teamRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
+        public TeamManager(ITeamRepository teamRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, IValidator<Team> validator)
         {
             _teamRepository = teamRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
+            _validator = validator;
         }
 
-        public CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl)
+        public CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var team = _mapper.Map<Team>(entity);
+            var validationResult = _validator.Validate(team);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _teamRepository.Add(team);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
@@ -58,7 +72,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity,IFormFile photoUrl)
+        public CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity,IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var existData = TGetById(entity.Id).Data;
             if (photoUrl!= null)
@@ -70,6 +84,16 @@ namespace BusinessLayer.Concrete
                 entity.ImageUrl = existData.ImageUrl;
             }
             var team = _mapper.Map<Team>(entity);
+            var validationResult = _validator.Validate(team);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _teamRepository.Update(team);
 
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);

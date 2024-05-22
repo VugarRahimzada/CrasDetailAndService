@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstrsact;
+using DTOLayer.AboutDTO;
 using DTOLayer.ServiceDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +9,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class ServiceController : Controller
+    public class ServiceController : BaseController
     {
         private readonly IServiceService _serviceService;
 
@@ -30,12 +32,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddService(ServiceCreateDTOs serviceDTOs)
         {
-            var result = _serviceService.TAdd(serviceDTOs);
-            if (result.IsSuccess)
+            var result = _serviceService.TAdd(serviceDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(serviceDTOs);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -48,12 +51,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateService(ServiceDTOs serviceDTOs)
         {
-            var result = _serviceService.TUpdate(serviceDTOs);
-            if (result.IsSuccess)
+            var result = _serviceService.TUpdate(serviceDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(serviceDTOs);
             }
-            return View(serviceDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteService(int id)

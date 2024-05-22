@@ -1,5 +1,8 @@
 ﻿using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Concrete;
+using DTOLayer.AboutDTO;
 using DTOLayer.TestimonialDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +10,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class TestimonialController : Controller
+    public class TestimonialController : BaseController
     {
       
         private readonly ITestimonialService _testimonialService;
@@ -32,12 +35,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs,IFormFile photoUrl)
         {
-            var value = _testimonialService.TAdd(testimonialDTOs,photoUrl);
-            if (value.IsSuccess)
+            var result = _testimonialService.TAdd(testimonialDTOs,photoUrl, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(testimonialDTOs);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -50,12 +54,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateTestimonial(TestimonialDTOs testimonialDTOs,IFormFile photoUrl)
         {
-            var result = _testimonialService.TUpdate(testimonialDTOs, photoUrl);
-            if (result.IsSuccess)
+            var result = _testimonialService.TUpdate(testimonialDTOs, photoUrl, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(testimonialDTOs);
             }
-            return View(testimonialDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteTestimonial(int id)

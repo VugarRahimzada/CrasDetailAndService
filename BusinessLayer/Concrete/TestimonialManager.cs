@@ -8,6 +8,8 @@ using DataAccessLayer.Abstract;
 using DocumentFormat.OpenXml.Drawing;
 using DTOLayer.TestimonialDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
@@ -15,21 +17,33 @@ namespace BusinessLayer.Concrete
 {
     public class TestimonialManager : ITestimonialService
     {
-        protected readonly ITestimonialRepository _testimonialRepository;
+        private readonly ITestimonialRepository _testimonialRepository;
+        private readonly IValidator<Testimonial> _validator;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        protected readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public TestimonialManager(ITestimonialRepository testimonialRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
+        public TestimonialManager(ITestimonialRepository testimonialRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, IValidator<Testimonial> validator)
         {
             _testimonialRepository = testimonialRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
+            _validator = validator;
         }
 
-        public CoreLayer.Results.Abstract.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl)
+        public CoreLayer.Results.Abstract.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl,out List<ValidationFailure> errors)
         {
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var testimonial = _mapper.Map<Testimonial>(entity);
+            var validationResult = _validator.Validate(testimonial);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _testimonialRepository.Add(testimonial);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
@@ -48,7 +62,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl)
+        public CoreLayer.Results.Abstract.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var existData = TGetById(entity.Id).Data;
             if (photoUrl != null)
@@ -60,6 +74,16 @@ namespace BusinessLayer.Concrete
                 entity.ImageUrl = existData.ImageUrl;
             }
             var testimonial = _mapper.Map<Testimonial>(entity);
+            var validationResult = _validator.Validate(testimonial);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
             _testimonialRepository.Update(testimonial);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }

@@ -8,6 +8,8 @@ using DataAccessLayer.Concrete;
 using DTOLayer;
 using DTOLayer.FAQDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +21,30 @@ namespace BusinessLayer.Concrete
 	public class FAQManager : IFAQService
 	{
 		private readonly IFAQRepository _faqrepository;
+		private readonly IValidator<FAQ> _validator;
 		private readonly IMapper _mapper;
 
-		public FAQManager(IFAQRepository faqrepository, IMapper mapper)
-		{
-			_faqrepository = faqrepository;
-			_mapper = mapper;
-		}
+        public FAQManager(IFAQRepository faqrepository, IMapper mapper, IValidator<FAQ> validator)
+        {
+            _faqrepository = faqrepository;
+            _mapper = mapper;
+            _validator = validator;
+        }
 
-		public IResult TAdd(FAQCreateDTOs entity)
+        public IResult TAdd(FAQCreateDTOs entity, out List<ValidationFailure> errors)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
-			_faqrepository.Add(faq);
+            var validationResult = _validator.Validate(faq);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
+            _faqrepository.Add(faq);
 			return new SuccessResult(UIMessage.ADD_SUCCESS);
 		}
 
@@ -47,10 +61,20 @@ namespace BusinessLayer.Concrete
 			return new SuccessResult(UIMessage.DELETE_SUCCESS);
 		}
 
-		public IResult TUpdate(FAQDTOs entity)
+		public IResult TUpdate(FAQDTOs entity, out List<ValidationFailure> errors)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
-			_faqrepository.Update(faq);
+            var validationResult = _validator.Validate(faq);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
+            _faqrepository.Update(faq);
 			return new SuccessResult(UIMessage.UPDATE_SUCCESS);
 		}
 

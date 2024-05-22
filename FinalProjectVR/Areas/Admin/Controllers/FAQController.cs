@@ -1,6 +1,9 @@
 ﻿using BusinessLayer.Abstrsact;
+using CoreLayer.Results.Concrete;
 using DTOLayer;
+using DTOLayer.AboutDTO;
 using DTOLayer.FAQDTO;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +11,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    public class FAQController : Controller
+    public class FAQController : BaseController
     {
         private readonly IFAQService _faqService;
 
@@ -30,12 +33,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddFAQ(FAQCreateDTOs faqdtos)
         {
-            var value = _faqService.TAdd(faqdtos);
-            if (value.IsSuccess)
-            {  
-            return RedirectToAction("Index");
+            var result = _faqService.TAdd(faqdtos, out List<ValidationFailure> errors);
+
+            if (!result.IsSuccess)
+            {
+                AddModelError(errors);
+                return View(faqdtos);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
 
@@ -49,12 +54,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateFAQ(FAQDTOs faqDTOs)
         {
-            var result = _faqService.TUpdate(faqDTOs);
-            if (result.IsSuccess)
+            var result = _faqService.TUpdate(faqDTOs, out List<ValidationFailure> errors);
+            if (!result.IsSuccess)
             {
-                return RedirectToAction("Index");
+                AddModelError(errors);
+                return View(faqDTOs);
             }
-            return View(faqDTOs);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteFAQ(int id)
