@@ -31,9 +31,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeam(TeamCreateDTOs teamcreateDTOs,IFormFile photoUrl)
+        public IActionResult AddTeam(TeamCreateDTOs teamcreateDTOs, IFormFile photoUrl)
         {
-            var result = _teamService.TAdd(teamcreateDTOs, photoUrl,out List<ValidationFailure> errors);
+            var result = _teamService.TAdd(teamcreateDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {
                 AddModelError(errors);
@@ -51,7 +51,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTeam(TeamDTOs teamDTOs,IFormFile photoUrl)
+        public IActionResult UpdateTeam(TeamDTOs teamDTOs, IFormFile photoUrl)
         {
             var result = _teamService.TUpdate(teamDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

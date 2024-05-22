@@ -15,7 +15,7 @@ namespace FinalProjectVR.Areas.Admin.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var value = _blogService.TLastBlog().Data;
+            var value = _blogService.TLastOrDefault().Data;
             return View(value);
         }
     }

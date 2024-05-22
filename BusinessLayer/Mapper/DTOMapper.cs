@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DTOLayer.AboutDTO;
-using DTOLayer.AppointmentDTO;
 using DTOLayer.BlogDTO;
 using DTOLayer.CommentDTO;
 using DTOLayer.ContactUs;
@@ -23,10 +22,8 @@ namespace BusinessLayer.Mapper
             #region About
             CreateMap<AboutDTOs, About>().ReverseMap();
             CreateMap<AboutGetActivDTOs, About>().ReverseMap();
-            CreateMap<AboutCreate, About>().ReverseMap();
+            CreateMap<AboutCreateDTOs, About>().ReverseMap();
             #endregion
-
-            CreateMap<AppointmentDTOs, Appointment>().ReverseMap();
 
             CreateMap<BlogDTOs, Blog>().ReverseMap();
 

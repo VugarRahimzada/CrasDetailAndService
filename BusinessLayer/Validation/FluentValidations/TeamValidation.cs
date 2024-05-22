@@ -22,10 +22,16 @@ namespace BusinessLayer.Validation.FluentValidations
             RuleFor(x => x.Position).MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
 
 
-            RuleFor(x => x.ImageUrl).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.ImageUrl).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.ImageUrl)
+                .NotEmpty()
+                .WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MinimumLength(3)
+                .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
-            RuleFor(x => x.LinkedInUrl).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
+            RuleFor(x => x.LinkedInUrl)
+                .NotEmpty()
+                .WithMessage(ValidationBaseMessage.NOT_EMPTY);
+
         }
     }
 

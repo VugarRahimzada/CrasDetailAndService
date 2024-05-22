@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/admin/Dashboard/Index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-action="Index" asp-controller="Dashboard">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -45,82 +45,88 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-
             <li class="nav-item">
-                <a class="nav-link" href="~/admin/Dashboard/Index">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/About/Index">
-                    <i class="fas fa-fw fa-info-circle"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="About">
+                    <i class="fas fa-info-circle"></i>
                     <span>Haqqımızda</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Blog">
-                    <i class="fas fa-fw fa-blog"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Blog">
+                    <i class="fas fa-blog"></i>
                     <span>Blog</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/ContactUs">
-                    <i class="fas fa-fw fa-envelope"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="ContactUs">
+                    <i class="fas fa-envelope"></i>
                     <span>Bizimlə Əlaqə</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/FAQ/Index">
-                    <i class="fas fa-fw fa-question-circle"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="FAQ">
+                    <i class="fas fa-question-circle"></i>
                     <span>FAQ</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Order/Index">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Order">
+                    <i class="fas fa-shopping-cart"></i>
                     <span>Sifarişlər</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Team/Index">
-                    <i class="fas fa-fw fa-users"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Team">
+                    <i class="fas fa-users"></i>
                     <span>Komandamız</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Testimonial/Index">
-                    <i class="fas fa-fw fa-comments"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Testimonial">
+                    <i class="fas fa-comments"></i>
                     <span>İstifadəci Geri Dönüşləri</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Service/Index">
-                    <i class="fas fa-fw fa-cogs"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Service">
+                    <i class="fas fa-cogs"></i>
                     <span>Xidmətlərimiz</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/Pricing/Index">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="Pricing">
+                    <i class="fas fa-dollar-sign"></i>
                     <span>Qiymətlərimiz</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/PriceDescription/Index">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
-                    <span>Qiymet Acılqlamalrı</span>
+                <a class="nav-link" asp-action="Index" asp-controller="PriceDescription">
+                    <i class="fas fa-tags"></i>
+                    <span>Qiymet Açıklamaları</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/Admin/EmailSubscription/Index">
-                    <i class="fa-envelope"></i>
+                <a class="nav-link" asp-action="Index" asp-controller="EmailSubscription">
+                    <i class="fas fa-envelope-open"></i>
                     <span>Mail Abone Olanlar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="" target="_blank">
+                    <i class="fas fa-home"></i>
+                    <span>Ana Səyfə</span>
                 </a>
             </li>
 
 
-           
+
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

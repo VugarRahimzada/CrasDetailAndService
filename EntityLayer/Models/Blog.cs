@@ -1,4 +1,6 @@
 ﻿using CoreLayer.Entity;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer.Models
 {
@@ -12,6 +14,9 @@ namespace EntityLayer.Models
         public string Text { get; set; }
         public int CommentCounta {  get; set; } = 0;
         public string ImageUrl { get; set; }
+
+        [NotMapped]
+        public IFormFile photoUrl { get; set; }
         public ICollection<Comment> Comment { get; set; }
     }
 }

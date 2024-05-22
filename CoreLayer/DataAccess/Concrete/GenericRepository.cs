@@ -23,12 +23,12 @@ namespace CoreLayer.DataAccess.Concrete
         {
             using (TContext context = new TContext())
             {
-                if (entity.Delete==0)
+                if (entity.Delete == 0)
                 {
-                var deleteEntity = context.Entry(entity);
-                deleteEntity.State = EntityState.Modified;
-                entity.Delete = entity.Id;
-                entity.UpdateTime = DateTime.Now;
+                    var deleteEntity = context.Entry(entity);
+                    deleteEntity.State = EntityState.Modified;
+                    entity.Delete = entity.Id;
+                    entity.UpdateTime = DateTime.Now;
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace CoreLayer.DataAccess.Concrete
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().Where(x=>x.Delete == 0).ToList();
+                return context.Set<TEntity>().Where(x => x.Delete == 0).ToList();
             }
         }
     }

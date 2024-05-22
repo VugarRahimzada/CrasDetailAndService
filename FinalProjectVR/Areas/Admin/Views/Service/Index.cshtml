@@ -24,7 +24,7 @@
                             <th>Acıqlama</th>
                             <th>Icon</th>
                             <th>Ana Ekranda</th>
-                            <th></th>
+                            <th>Activlik</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -127,7 +127,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: "POST",
-                        url: "/Admin/Service/HardDeleteService/",
+                        url: "/Admin/Service/DeleteService/",
                         data: {
                             id: itemId
                         },

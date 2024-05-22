@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.AboutDTO
 {
-    public class AboutCreate
+    public class AboutCreateDTOs
     {
         public string Misson { get; set; }
         public string Vision { get; set; }

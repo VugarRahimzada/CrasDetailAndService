@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.BlogDTO;
+using DTOLayer.TeamDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +39,9 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBlog(BlogDTOs blogDTOs,IFormFile photoUrl)
+        public IActionResult AddBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
         {
-            var result = _blogService.TAdd(blogDTOs,photoUrl,out List<ValidationFailure> errors);
+            var result = _blogService.TAdd(blogDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {
                 AddModelError(errors);
@@ -48,7 +49,6 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
         [HttpGet]
         public IActionResult UpdateBlog(int id)
         {
@@ -59,7 +59,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
         {
-            var result = _blogService.TUpdate(blogDTOs, photoUrl, out List<ValidationFailure> errors);
+            var result = _blogService.TUpdate(blogDTOs,photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {
                 AddModelError(errors);

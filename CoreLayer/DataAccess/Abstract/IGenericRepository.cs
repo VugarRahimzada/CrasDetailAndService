@@ -6,10 +6,10 @@ namespace CoreLayer.DataAccess.Abstract
     {
         IEnumerable<T> GetAll();
         IEnumerable<T> GetActiv();
-        T GetById(int id);  
-        void Add (T entity);
-        void Update (T entity);
-        void Delete (T entity);
+        T GetById(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
         void HardDelete(T entity);
     }
 }

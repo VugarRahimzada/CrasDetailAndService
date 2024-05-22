@@ -1,5 +1,4 @@
 ﻿using CoreLayer.Results.Abstract;
-using DTOLayer.AppointmentDTO;
 using DTOLayer.EmailSubscriptionDTO;
 using FluentValidation.Results;
 using System;

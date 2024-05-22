@@ -30,7 +30,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAbout(AboutCreate aboutDTOs)
+        public IActionResult AddAbout(AboutCreateDTOs aboutDTOs)
         {
 
             var result = _aboutService.TAdd(aboutDTOs, out List<ValidationFailure> errors);

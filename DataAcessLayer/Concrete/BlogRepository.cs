@@ -40,7 +40,7 @@ namespace DataAccessLayer.Concrete
         }
 
 
-        
+
     }
 
 }

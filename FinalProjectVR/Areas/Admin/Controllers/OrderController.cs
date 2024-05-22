@@ -71,7 +71,8 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         public IActionResult ExportExelOrder()
         {
             var result = _orderService.ExportExelOrder();
-            return File(result.Data, DefaultConstantValue.ExelExport, DefaultConstantValue.ExelExporFolderName);
+            var datetime = DateTime.Now.ToString("/dd/MM/yyyy/mm/ss");
+            return File(result.Data, DefaultConstantValue.ExelExport, DefaultConstantValue.ExelExporFolderName+ datetime + ".xlsx");
         }
     }
 }

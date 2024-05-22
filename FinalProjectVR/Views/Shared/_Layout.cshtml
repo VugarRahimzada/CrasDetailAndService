@@ -51,52 +51,47 @@
             <div class="container">
                 <div class="ak-main_header_in">
                     <div class="ak-main-header-left">
-                        <a class="ak-site_branding" href="~/Home/Index">
+                        <a class="ak-site_branding" asp-controller="Home" asp-action="Index">
                             <img src="~/web-cras-three.vercel.app/assets/img/logo.svg" alt="...">
                         </a>
                     </div>
                     <div class="ak-main-header-center">
                         <div class="ak-nav ak-medium">
                             <ul class="ak-nav_list">
-                             
                                 <li>
-                                    <a href="~/About/Index" class="text-hover-animaiton">Haqqımızda</a>
+                                    <a asp-controller="About" asp-action="Index" class="text-hover-animaiton"> Haqqımızda</a>
                                 </li>
                                 <li>
-                                    <a href="~/Service/Index" class="text-hover-animaiton">Xidmətlərimiz</a>
+                                    <a asp-controller="Service" asp-action="Index" class="text-hover-animaiton">Xidmətlərimiz</a>
                                 </li>
                                 <li>
-                                    <a href="~/Blog/Index" class="text-hover-animaiton">Blog</a>
+                                    <a asp-controller="Blog" asp-action="Index" class="text-hover-animaiton">Blog</a>
                                 </li>
                                 <li>
-                                    <a href="~/Team/Index" class="text-hover-animaiton">Komandamız</a>
+                                    <a asp-controller="Team" asp-action="Index" class="text-hover-animaiton">Komandamız</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="~/Appointment/Index" class="text-hover-animaiton">Rezervasya</a>
+                                    <a asp-controller="Pricing" asp-action="Index" class="text-hover-animaiton">Qiymətlərimiz</a>
                                     <ul>
                                         <li>
-                                            <a href="~/Appointment/Index" class="text-hover-animaiton">Rezervasya</a>
+                                            <a asp-controller="Pricing" asp-action="Index" class="text-hover-animaiton">Qiymətlərimiz</a>
                                         </li>
                                         <li>
-                                            <a href="~/Pricing/Index" class="text-hover-animaiton">Qiymətlərimiz</a>
+                                            <a asp-controller="Pricing" asp-action="Order" class="text-hover-animaiton">Abonə Olma</a>
                                         </li>
                                         <li>
-                                            <a href="~/Pricing/Order/" class="text-hover-animaiton">Abonə Olma</a>
+                                            <a asp-controller="Pricing" asp-action="GetOrderer" class="text-hover-animaiton">Abonəliyin Sorğulanması</a>
                                         </li>
                                         <li>
-                                            <a href="~/Pricing/GetOrderer" class="text-hover-animaiton">Abonəliyin Sorğulanması</a>
+                                            <a asp-controller="FAQ" asp-action="Index" class="text-hover-animaiton">FAQ</a>
                                         </li>
-                                        <li>
-                                            <a href="~/FAQ/Index" class="text-hover-animaiton">FAQ</a>
-                                        </li>     
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="~/ContactUs/Index" class="text-hover-animaiton">Əlaqə</a>
+                                    <a asp-controller="ContactUs" asp-action="Index" class="text-hover-animaiton">Əlaqə</a>
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                     <div class="ak-main-header-right">
                         <a href="tel:+994 51-411-21-03">
@@ -111,6 +106,7 @@
                 </div>
             </div>
         </div>
+
         <div class="nav-bar-border"></div>
     </header>
     <div class="ak-height-100 ak-height-lg-40"></div>

@@ -24,7 +24,7 @@ namespace BusinessLayer.Concrete
             _validator = aboutValidator;
         }
 
-        public IResult TAdd(AboutCreate entity, out List<ValidationFailure> errors)
+        public IResult TAdd(AboutCreateDTOs entity, out List<ValidationFailure> errors)
         {
             var about = _mapper.Map<About>(entity);
             var validationResult = _validator.Validate(about);
@@ -95,7 +95,7 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<AboutDTOs>(aboutdtos);
         }
 
-        public IResult TAdd(AboutCreate entity)
+        public IResult TAdd(AboutCreateDTOs entity)
         {
             throw new NotImplementedException();
         }

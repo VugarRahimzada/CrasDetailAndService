@@ -12,5 +12,7 @@ namespace BusinessLayer.BaseMessage
         public const string ADD_SUCCESS = "Uğurla Əlavə Edildi";
         public const string UPDATE_SUCCESS = "Uğurla Yeniləndi";
         public const string DELETE_SUCCESS = "Uğurla Silindi";
+
+        public const string ERROR_IMAGE_EMPTY = "Şəkil Boş Gələ Bilməz";
     }
 }

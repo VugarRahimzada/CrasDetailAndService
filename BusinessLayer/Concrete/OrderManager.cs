@@ -127,7 +127,7 @@ namespace BusinessLayer.Concrete
         public IDataResult<MemoryStream> ExportExelOrder()
         {
 
-            var value = _orderRepository.GetActiv();
+            var value = _orderRepository.GetOrderWithPricingCategory();
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Order List");
@@ -143,7 +143,7 @@ namespace BusinessLayer.Concrete
                     worksheet.Cell(OrderRowCounta, 1).Value = item.Name + " " + item.Surname;
                     worksheet.Cell(OrderRowCounta, 2).Value = item.Email;
                     worksheet.Cell(OrderRowCounta, 3).Value = item.LicensePlate;
-                    worksheet.Cell(OrderRowCounta, 4).Value = item.PricingId;
+                    worksheet.Cell(OrderRowCounta, 4).Value = item.Pricing.Title;
                     worksheet.Cell(OrderRowCounta, 5).Value = item.Deadline.ToString("dd/MM/yyyy");
                     OrderRowCounta++;
                 }

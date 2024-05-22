@@ -1,4 +1,6 @@
 ﻿using CoreLayer.Entity;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer.Models
 {
@@ -8,5 +10,7 @@ namespace EntityLayer.Models
         public string Suranme { get; set; }
         public string Message { get; set; }
         public string ImageUrl { get; set; }
+        [NotMapped]
+        public IFormFile photoUrl { get; set; }
     }
 }
