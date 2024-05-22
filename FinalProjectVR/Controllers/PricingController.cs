@@ -1,6 +1,4 @@
 ﻿using BusinessLayer.Abstrsact;
-using CoreLayer.Results.Concrete;
-using DTOLayer.AboutDTO;
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using FinalProjectVR.Areas.Admin.Controllers;
@@ -13,14 +11,14 @@ namespace FinalProjectVR.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IPricingService _pricingService;
-       
 
-        public PricingController(IOrderService orderService, IPricingService pricingService) 
+
+        public PricingController(IOrderService orderService, IPricingService pricingService)
         {
             _orderService = orderService;
             _pricingService = pricingService;
         }
-       
+
         public IActionResult Index()
         {
             var value = _pricingService.TGetActiv().Data;
@@ -32,23 +30,26 @@ namespace FinalProjectVR.Controllers
         public IActionResult Order(int id)
         {
             var data = _orderService.TGetById(id).Data;
+
             ViewData["Prices"] = _pricingService.TGetActiv().Data;
-    
+
+
             return View(data);
         }
         [HttpPost]
         public IActionResult Order(Order orderDTOs)
         {
-            var result = _orderService.TAdd(orderDTOs, out List<ValidationFailure> errors);
+            var result = _orderService.TAdd(orderDTOs);
             ViewData["Prices"] = _pricingService.TGetActiv().Data;
             if (!result.IsSuccess)
             {
 
-                AddModelError(errors);
+
                 return View(orderDTOs);
             }
             return RedirectToAction("Index");
         }
+
 
         [HttpGet]
         public IActionResult GetOrderer(string licenseplate)

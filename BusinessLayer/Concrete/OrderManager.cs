@@ -46,17 +46,12 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<OrderDTOs>(orderplatedto);
         }
 
-        public IResult TAdd(Order entity, out List<ValidationFailure> errors)
+        public IResult TAdd(Order entity)
         {
             var order = _mapper.Map<Order>(entity);
             var validationResult = _validator.Validate(order);
-            errors = new List<ValidationFailure>();
             if (!validationResult.IsValid)
             {
-                foreach (var item in validationResult.Errors)
-                {
-                    errors.Add(item);
-                }
                 return new ErrorResult("Error");
             }
             _orderRepository.Add(order);

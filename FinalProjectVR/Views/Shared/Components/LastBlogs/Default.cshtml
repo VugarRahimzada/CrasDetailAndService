@@ -18,13 +18,13 @@
                             </div>
                         </a>
                         <div class="blog-body-info">
-                            <p class="blog-text">@item.CreateTime.ToString("dd/MM/yyyy")</p> 
-                            <a href="~/Blog/BlogDetail/@item.Id" class="blog-title">
+                            <p class="blog-text">@item.CreateTime.ToString("dd/MM/yyyy")</p>
+                            <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@item.Id" class="blog-title">
                                 @item.Title
                             </a>
                         </div>
                         <div class="blog-footer-info">
-                            <a href="~/Blog/BlogDetail/@item.Id" class="more-btn">Davamını Oxu</a>
+                            <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@item.Id" class="more-btn">Davamını Oxu</a>
                         </div>
                     </div>
                 </div>
