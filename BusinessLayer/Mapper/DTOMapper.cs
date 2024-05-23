@@ -54,6 +54,7 @@ namespace BusinessLayer.Mapper
             CreateMap<FAQActivDTOs, FAQ>().ReverseMap();
             CreateMap<FAQUpdateDTOs, FAQ>().ReverseMap();
             #endregion
+
             #region Order
 
             CreateMap<OrderDTOs, Order>().ReverseMap();

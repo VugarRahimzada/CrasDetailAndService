@@ -34,11 +34,11 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddTeam(TeamCreateDTOs teamcreateDTOs, IFormFile photoUrl)
         {
-            if (photoUrl == null || photoUrl.Length == 0)
-            {
-                ModelState.Clear();
-                return View(teamcreateDTOs);
-            }
+            //if (photoUrl == null || photoUrl.Length == 0)
+            //{
+            //    ModelState.Clear();
+            //    return View(teamcreateDTOs);
+            //}
             var result = _teamService.TAdd(teamcreateDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {

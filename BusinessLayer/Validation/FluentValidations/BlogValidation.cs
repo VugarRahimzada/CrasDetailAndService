@@ -29,9 +29,9 @@ namespace BusinessLayer.Validation.FluentValidations
                 .MinimumLength(3)
                 .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
-            RuleFor(x => x.photoUrl)
-                .NotEmpty()
-                .WithMessage(ValidationBaseMessage.NOT_EMPTY);
+            //RuleFor(x => x.photoUrl)
+            //    .NotEmpty()
+            //    .WithMessage(ValidationBaseMessage.NOT_EMPTY);
 
         }
     }

@@ -13,6 +13,7 @@ namespace DataAccessLayer.Context
         {
             optionsBuilder.UseSqlServer(@"Server=VR;Database=CrasFinalProject9Db;Trusted_Connection=True;Encrypt=false;");
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

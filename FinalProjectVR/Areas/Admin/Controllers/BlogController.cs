@@ -41,11 +41,11 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddBlog(BlogCreateDTO blogDTOs, IFormFile photoUrl)
         {
-            if (photoUrl == null || photoUrl.Length == 0)
-            {
-                ModelState.Clear();
-                return View(blogDTOs);
-            }
+            //if (photoUrl == null || photoUrl.Length == 0)
+            //{
+            //    ModelState.Clear();
+            //    return View(blogDTOs);
+            //}
 
             var result = _blogService.TAdd(blogDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

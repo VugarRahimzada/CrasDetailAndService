@@ -32,7 +32,14 @@ namespace BusinessLayer.Concrete
 
         public IResult.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
-         
+
+            if (photoUrl == null)
+            {
+                errors = new List<ValidationFailure>();
+                errors.Add(new ValidationFailure("photoUrl", "Resim yüklemesi zorunludur."));
+                return new ErrorResult("Resim yüklemesi zorunludur.");
+            }
+
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var team = _mapper.Map<Team>(entity);
             var validationResult = _validator.Validate(team);

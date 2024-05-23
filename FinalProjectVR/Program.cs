@@ -13,6 +13,7 @@ using FinalProjectVR.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProjectVR
 {
@@ -32,6 +33,8 @@ namespace FinalProjectVR
                 cfg.AddMaps(typeof(DTOMapper).Assembly);
             });
             IMapper mapper = mapperConfig.CreateMapper();
+
+
             builder.Services.AddSingleton(mapper);
             builder.Services.AddScoped<IValidator<Testimonial>, TestimonialValidation>();
             builder.Services.AddControllersWithViews()
@@ -39,16 +42,18 @@ namespace FinalProjectVR
             builder.Services.AddControllersWithViews()
              .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<OrderValidation>());
 
+            
 
-            //builder.Services.AddScoped
-            //builder.Services.AddTransient
-            //builder.Services.AddSingleton
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
 
             builder.Services.AddDbContext<AppDbContext>()
                 .AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            //builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
+            // .AddIdentity<ApplicationUser, ApplicationRole>()
+            // .AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
