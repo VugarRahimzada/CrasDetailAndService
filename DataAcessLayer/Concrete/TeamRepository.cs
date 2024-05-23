@@ -20,6 +20,11 @@ namespace DataAccessLayer.Concrete
             var value = _appDbContext.Teams.Where(function).Where(x => x.Delete == 0).ToList();
             return value;
         }
+        public bool Any(Expression<Func<Order, bool>> filter)
+        {
+            var result = _appDbContext.Orders.Any(filter);
+            return result;
+        }
     }
 
 }

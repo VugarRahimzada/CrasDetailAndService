@@ -47,5 +47,11 @@ namespace DataAccessLayer.Concrete
             return data;
 
         }
+
+        public bool Any(Expression<Func<Order, bool>> filter)
+        {
+            var result = _appDbContext.Orders.Any(filter);
+            return result;
+        }
     }
 }

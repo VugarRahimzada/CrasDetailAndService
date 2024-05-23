@@ -30,9 +30,6 @@ namespace DataAccessLayer.Configrations
                    .WithMany(x => x.Order)
                    .HasForeignKey(x => x.PricingId);
 
-            builder.HasIndex(x => x.LicensePlate)
-                   .IsUnique();
-
             builder.HasIndex(x => new { x.LicensePlate, x.Delete })
                    .IsUnique();
         }

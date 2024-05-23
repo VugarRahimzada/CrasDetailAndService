@@ -2,6 +2,7 @@
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using FluentValidation.Results;
+using System.Linq.Expressions;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -16,8 +17,6 @@ namespace BusinessLayer.Abstrsact
         IResult THardDelete(Order entity);
         IDataResult<OrderDTOs> FirstOrDefault(string licenseplate);
         IDataResult<MemoryStream> ExportExelOrder();
-
         IDataResult<int> TCount();
-
     }
 }

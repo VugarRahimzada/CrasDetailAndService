@@ -39,6 +39,7 @@ namespace BusinessLayer.Concrete
 
         public CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
+         
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var team = _mapper.Map<Team>(entity);
             var validationResult = _validator.Validate(team);

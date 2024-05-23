@@ -48,6 +48,12 @@ namespace BusinessLayer.Concrete
 
         public IResult TAdd(Order entity)
         {
+            if (_orderRepository.Any(x=>x.LicensePlate == entity.LicensePlate && x.Delete==0))
+            {
+                return new ErrorResult("Bu Qeydiyyat Nişanı var");
+            }
+
+           
             var order = _mapper.Map<Order>(entity);
             var validationResult = _validator.Validate(order);
             if (!validationResult.IsValid)
@@ -104,9 +110,15 @@ namespace BusinessLayer.Concrete
 
         public IResult TUpdate(Order entity, out List<ValidationFailure> errors)
         {
+
             var order = _mapper.Map<Order>(entity);
             var validationResult = _validator.Validate(order);
             errors = new List<ValidationFailure>();
+            if (_orderRepository.Any(x=>x.LicensePlate == entity.LicensePlate && x.Delete==0))
+            {
+                return new ErrorResult("Bu Qeydiyyat Nişanı var");
+            }
+
             if (!validationResult.IsValid)
             {
                 foreach (var item in validationResult.Errors)
