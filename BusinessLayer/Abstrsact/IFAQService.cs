@@ -10,7 +10,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<FAQActivDTOs>> TGetActiv();
         IDataResult<FAQDTOs> TGetById(int id);
 		IResult TAdd(FAQCreateDTOs entity, out List<ValidationFailure> errors);
-        IResult TUpdate(FAQUpdateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(FAQDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(FAQDTOs entity);
         IResult THardDelete(FAQDTOs entity);
 	}

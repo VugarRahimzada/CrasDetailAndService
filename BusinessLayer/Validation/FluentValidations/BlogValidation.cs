@@ -11,7 +11,7 @@ namespace BusinessLayer.Validation.FluentValidations
             RuleFor(x => x.Title)
                 .NotEmpty()
                 .WithMessage(ValidationBaseMessage.NOT_EMPTY)
-                .MaximumLength(50)
+                .MaximumLength(200)
                 .WithMessage(ValidationBaseMessage.MAX_LENGHT_50)
                 .MinimumLength(3)
                 .WithMessage(ValidationBaseMessage.MIN_LENGHT);

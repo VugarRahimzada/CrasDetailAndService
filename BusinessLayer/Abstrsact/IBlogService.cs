@@ -13,7 +13,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<BlogGetActivDTOs>> TGetActiv();
         IDataResult<BlogDTOs> TGetById(int id);
         CoreResults.IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors);
-        CoreResults.IResult TUpdate(BlogUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
+        CoreResults.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
         CoreResults.IResult TDelete(BlogDTOs entity);
         CoreResults.IResult THardDelete(BlogDTOs entity);
 

@@ -91,7 +91,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(PricingDescriptionUpdateDTOs entity, out List<ValidationFailure> errors)
+        public IResult TUpdate(PriceDescriptionDTOs entity, out List<ValidationFailure> errors)
         {
             var pdes = _mapper.Map<PriceDescription>(entity);
             var validationResult = _validator.Validate(pdes);
@@ -104,6 +104,8 @@ namespace BusinessLayer.Concrete
                 }
                 return new ErrorResult("Error");
             }
+
+            _priceDescriptionRepository.Update(pdes);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
         public IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId)

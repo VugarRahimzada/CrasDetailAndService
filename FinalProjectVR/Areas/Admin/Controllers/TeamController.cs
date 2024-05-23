@@ -57,7 +57,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTeam(TeamUpdateDTOs teamDTOs, IFormFile photoUrl)
+        public IActionResult UpdateTeam(TeamDTOs teamDTOs, IFormFile photoUrl)
         {
             var result = _teamService.TUpdate(teamDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

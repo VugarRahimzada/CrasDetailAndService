@@ -12,7 +12,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<TeamDTOs> TGetById(int id);
         IDataResult<List<TeamActiveDTOs>> TGetTeamHomePage();
         IResult.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl,out List<ValidationFailure> errors);
-        IResult.IResult TUpdate(TeamUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
+        IResult.IResult TUpdate(TeamDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
         IResult.IResult TDelete(TeamDTOs entity);
         IResult.IResult THardDelete(TeamDTOs entity);
         IDataResult<int> TCount();

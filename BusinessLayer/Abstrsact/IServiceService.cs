@@ -1,12 +1,6 @@
 ﻿using CoreLayer.Results.Abstract;
 using DTOLayer.ServiceDTO;
-using DTOLayer.TeamDTO;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -17,7 +11,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<ServiceDTOs> TGetById(int id);
         IDataResult<List<ServiceActivDTOs>> TGetServiceHomePage();
         IResult TAdd(ServiceCreateDTOs entity, out List<ValidationFailure> errors);
-        IResult TUpdate(ServiceUpdateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(ServiceDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(ServiceDTOs entity);
         IResult THardDelete(ServiceDTOs entity);
     }

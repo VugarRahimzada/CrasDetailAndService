@@ -61,7 +61,7 @@ namespace BusinessLayer.Concrete
 			return new SuccessResult(UIMessage.DELETE_SUCCESS);
 		}
 
-		public IResult TUpdate(FAQUpdateDTOs entity, out List<ValidationFailure> errors)
+		public IResult TUpdate(FAQDTOs entity, out List<ValidationFailure> errors)
 		{
 			var faq = _mapper.Map<FAQ>(entity);
             var validationResult = _validator.Validate(faq);

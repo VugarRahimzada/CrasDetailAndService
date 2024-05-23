@@ -16,7 +16,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<PriceDescriptionActiveDTOs>> TGetActiv();
         IDataResult<PriceDescriptionDTOs> TGetById(int id);
         IResult TAdd(PricingDescriptionCreateDTOs entity, out List<ValidationFailure> errors);
-        IResult TUpdate(PricingDescriptionUpdateDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(PriceDescriptionDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(PriceDescriptionDTOs entity);
         IResult THardDelete(PriceDescriptionDTOs entity);
         IDataResult<List<PriceDescriptionActiveDTOs>> TGetActivByPricingId(int pricingId);

@@ -58,7 +58,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateTestimonial(TestimonialUpdateDTOs testimonialDTOs,IFormFile photoUrl)
+        public IActionResult UpdateTestimonial(TestimonialDTOs testimonialDTOs,IFormFile photoUrl)
         {
             var result = _testimonialService.TUpdate(testimonialDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

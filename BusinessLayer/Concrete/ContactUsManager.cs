@@ -63,7 +63,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(ContactUsUpdateDTOs entity, out List<ValidationFailure> errors)
+        public IResult TUpdate(ContactUsDTOs entity, out List<ValidationFailure> errors)
         {
             var contactus = _mapper.Map<ContactUs>(entity);
             var validationResult = _validator.Validate(contactus);

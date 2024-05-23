@@ -43,8 +43,6 @@ namespace FinalProjectVR.Controllers
             ViewData["Prices"] = _pricingService.TGetActiv().Data;
             if (!result.IsSuccess)
             {
-
-
                 return View(orderDTOs);
             }
             return RedirectToAction("Index");

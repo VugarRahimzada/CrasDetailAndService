@@ -52,7 +52,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateFAQ(FAQUpdateDTOs faqDTOs)
+        public IActionResult UpdateFAQ(FAQDTOs faqDTOs)
         {
             var result = _faqService.TUpdate(faqDTOs, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

@@ -12,7 +12,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<TestimonialActiveDTOs>> TGetActiv();
         IDataResult<TestimonialDTOs> TGetById(int id);
         IResult.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
-        IResult.IResult TUpdate(TestimonialUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
+        IResult.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
         IResult.IResult TDelete(TestimonialDTOs entity);
         IResult.IResult THardDelete(TestimonialDTOs entity);
     }

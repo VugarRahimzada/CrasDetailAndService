@@ -60,7 +60,7 @@ namespace BusinessLayer.Concrete
             _blogRepository.HardDelete(blog);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
-        public CoreResults.IResult TUpdate(BlogUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public CoreResults.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var value = _blogRepository.GetById(entity.Id);
 

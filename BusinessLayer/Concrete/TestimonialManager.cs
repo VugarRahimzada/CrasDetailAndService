@@ -62,7 +62,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult.IResult TUpdate(TestimonialUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var existData = TGetById(entity.Id).Data;
             if (photoUrl != null)
