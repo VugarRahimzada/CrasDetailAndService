@@ -17,9 +17,5 @@ namespace FinalProjectVR.Controllers
             var value = _serviceService.TGetActiv().Data;
             return View(value);
         }
-        public IActionResult ServiceDetail()
-        {
-            return View();
-        }
     }
 }

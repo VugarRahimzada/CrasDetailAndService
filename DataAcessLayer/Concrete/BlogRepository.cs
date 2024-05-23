@@ -38,9 +38,6 @@ namespace DataAccessLayer.Concrete
             _appDbContext.Blogs.Find(id).CommentCounta--;
             _appDbContext.SaveChanges();
         }
-
-
-
     }
 
 }

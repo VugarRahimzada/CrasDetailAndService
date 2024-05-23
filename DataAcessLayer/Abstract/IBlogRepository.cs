@@ -11,5 +11,4 @@ namespace DataAccessLayer.Abstract
         void IncreesCommentCounta(int id);
         void DecreaseCommentCounta(int id);
     }
-
 }

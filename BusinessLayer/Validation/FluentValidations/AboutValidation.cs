@@ -16,13 +16,13 @@ namespace BusinessLayer.Validation.FluentValidations
         {
             RuleFor(x => x.Misson)
                    .NotEmpty()
-                   .WithMessage("Boş buraxıla bilməz")
+                   .WithMessage(ValidationBaseMessage.NOT_EMPTY)
                    .MinimumLength(3)
                    .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
             RuleFor(x => x.Vision)
                    .NotEmpty()
-                   .WithMessage("Boş buraxıla bilməz")
+                   .WithMessage(ValidationBaseMessage.NOT_EMPTY)
                    .MinimumLength(3)
                    .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 

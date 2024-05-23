@@ -48,14 +48,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult THardDelete(AboutDTOs entity)
-        {
-            var about = _mapper.Map<About>(entity);
-            _aboutRepository.HardDelete(about);
-            return new SuccessResult(UIMessage.DELETE_SUCCESS);
-        }
-
-        public IResult TUpdate(AboutDTOs entity, out List<ValidationFailure> errors)
+        public IResult TUpdate(AboutUpdateDTOs entity, out List<ValidationFailure> errors)
         {
             var about = _mapper.Map<About>(entity);
             var validationResult = _validator.Validate(about);
@@ -71,6 +64,10 @@ namespace BusinessLayer.Concrete
             _aboutRepository.Update(about);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
+
+
+
+
         public IDataResult<List<AboutGetActivDTOs>> TGetActiv()
         {
             var about = _aboutRepository.GetActiv();
@@ -93,16 +90,6 @@ namespace BusinessLayer.Concrete
             var aboutdtos = _mapper.Map<AboutDTOs>(about);
 
             return new SuccessDataResult<AboutDTOs>(aboutdtos);
-        }
-
-        public IResult TAdd(AboutCreateDTOs entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult TUpdate(AboutDTOs entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

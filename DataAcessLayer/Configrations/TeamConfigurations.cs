@@ -30,7 +30,7 @@ namespace DataAccessLayer.Configrations
                    .IsRequired()
                    .HasMaxLength(300);
 
-            builder.HasIndex(x => new { x.Name, x.Delete })
+            builder.HasIndex(x => new { x.Id, x.Delete })
                    .IsUnique();
         }
     }

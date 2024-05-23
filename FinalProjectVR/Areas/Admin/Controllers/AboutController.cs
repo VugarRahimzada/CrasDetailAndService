@@ -50,7 +50,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateAbout(AboutDTOs aboutDTOs)
+        public IActionResult UpdateAbout(AboutUpdateDTOs aboutDTOs)
         {
             var result = _aboutService.TUpdate(aboutDTOs, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

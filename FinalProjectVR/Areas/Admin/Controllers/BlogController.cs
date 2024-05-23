@@ -39,8 +39,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
+        public IActionResult AddBlog(BlogCreateDTO blogDTOs, IFormFile photoUrl)
         {
+            if (photoUrl == null || photoUrl.Length == 0)
+            {
+                ModelState.Clear();
+                return View(blogDTOs);
+            }
+
             var result = _blogService.TAdd(blogDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {
@@ -57,7 +63,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
+        public IActionResult UpdateBlog(BlogUpdateDTOs blogDTOs, IFormFile photoUrl)
         {
             var result = _blogService.TUpdate(blogDTOs,photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

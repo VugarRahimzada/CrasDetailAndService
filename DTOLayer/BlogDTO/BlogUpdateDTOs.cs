@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace DTOLayer.BlogDTO
 {
-    public class BlogGetActivDTOs
+    public class BlogUpdateDTOs
     {
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public int CommentCounta { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime CreateTime { get; set; } 
     }
 }

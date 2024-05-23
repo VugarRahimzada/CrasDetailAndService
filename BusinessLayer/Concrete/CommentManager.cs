@@ -44,13 +44,6 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public IResult TUpdate(CommentDTOs entity)
-        {
-            var comment = _mapper.Map<Comment>(entity);
-            _commentRepository.Delete(comment);
-            return new SuccessResult(UIMessage.ADD_SUCCESS);
-        }
-
         public IDataResult<List<CommentActiveDTOs>> TGetActiv()
         {
             var comment = _commentRepository.GetActiv();

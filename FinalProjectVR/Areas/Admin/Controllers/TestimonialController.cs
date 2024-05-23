@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstrsact;
 using CoreLayer.Results.Concrete;
 using DTOLayer.AboutDTO;
+using DTOLayer.TeamDTO;
 using DTOLayer.TestimonialDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -35,6 +36,11 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs,IFormFile photoUrl)
         {
+            if (photoUrl == null || photoUrl.Length == 0)
+            {
+                ModelState.Clear();
+                return View(testimonialDTOs);
+            }
             var result = _testimonialService.TAdd(testimonialDTOs,photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {

@@ -23,9 +23,17 @@ namespace BusinessLayer.Mapper
             CreateMap<AboutDTOs, About>().ReverseMap();
             CreateMap<AboutGetActivDTOs, About>().ReverseMap();
             CreateMap<AboutCreateDTOs, About>().ReverseMap();
+            CreateMap<AboutUpdateDTOs, About>().ReverseMap();
             #endregion
 
+            #region Blog
+
             CreateMap<BlogDTOs, Blog>().ReverseMap();
+            CreateMap<BlogCreateDTO, Blog>().ReverseMap();
+            CreateMap<BlogGetActivDTOs, Blog>().ReverseMap();
+            CreateMap<BlogUpdateDTOs, Blog>().ReverseMap();
+
+            #endregion
 
             #region Comment
             CreateMap<CommentDTOs, Comment>().ReverseMap();

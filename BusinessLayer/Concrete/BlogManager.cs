@@ -5,15 +5,13 @@ using CoreLayer.Extension;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
 using DTOLayer.BlogDTO;
 using EntityLayer.Models;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Web.Http.ModelBinding.Binders;
+using CoreResults = CoreLayer.Results.Abstract;
 namespace BusinessLayer.Concrete
 {
     public class BlogManager : IBlogService
@@ -31,9 +29,10 @@ namespace BusinessLayer.Concrete
             _validator = validator;
         }
 
-        public CoreLayer.Results.Abstract.IResult TAdd(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public CoreResults.IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
+
             var blog = _mapper.Map<Blog>(entity);
             var validationResult = _validator.Validate(blog);
             errors = new List<ValidationFailure>();
@@ -48,20 +47,20 @@ namespace BusinessLayer.Concrete
             _blogRepository.Add(blog);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
-        public CoreLayer.Results.Abstract.IResult TDelete(BlogDTOs entity)
+        public CoreResults.IResult TDelete(BlogDTOs entity)
         {
             var blog = _mapper.Map<Blog>(entity);
             _blogRepository.Delete(blog);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult THardDelete(BlogDTOs entity)
+        public CoreResults.IResult THardDelete(BlogDTOs entity)
         {
             var blog = _mapper.Map<Blog>(entity);
             _blogRepository.HardDelete(blog);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
-        public CoreLayer.Results.Abstract.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public CoreResults.IResult TUpdate(BlogUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var value = _blogRepository.GetById(entity.Id);
 
@@ -87,11 +86,16 @@ namespace BusinessLayer.Concrete
             _blogRepository.Update(blog);
             return new SuccessResult(UIMessage.UPDATE_SUCCESS);
         }
-        public IDataResult<List<BlogDTOs>> TGetActiv()
+
+
+
+
+
+        public IDataResult<List<BlogGetActivDTOs>> TGetActiv()
         {
             var blog = _blogRepository.GetActiv();
-            var blogdto = _mapper.Map<List<BlogDTOs>>(blog);
-            return new SuccessDataResult<List<BlogDTOs>>(blogdto, UIMessage.SUCCESS);
+            var blogdto = _mapper.Map<List<BlogGetActivDTOs>>(blog);
+            return new SuccessDataResult<List<BlogGetActivDTOs>>(blogdto, UIMessage.SUCCESS);
         }
 
         public IDataResult<List<BlogDTOs>> TGetAll()
@@ -107,6 +111,9 @@ namespace BusinessLayer.Concrete
             var blogdto = _mapper.Map<BlogDTOs>(blog);
             return new SuccessDataResult<BlogDTOs>(blogdto, UIMessage.SUCCESS);
         }
+
+
+
 
         public IDataResult<BlogDTOs> TLastOrDefault()
         {
