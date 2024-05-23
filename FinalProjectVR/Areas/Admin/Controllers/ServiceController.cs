@@ -49,7 +49,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateService(ServiceDTOs serviceDTOs)
+        public IActionResult UpdateService(ServiceUpdateDTOs serviceDTOs)
         {
             var result = _serviceService.TUpdate(serviceDTOs, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

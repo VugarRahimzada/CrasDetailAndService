@@ -37,7 +37,7 @@ namespace FinalProjectVR.Controllers
             return View(data);
         }
         [HttpPost]
-        public IActionResult Order(Order orderDTOs)
+        public IActionResult Order(OrderCreateDTOs orderDTOs)
         {
             var result = _orderService.TAdd(orderDTOs);
             ViewData["Prices"] = _pricingService.TGetActiv().Data;

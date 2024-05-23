@@ -57,7 +57,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdatePDescription(PriceDescriptionDTOs priceDescriptionDTOs)
+        public IActionResult UpdatePDescription(PricingDescriptionUpdateDTOs priceDescriptionDTOs)
         {
             var result = _priceDescriptionsService.TUpdate(priceDescriptionDTOs, out List<ValidationFailure> errors);
             ViewData["PriceDescription"] = _pricingService.TGetAll().Data;

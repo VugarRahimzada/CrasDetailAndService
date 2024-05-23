@@ -11,7 +11,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<Order>> GetOrderWithPricingCategory();
         IDataResult<List<OrderDTOs>> TGetActiv();
         IDataResult<Order> TGetById(int id);
-        IResult TAdd(Order entity);
+        IResult TAdd(OrderCreateDTOs entity);
         IResult TUpdate(Order entity, out List<ValidationFailure> errors);
         IResult TDelete(Order entity);
         IResult THardDelete(Order entity);

@@ -35,7 +35,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return View(value);
         }
         [HttpPost]
-        public IActionResult UpdateContactUs(ContactUsDTOs contactUsDTOs)
+        public IActionResult UpdateContactUs(ContactUsUpdateDTOs contactUsDTOs)
         {
             var result = _contactUsService.TUpdate(contactUsDTOs, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

@@ -13,18 +13,33 @@ namespace BusinessLayer.Validation.FluentValidations
     {
         public CommentValidation()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Name).MaximumLength(50).WithMessage(ValidationBaseMessage.MAX_LENGHT_50);
-            RuleFor(x => x.Name).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MaximumLength(50)
+                .WithMessage(ValidationBaseMessage.MAX_LENGHT_50)
+                .MinimumLength(3)
+                .WithMessage(ValidationBaseMessage.MIN_LENGHT);
 
-            RuleFor(x => x.Email).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Email).MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
-            RuleFor(x => x.Email).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
-            RuleFor(x => x.Email).EmailAddress().WithMessage(ValidationBaseMessage.EMAIL);
 
-            RuleFor(x => x.Message).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Message).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
-            RuleFor(x => x.Message).MaximumLength(1000).WithMessage(ValidationBaseMessage.MAX_LENGHT_1000);
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MaximumLength(200)
+                .WithMessage(ValidationBaseMessage.MAX_LENGHT_200)
+                .EmailAddress()
+                .WithMessage(ValidationBaseMessage.EMAIL)
+                .MinimumLength(3)
+                .WithMessage(ValidationBaseMessage.MIN_LENGHT);
+
+
+            RuleFor(x => x.Message)
+                .NotEmpty()
+                .WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MinimumLength(3)
+                .WithMessage(ValidationBaseMessage.MIN_LENGHT)
+                .MaximumLength(1000)
+                .WithMessage(ValidationBaseMessage.MAX_LENGHT_1000);
 
         }
     }

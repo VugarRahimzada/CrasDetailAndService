@@ -8,10 +8,10 @@ namespace BusinessLayer.Validation.FluentValidations
     {
         public PriceDescriptionValidation()
         {
-            RuleFor(x => x.Description).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Description).MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
-            RuleFor(x => x.Description).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.Description)
+                .NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT)
+                .MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
         }
     }
-
 }

@@ -7,18 +7,11 @@ using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
 using DTOLayer.TeamDTO;
 using EntityLayer.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using IResult = CoreLayer.Results.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
-using DataAccessLayer.Concrete;
-using FluentValidation.Results;
-using FluentValidation;
 namespace BusinessLayer.Concrete
 {
     public class TeamManager : ITeamService
@@ -37,7 +30,7 @@ namespace BusinessLayer.Concrete
             _validator = validator;
         }
 
-        public CoreLayer.Results.Abstract.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult.IResult TAdd(TeamCreateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
          
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
@@ -57,7 +50,7 @@ namespace BusinessLayer.Concrete
         }
       
 
-        public CoreLayer.Results.Abstract.IResult TDelete(TeamDTOs entity)
+        public IResult.IResult TDelete(TeamDTOs entity)
         {
             var team = _mapper.Map<Team>(entity);
             _teamRepository.Delete(team);
@@ -65,7 +58,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult THardDelete(TeamDTOs entity)
+        public IResult.IResult THardDelete(TeamDTOs entity)
         {
             var team = _mapper.Map<Team>(entity);
             _teamRepository.HardDelete(team);
@@ -73,7 +66,7 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult TUpdate(TeamDTOs entity,IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult.IResult TUpdate(TeamUpdateDTOs entity,IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var existData = TGetById(entity.Id).Data;
             if (photoUrl!= null)

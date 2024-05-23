@@ -5,13 +5,13 @@ using CoreLayer.Extension;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DocumentFormat.OpenXml.Drawing;
 using DTOLayer.TestimonialDTO;
 using EntityLayer.Models;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using IResult = CoreLayer.Results.Abstract;
 
 namespace BusinessLayer.Concrete
 {
@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
             _validator = validator;
         }
 
-        public CoreLayer.Results.Abstract.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl,out List<ValidationFailure> errors)
+        public IResult.IResult TAdd(TestimonialCreateDTOs entity, IFormFile photoUrl,out List<ValidationFailure> errors)
         {
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
             var testimonial = _mapper.Map<Testimonial>(entity);
@@ -48,21 +48,21 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult TDelete(TestimonialDTOs entity)
+        public IResult.IResult TDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.Delete(testimonial);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult THardDelete(TestimonialDTOs entity)
+        public IResult.IResult THardDelete(TestimonialDTOs entity)
         {
             var testimonial = _mapper.Map<Testimonial>(entity);
             _testimonialRepository.HardDelete(testimonial);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreLayer.Results.Abstract.IResult TUpdate(TestimonialDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult.IResult TUpdate(TestimonialUpdateDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var existData = TGetById(entity.Id).Data;
             if (photoUrl != null)
@@ -73,6 +73,8 @@ namespace BusinessLayer.Concrete
             {
                 entity.ImageUrl = existData.ImageUrl;
             }
+
+
             var testimonial = _mapper.Map<Testimonial>(entity);
             var validationResult = _validator.Validate(testimonial);
             errors = new List<ValidationFailure>();

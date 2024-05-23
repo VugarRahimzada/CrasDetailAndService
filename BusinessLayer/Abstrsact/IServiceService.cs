@@ -17,7 +17,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<ServiceDTOs> TGetById(int id);
         IDataResult<List<ServiceActivDTOs>> TGetServiceHomePage();
         IResult TAdd(ServiceCreateDTOs entity, out List<ValidationFailure> errors);
-        IResult TUpdate(ServiceDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(ServiceUpdateDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(ServiceDTOs entity);
         IResult THardDelete(ServiceDTOs entity);
     }

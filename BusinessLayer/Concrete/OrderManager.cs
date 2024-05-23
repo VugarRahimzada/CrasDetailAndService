@@ -1,26 +1,14 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstrsact;
 using BusinessLayer.BaseMessage;
-using BusinessLayer.Validation.FluentValidations;
 using ClosedXML.Excel;
 using CoreLayer.Results.Abstract;
 using CoreLayer.Results.Concrete;
 using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
-using DocumentFormat.OpenXml.Vml.Office;
 using DTOLayer.OrderDTO;
 using EntityLayer.Models;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
@@ -46,7 +34,7 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<OrderDTOs>(orderplatedto);
         }
 
-        public IResult TAdd(Order entity)
+        public IResult TAdd(OrderCreateDTOs entity)
         {
             if (_orderRepository.Any(x=>x.LicensePlate == entity.LicensePlate && x.Delete==0))
             {

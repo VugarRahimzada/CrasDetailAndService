@@ -55,6 +55,30 @@ namespace BusinessLayer.Concrete
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
+        public IResult THardDelete(ServiceDTOs entity)
+        {
+            var value = _mapper.Map<Service>(entity);
+
+            _serviceRepository.HardDelete(value);
+            return new SuccessResult(UIMessage.DELETE_SUCCESS);
+        }
+
+        public IResult TUpdate(ServiceUpdateDTOs entity, out List<ValidationFailure> errors)
+        {
+            var value = _mapper.Map<Service>(entity);
+            var validationResult = _validator.Validate(value);
+            errors = new List<ValidationFailure>();
+            if (!validationResult.IsValid)
+            {
+                foreach (var item in validationResult.Errors)
+                {
+                    errors.Add(item);
+                }
+                return new ErrorResult("Error");
+            }
+            _serviceRepository.Update(value);
+            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
+        }
         public IDataResult<List<ServiceActivDTOs>> TGetActiv()
         {
             var service = _serviceRepository.GetActiv();
@@ -83,29 +107,5 @@ namespace BusinessLayer.Concrete
             return new SuccessDataResult<List<ServiceActivDTOs>>(servicedto);
         }
 
-        public IResult THardDelete(ServiceDTOs entity)
-        {
-            var value = _mapper.Map<Service>(entity);
-
-            _serviceRepository.HardDelete(value);
-            return new SuccessResult(UIMessage.DELETE_SUCCESS);
-        }
-
-        public IResult TUpdate(ServiceDTOs entity, out List<ValidationFailure> errors)
-        {
-            var value = _mapper.Map<Service>(entity);
-            var validationResult = _validator.Validate(value);
-            errors = new List<ValidationFailure>();
-            if (!validationResult.IsValid)
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    errors.Add(item);
-                }
-                return new ErrorResult("Error");
-            }
-            _serviceRepository.Update(value);
-            return new SuccessResult(UIMessage.UPDATE_SUCCESS);
-        }
     }
 }

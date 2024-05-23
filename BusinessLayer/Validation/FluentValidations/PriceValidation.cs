@@ -8,13 +8,14 @@ namespace BusinessLayer.Validation.FluentValidations
     {
         public PriceValidation()
         {
-            RuleFor(x => x.Title).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Title).MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
-            RuleFor(x => x.Title).MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT);
+            RuleFor(x => x.Title)
+                .NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .MinimumLength(3).WithMessage(ValidationBaseMessage.MIN_LENGHT)
+                .MaximumLength(200).WithMessage(ValidationBaseMessage.MAX_LENGHT_200);
 
-            RuleFor(x => x.Price).NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY);
-            RuleFor(x => x.Price).GreaterThanOrEqualTo(0).WithMessage(ValidationBaseMessage.NEGATİVE);
+            RuleFor(x => x.Price)
+                .NotEmpty().WithMessage(ValidationBaseMessage.NOT_EMPTY)
+                .GreaterThanOrEqualTo(0).WithMessage(ValidationBaseMessage.NEGATİVE);
         }
     }
-
 }

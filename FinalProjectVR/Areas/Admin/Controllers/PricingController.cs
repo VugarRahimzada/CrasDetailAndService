@@ -33,7 +33,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdatePricing(PricingDTOs pricingDTOs)
+        public IActionResult UpdatePricing(PricingUpdateDTOs pricingDTOs)
         {
             var result = _pricingService.TUpdate(pricingDTOs, out List<ValidationFailure> errors);
             if (!result.IsSuccess)

@@ -19,7 +19,7 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<ContactUsActivDTOs>> TGetActiv();
         IDataResult<ContactUsDTOs> TGetById(int id);
         IResult TAdd(ContactUsCreateDTOs entity, out List<ValidationFailure> errors);
-        IResult TUpdate(ContactUsDTOs entity, out List<ValidationFailure> errors);
+        IResult TUpdate(ContactUsUpdateDTOs entity, out List<ValidationFailure> errors);
         IResult TDelete(ContactUsDTOs entity);
         IResult THardDelete(ContactUsDTOs entity);
     }

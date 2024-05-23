@@ -15,7 +15,6 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<EmailSubscriptionDTOs>> TGetActiv();
         IDataResult<EmailSubscriptionDTOs> TGetById(int id);
         IResult TAdd(EmailSubscriptionCreateDTOs entity);
-        IResult TUpdate(EmailSubscriptionDTOs entity);
         IResult TDelete(EmailSubscriptionDTOs entity);
         IResult THardDelete(EmailSubscriptionDTOs entity);
         IDataResult<int> TCount();
