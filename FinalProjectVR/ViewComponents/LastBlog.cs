@@ -14,7 +14,7 @@ namespace FinalProjectVR.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var value = _blogService.TLastOrDefault();
+            var value = _blogService.TLastOrDefault().Data;
             return View(value);
         }
     }

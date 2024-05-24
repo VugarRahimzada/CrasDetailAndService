@@ -29,12 +29,12 @@
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
             <div data-aos="fade-up" data-aos-delay="700">
-                <img src="@Model.ImageUrl" class="img-fluid" alt="...">
+            <img src="@Model.ImageUrl" class="img-fluid" style="width: 843px; height: 485px;" alt="...">
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
 
             <div data-aos="fade-up">
-                <p class="desp">@Model.Text</p>
+                <p class="desp">@Html.Raw(Model.Text)</p>
                 <div class="ak-height-50 ak-height-lg-30"></div>
             </div>
         </div>

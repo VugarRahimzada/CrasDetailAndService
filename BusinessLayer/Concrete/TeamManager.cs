@@ -36,8 +36,8 @@ namespace BusinessLayer.Concrete
             if (photoUrl == null)
             {
                 errors = new List<ValidationFailure>();
-                errors.Add(new ValidationFailure("photoUrl", "Resim yüklemesi zorunludur."));
-                return new ErrorResult("Resim yüklemesi zorunludur.");
+                errors.Add(new ValidationFailure("photoUrl", UIMessage.ERROR_IMAGE_EMPTY));
+                return new ErrorResult(UIMessage.ERROR_IMAGE_EMPTY);
             }
 
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);

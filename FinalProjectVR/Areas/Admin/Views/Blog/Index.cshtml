@@ -31,7 +31,7 @@
                         {
                             <tr>
                                 <td>@item.Title</td>
-                                <td>@(item.Text.Length > 20 ? item.Text.Substring(0, 20) + "..." : item.Text)</td>
+                                <td>@Html.Raw(item.Text.Length > 20 ? item.Text.Substring(0, 20) + "..." : item.Text)</td>
                                 <td>@item.CommentCounta</td>
                                 <td>
                                     <span class="badge @(item.Delete == 0 ? "badge-success" : "badge-warning")">

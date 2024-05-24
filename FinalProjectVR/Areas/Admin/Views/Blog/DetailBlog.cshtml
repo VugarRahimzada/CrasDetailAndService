@@ -21,7 +21,7 @@
                     <img src="@Model.ImageUrl" class="img-fluid rounded" style="width: 350px; height: 350px;" alt="Blog Image" />
                 </div>
                 <div class="card-body">
-                    <p class="card-text">@Model.Text</p>
+                    <p class="card-text">@Html.Raw(@Model.Text)</p>
                 </div>
             </div>
         </div>

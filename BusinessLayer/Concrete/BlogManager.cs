@@ -31,6 +31,13 @@ namespace BusinessLayer.Concrete
 
         public CoreResults.IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
+
+            if (photoUrl == null)
+            {
+                errors = new List<ValidationFailure>();
+                errors.Add(new ValidationFailure("photoUrl", UIMessage.ERROR_IMAGE_EMPTY));
+                return new ErrorResult(UIMessage.ERROR_IMAGE_EMPTY);
+            }
             entity.ImageUrl = PictureHelper.UploadImage(photoUrl, _webHostEnvironment.WebRootPath);
 
             var blog = _mapper.Map<Blog>(entity);

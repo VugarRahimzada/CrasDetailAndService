@@ -16,7 +16,7 @@
             <p class="data">@Model.CreateTime.ToString("dd.MM.yyyy")</p>
             <h4 class="title">@Model.Title</h4>
             <p class="desp">
-                @trimmedText
+                @Html.Raw(trimmedText)
             </p>
             <a href="~/Blog/BlogDetail/@Model.Id" class="more-btn">Davamını Oxu</a>
         </div>
