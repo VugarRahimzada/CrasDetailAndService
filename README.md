@@ -23,10 +23,6 @@ Cras is a web application developed for managing car details and various service
 - **SOLID Principles:** Design approach for implementing software development principles.
 
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
 ## Contact
 
 If you have any questions or suggestions, please contact me at vuqarr32@gmail.com.
