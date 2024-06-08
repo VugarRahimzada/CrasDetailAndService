@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://img.icons8.com/ios-filled/50/000000/car.png" alt="Car Icon"/>
-</p>
-
 <h1 align="center">Cras</h1>
 
 Cras is an MVC project for managing car details and services. It incorporates C#, .NET, N-tier architecture, SQL Server, EF Core, FluentValidation, and adheres to SOLID principles.
