@@ -40,12 +40,11 @@ namespace FinalProjectVR.Controllers
         public IActionResult Order(OrderCreateDTOs orderDTOs)
         {
             var result = _orderService.TAdd(orderDTOs);
-            ViewData["Prices"] = _pricingService.TGetActiv().Data;
             if (!result.IsSuccess)
             {
-                return View(orderDTOs);
+                return Json(new { success = false, message = result.Message });
             }
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
 
@@ -55,7 +54,5 @@ namespace FinalProjectVR.Controllers
             var order = _orderService.FirstOrDefault(licenseplate).Data;
             return View(order);
         }
-
-
     }
 }
