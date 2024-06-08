@@ -14,6 +14,7 @@ namespace FinalProjectVR.Controllers
 
         public IActionResult Index()
         {
+          
             var value = _blogservice.TGetActiv().Data;
             return View(value);
         }

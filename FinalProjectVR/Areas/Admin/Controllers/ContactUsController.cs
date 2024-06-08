@@ -1,18 +1,13 @@
 ﻿using BusinessLayer.Abstrsact;
-using CoreLayer.Entity;
-using CoreLayer.Results.Concrete;
-using DTOLayer;
-using DTOLayer.AboutDTO;
 using DTOLayer.ContactUs;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.AccessControl;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ContactUsController : BaseController
     {
 

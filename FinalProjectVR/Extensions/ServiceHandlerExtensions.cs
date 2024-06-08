@@ -15,17 +15,17 @@ namespace FinalProjectVR.Extensions
         public static void AddCustomService(this IServiceCollection services)
         {
 
-             services.AddScoped<IValidator<About>, AboutValidation>();//++
-             services.AddScoped<IValidator<Pricing>, PriceValidation>();//++
-             services.AddScoped<IValidator<Blog>, BlogValidation>();//++
-             services.AddScoped<IValidator<FAQ>, FAQValidation>();//++
-             services.AddScoped<IValidator<Team>, TeamValidation>(); //++
-             services.AddScoped<IValidator<Comment>, CommentValidation>(); //Boş Add
-             services.AddScoped<IValidator<ContactUs>, ContactUsValidation>();//BOŞ Add
-             services.AddScoped<IValidator<EmailSubscription>, EmailSubscriptionValidation>();//Boş add
-             services.AddScoped<IValidator<Service>, ServiceValidation>();//Boş Add
-             services.AddScoped<IValidator<Order>, OrderValidation>(); //Buna Bax
-             services.AddScoped<IValidator<PriceDescription>, PriceDescriptionValidation>(); //Buna Bax
+             services.AddScoped<IValidator<About>, AboutValidation>();
+             services.AddScoped<IValidator<Pricing>, PriceValidation>();
+             services.AddScoped<IValidator<Blog>, BlogValidation>();
+             services.AddScoped<IValidator<FAQ>, FAQValidation>();
+             services.AddScoped<IValidator<Team>, TeamValidation>(); 
+             services.AddScoped<IValidator<Comment>, CommentValidation>();
+             services.AddScoped<IValidator<ContactUs>, ContactUsValidation>();
+             services.AddScoped<IValidator<EmailSubscription>, EmailSubscriptionValidation>();
+             services.AddScoped<IValidator<Service>, ServiceValidation>();
+             services.AddScoped<IValidator<Order>, OrderValidation>(); 
+             services.AddScoped<IValidator<PriceDescription>, PriceDescriptionValidation>(); 
 
 
 

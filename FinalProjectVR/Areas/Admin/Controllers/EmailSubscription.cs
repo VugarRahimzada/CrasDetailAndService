@@ -1,10 +1,10 @@
 ﻿using BusinessLayer.Abstrsact;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class EmailSubscription : Controller
     {
         private readonly IEmailSubscriptionService _emailSubscriptionService;

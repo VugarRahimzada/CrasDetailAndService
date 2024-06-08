@@ -11,7 +11,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using CoreResults = CoreLayer.Results.Abstract;
+using IResult = CoreLayer.Results.Abstract.IResult;
 namespace BusinessLayer.Concrete
 {
     public class BlogManager : IBlogService
@@ -29,7 +29,7 @@ namespace BusinessLayer.Concrete
             _validator = validator;
         }
 
-        public CoreResults.IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
 
             if (photoUrl == null)
@@ -54,20 +54,20 @@ namespace BusinessLayer.Concrete
             _blogRepository.Add(blog);
             return new SuccessResult(UIMessage.ADD_SUCCESS);
         }
-        public CoreResults.IResult TDelete(BlogDTOs entity)
+        public IResult TDelete(BlogDTOs entity)
         {
             var blog = _mapper.Map<Blog>(entity);
             _blogRepository.Delete(blog);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
 
-        public CoreResults.IResult THardDelete(BlogDTOs entity)
+        public IResult THardDelete(BlogDTOs entity)
         {
             var blog = _mapper.Map<Blog>(entity);
             _blogRepository.HardDelete(blog);
             return new SuccessResult(UIMessage.DELETE_SUCCESS);
         }
-        public CoreResults.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
+        public IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors)
         {
             var value = _blogRepository.GetById(entity.Id);
 
@@ -100,6 +100,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<BlogGetActivDTOs>> TGetActiv()
         {
+
             var blog = _blogRepository.GetActiv();
             var blogdto = _mapper.Map<List<BlogGetActivDTOs>>(blog);
             return new SuccessDataResult<List<BlogGetActivDTOs>>(blogdto, UIMessage.SUCCESS);

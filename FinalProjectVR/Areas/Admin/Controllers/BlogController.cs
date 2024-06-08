@@ -1,6 +1,5 @@
 ﻿using BusinessLayer.Abstrsact;
 using DTOLayer.BlogDTO;
-using DTOLayer.TeamDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin,Author")]
     public class BlogController : BaseController
     {
 

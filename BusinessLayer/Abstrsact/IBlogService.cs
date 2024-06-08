@@ -2,8 +2,7 @@
 using DTOLayer.BlogDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
-
-using CoreResults = CoreLayer.Results.Abstract;
+using IResult = CoreLayer.Results.Abstract.IResult;
 
 namespace BusinessLayer.Abstrsact
 {
@@ -12,10 +11,10 @@ namespace BusinessLayer.Abstrsact
         IDataResult<List<BlogDTOs>> TGetAll();
         IDataResult<List<BlogGetActivDTOs>> TGetActiv();
         IDataResult<BlogDTOs> TGetById(int id);
-        CoreResults.IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors);
-        CoreResults.IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
-        CoreResults.IResult TDelete(BlogDTOs entity);
-        CoreResults.IResult THardDelete(BlogDTOs entity);
+        IResult TAdd(BlogCreateDTO entity, IFormFile photoUrl, out List<ValidationFailure> errors);
+        IResult TUpdate(BlogDTOs entity, IFormFile photoUrl, out List<ValidationFailure> errors);
+        IResult TDelete(BlogDTOs entity);
+        IResult THardDelete(BlogDTOs entity);
 
 
 

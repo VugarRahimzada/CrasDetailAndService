@@ -8,5 +8,10 @@ namespace FinalProjectVR.Controllers
         {
             return View();
         }
+        public IActionResult AccesDenied()
+        {
+            return View();
+        }
+
     }
 }

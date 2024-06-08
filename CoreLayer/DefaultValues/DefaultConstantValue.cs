@@ -14,6 +14,7 @@ namespace CoreLayer.DefaultValues
         public const string ADD_MESSAGE = "Əlavə et";
         public const string Update_MESSAGE = "Redakte et";
         public const string RETURN_TO_BACK = "Əvvələ Qayıt";
+        public const string RETURN_TO_BACK1 = "Əvvələ Qayıt";
 
     }
 }

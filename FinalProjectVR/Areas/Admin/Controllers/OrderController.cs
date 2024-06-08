@@ -1,10 +1,5 @@
 ﻿using BusinessLayer.Abstrsact;
-using ClosedXML.Excel;
 using CoreLayer.DefaultValues;
-using CoreLayer.Results.Concrete;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DTOLayer;
-using DTOLayer.AboutDTO;
 using EntityLayer.Models;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;

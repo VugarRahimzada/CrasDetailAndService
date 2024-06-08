@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin,Author")]
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;

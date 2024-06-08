@@ -1,6 +1,4 @@
 ﻿using CoreLayer.Results.Abstract;
-using CoreLayer.Results.Concrete;
-using DTOLayer;
 using DTOLayer.AboutDTO;
 using FluentValidation.Results;
 

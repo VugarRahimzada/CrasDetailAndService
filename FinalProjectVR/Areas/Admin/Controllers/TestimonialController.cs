@@ -1,7 +1,4 @@
 ﻿using BusinessLayer.Abstrsact;
-using CoreLayer.Results.Concrete;
-using DTOLayer.AboutDTO;
-using DTOLayer.TeamDTO;
 using DTOLayer.TestimonialDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class TestimonialController : BaseController
     {
       

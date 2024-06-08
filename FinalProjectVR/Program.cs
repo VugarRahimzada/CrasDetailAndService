@@ -23,7 +23,6 @@ namespace FinalProjectVR
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddAutoMapper(typeof(DTOMapper));
 
@@ -37,6 +36,7 @@ namespace FinalProjectVR
 
             builder.Services.AddSingleton(mapper);
             builder.Services.AddScoped<IValidator<Testimonial>, TestimonialValidation>();
+
             builder.Services.AddControllersWithViews()
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ContactUsValidation>());
             builder.Services.AddControllersWithViews()
@@ -51,6 +51,11 @@ namespace FinalProjectVR
                 .AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
+            //builder.Services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+            //});
+
             //builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")))
             // .AddIdentity<ApplicationUser, ApplicationRole>()
             // .AddEntityFrameworkStores<AppDbContext>();
@@ -64,6 +69,13 @@ namespace FinalProjectVR
                 options.Password.RequiredLength = 5;
 
                 options.User.RequireUniqueEmail = true;
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.AccessDeniedPath = new PathString("/ErrorPage/AccesDenied");
+
             });
 
             builder.Services.AddCustomService();

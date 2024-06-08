@@ -1,7 +1,4 @@
 ﻿using BusinessLayer.Abstrsact;
-using CoreLayer.Results.Concrete;
-using DTOLayer;
-using DTOLayer.AboutDTO;
 using DTOLayer.FAQDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class FAQController : BaseController
     {
         private readonly IFAQService _faqService;
