@@ -1,4 +1,4 @@
-# Cras
+<h1 align="center">Cras</h1>
 
 Cras is an MVC project for managing car details and services. It incorporates C#, .NET, N-tier architecture, SQL Server, EF Core, FluentValidation, and adheres to SOLID principles.
 
@@ -11,6 +11,7 @@ Cras is a web application developed for managing car details and various service
 - **Subscription System:** Users can subscribe to premium services for a monthly fee.
 - **Dynamic Application Usage:** Application adapts dynamically to user and admin needs.
 - **Admin Management:** Administrators can manage users, vehicles, and services efficiently.
+- **Role-based Authorization:** User roles determine access and permissions within the application.
 
 ## Technologies
 
@@ -21,7 +22,6 @@ Cras is a web application developed for managing car details and various service
 - **EF Core:** Object-Relational Mapping library for simplifying database operations.
 - **FluentValidation:** Library used for input validation.
 - **SOLID Principles:** Design approach for implementing software development principles.
-
 
 ## Contact
 
