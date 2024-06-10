@@ -155,6 +155,11 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             var userid = (int)TempData["UserId"];
             var user = _userManager.Users.FirstOrDefault(x => x.Id == userid);
 
+            if (!User.IsInRole("Creator"))
+            {
+                return Forbid(); 
+            }
+
             foreach (var item in model)
             {
                 if (item.Exists)
@@ -165,6 +170,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
                 {
                     await _userManager.RemoveFromRoleAsync(user, item.Name);
                 }
+                
 
             }
             return RedirectToAction("UserRoleList");

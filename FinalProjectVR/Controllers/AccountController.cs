@@ -70,6 +70,7 @@ namespace FinalProjectVR.Controllers
                     Surname = dto.Surname,
                     Email = dto.Email,
                     EmailConfirmed = true,
+                    
                 };
 
                 var result = await _userManager.CreateAsync(user, dto.Password);
