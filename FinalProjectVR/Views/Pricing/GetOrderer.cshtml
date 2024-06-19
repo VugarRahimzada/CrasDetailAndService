@@ -30,10 +30,9 @@
                 <div class="ak-height-45 ak-height-lg-30"></div>
             </div>
             <form asp-controller="Pricing" asp-action="GetOrderer" method="get">
-                <div class="from-inputs ">
+                <div class="from-inputs ">  
                     <div class="type_1">
                         <label for="LicensePlate" class="form-label">Qeydiyyat nişanı</label>
-             @*            <input type="text" name="LicensePlate" id="LicensePlate"> *@
                         <input type="text" name="LicensePlate" id="LicensePlate" pattern="[0-9]{2}-[A-Z]{2}-[0-9]{3}" title=" XX-XX-XXX" required>
                     </div>
                 </div>
@@ -46,7 +45,7 @@
 </div>
 
 
-@if (Model != null )
+@if (Model != null ) 
 {
     <br />
     <section class="container">

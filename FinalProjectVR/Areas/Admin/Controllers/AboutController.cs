@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class AboutController : BaseController
     {
         private readonly IAboutService _aboutService;
@@ -16,6 +15,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _aboutService = aboutService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var about = _aboutService.TGetAll().Data;
@@ -24,12 +24,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddAbout()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddAbout(AboutCreateDTOs aboutDTOs)
         {
 
@@ -43,6 +45,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateAbout(int id)
         {
             var about = _aboutService.TGetById(id).Data;
@@ -50,6 +53,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateAbout(AboutUpdateDTOs aboutDTOs)
         {
             var result = _aboutService.TUpdate(aboutDTOs, out List<ValidationFailure> errors);
@@ -62,6 +66,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteAbout(int id)
         {
             var value = _aboutService.TGetById(id).Data;

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class PriceDescriptionController : BaseController
     {
          private readonly IPriceDescriptionsService _priceDescriptionsService;
@@ -19,7 +18,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _priceDescriptionsService = priceDescriptionsService;
             _pricingService = pricingService;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var value = _priceDescriptionsService.TGetOrderWithPricingCategory().Data;
@@ -27,6 +26,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddPDescription()
         {
             ViewData["PriceDescription"] = _pricingService.TGetAll().Data;
@@ -34,6 +34,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddPDescription(PricingDescriptionCreateDTOs priceDescriptionDTOs)
         {
             var result = _priceDescriptionsService.TAdd(priceDescriptionDTOs,out List<ValidationFailure> errors);
@@ -48,6 +49,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdatePDescription(int id)
         {
     
@@ -57,6 +59,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdatePDescription(PriceDescriptionDTOs priceDescriptionDTOs)
         {
             var result = _priceDescriptionsService.TUpdate(priceDescriptionDTOs, out List<ValidationFailure> errors);
@@ -68,7 +71,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeletePDescription(int id)
         {
             var pdescription = _priceDescriptionsService.TGetById(id).Data;
@@ -78,6 +81,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeletePDescription(int id)
         {
             var pdescription = _priceDescriptionsService.TGetById(id).Data;

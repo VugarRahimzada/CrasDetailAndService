@@ -9,7 +9,9 @@ namespace DataAccessLayer.Concrete
 {
     public class BlogRepository : GenericRepository<Blog, AppDbContext>, IBlogRepository
     {
+
         private readonly AppDbContext _appDbContext;
+
         public BlogRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -17,15 +19,18 @@ namespace DataAccessLayer.Concrete
 
         public Blog LastOrDefault(Expression<Func<Blog, bool>> filter)
         {
-            return _appDbContext.Blogs.OrderBy(post => post.CreateTime)
-                                     .LastOrDefault(filter);
+            return _appDbContext.Blogs
+            .Where(filter)
+            .OrderBy(post => post.CreateTime)
+            .LastOrDefault();
         }
         public List<Blog> LastBlog(Expression<Func<Blog, bool>> filter)
         {
-            return _appDbContext.Blogs.Where(filter)
-                                     .OrderByDescending(x => x.CreateTime)
-                                     .Take(DefaultConstantValue.LASTBLOG)
-                                     .ToList();
+            return _appDbContext.Blogs
+                 .Where(filter)
+                 .OrderByDescending(x => x.CreateTime)
+                 .Take(DefaultConstantValue.LASTBLOG)
+                 .ToList();
         }
 
         public void IncreesCommentCounta(int id)

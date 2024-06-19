@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class TeamController : BaseController
     {
         private readonly ITeamService _teamService;
@@ -19,19 +18,21 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _teamService = teamService;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var teamMembers = _teamService.TGetAll().Data;
             return View(teamMembers);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddTeam()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddTeam(TeamCreateDTOs teamcreateDTOs, IFormFile photoUrl)
         {
             var result = _teamService.TAdd(teamcreateDTOs, photoUrl, out List<ValidationFailure> errors);
@@ -45,6 +46,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateTeam(int id)
         {
             var teamMember = _teamService.TGetById(id).Data;
@@ -52,6 +54,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateTeam(TeamDTOs teamDTOs, IFormFile photoUrl)
         {
             var result = _teamService.TUpdate(teamDTOs, photoUrl, out List<ValidationFailure> errors);
@@ -62,7 +65,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteTeam(int id)
         {
             var teamMember = _teamService.TGetById(id).Data;
@@ -72,6 +75,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteTeam(int id)
         {
             var teamMember = _teamService.TGetById(id).Data;

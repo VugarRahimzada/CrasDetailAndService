@@ -43,7 +43,7 @@ namespace FinalProjectVR.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "About", new { area = "Admin" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
             }
         end:

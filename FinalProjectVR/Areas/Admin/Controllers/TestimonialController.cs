@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class TestimonialController : BaseController
     {
       
@@ -17,7 +16,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _testimonialService = testimonialService;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var testimonials = _testimonialService.TGetAll().Data;
@@ -26,11 +25,13 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddTestimonial()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddTestimonial(TestimonialCreateDTOs testimonialDTOs,IFormFile photoUrl)
         {
             if (photoUrl == null || photoUrl.Length == 0)
@@ -48,6 +49,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateTestimonial(int id)
         {
             var testimonial = _testimonialService.TGetById(id).Data;
@@ -55,6 +57,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateTestimonial(TestimonialDTOs testimonialDTOs,IFormFile photoUrl)
         {
             var result = _testimonialService.TUpdate(testimonialDTOs, photoUrl, out List<ValidationFailure> errors);
@@ -65,13 +68,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteTestimonial(int id)
         {
             var value = _testimonialService.TGetById(id).Data;
             _testimonialService.TDelete(value);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteTestimonial(int id)
         {
             var value = _testimonialService.TGetById(id).Data;

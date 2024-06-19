@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Author")]
     public class BlogController : BaseController
     {
 
@@ -18,12 +17,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _blogService = blogService;
         }
 
+        [Authorize]
+
         public IActionResult Index()
         {
             var value = _blogService.TGetAll().Data;
             return View(value);
         }
-
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult DetailBlog(BlogDTOs blogDTOs)
         {
             ViewBag.i = blogDTOs.Id;
@@ -32,20 +33,16 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult AddBlog()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult AddBlog(BlogCreateDTO blogDTOs, IFormFile photoUrl)
         {
-            //if (photoUrl == null || photoUrl.Length == 0)
-            //{
-            //    ModelState.Clear();
-            //    return View(blogDTOs);
-            //}
-
             var result = _blogService.TAdd(blogDTOs, photoUrl, out List<ValidationFailure> errors);
             if (!result.IsSuccess)
             {
@@ -55,6 +52,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult UpdateBlog(int id)
         {
             var blog = _blogService.TGetById(id).Data;
@@ -62,6 +60,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult UpdateBlog(BlogDTOs blogDTOs, IFormFile photoUrl)
         {
             var result = _blogService.TUpdate(blogDTOs,photoUrl, out List<ValidationFailure> errors);
@@ -74,6 +73,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult DeleteBlog(int id)
         {
             var blog = _blogService.TGetById(id).Data;
@@ -83,6 +83,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Author,Creator")]
         public IActionResult HardDeleteBlog(int id)
         {
             var blog = _blogService.TGetById(id).Data;

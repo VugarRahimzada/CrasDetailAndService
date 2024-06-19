@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;
@@ -17,7 +16,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _orderService = orderService;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var value = _orderService.GetOrderWithPricingCategory().Data;
@@ -26,6 +25,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateOrder(int id)
         {
             var value = _orderService.TGetById(id).Data;
@@ -34,6 +34,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateOrder(Order orderDTOs)
         {
 
@@ -45,7 +46,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteOrder(int id)
         {
             var value = _orderService.TGetById(id).Data;
@@ -54,6 +55,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteOrder(int id)
         {
             var value = _orderService.TGetById(id).Data;
@@ -63,6 +65,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
         }
 
+        [Authorize()]
         public IActionResult ExportExelOrder()
         {
             var result = _orderService.ExportExelOrder();

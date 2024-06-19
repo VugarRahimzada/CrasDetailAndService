@@ -2,7 +2,6 @@
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
 using EntityLayer.Models;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace DataAccessLayer.Concrete

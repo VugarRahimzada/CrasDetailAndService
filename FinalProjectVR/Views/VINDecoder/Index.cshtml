@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "VIN Decoder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h6> test VIN Code 1ZVFT80N475211367</h6>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="contact-form" data-aos="fade-up" data-aos-delay="750">
+                <div>
+                    <h5 class="mb-3">VIN Kodun Sorğulanması</h5>
+                    <p>
+                        17 Simvollu Kodu Daxil Edin Maşın Məlumatlarını Əldə Edin
+                    </p>
+
+                    <form asp-action="Decode" method="post">
+                        <div class="from-inputs">
+                            <div class="type_1">
+                                <input type="text" id="vin" name="vin" class="form-control" />
+                            </div>
+                            <div class="ak-height-40 ak-height-lg-20"></div>
+                            <button type="submit" class="common-btn">Sorğula</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            @if (ViewBag.Error != null)
+            {
+                <div style="color: red;">@ViewBag.Error</div>
+            }
+            else if (ViewBag.Make != null)
+            {
+                <div>
+                    <h2>Maşın Məlumatları</h2>
+                    <p><strong>Marka:</strong> @ViewBag.Make</p>
+                    <p><strong>Model:</strong> @ViewBag.Model</p>
+                    <p><strong>Qapı sayı:</strong> @ViewBag.Doors</p>
+                    <p><strong>Mühərrik Silinder Sayı:</strong> @ViewBag.EngineCylinders</p>
+                    <p><strong>Mühərrik:</strong> @ViewBag.EngineHP a.g</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

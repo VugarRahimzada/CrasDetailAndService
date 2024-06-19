@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class FAQController : BaseController
     {
         private readonly IFAQService _faqService;
@@ -17,17 +16,20 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _faqService = faqService;
         }
 
+        [Authorize()]
         public IActionResult Index()
         {
             var faqs = _faqService.TGetAll().Data;
             return View(faqs);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddFAQ()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddFAQ(FAQCreateDTOs faqdtos)
         {
             var result = _faqService.TAdd(faqdtos, out List<ValidationFailure> errors);
@@ -42,6 +44,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateFAQ(int id)
         {
             var faq = _faqService.TGetById(id).Data;
@@ -49,6 +52,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateFAQ(FAQDTOs faqDTOs)
         {
             var result = _faqService.TUpdate(faqDTOs, out List<ValidationFailure> errors);
@@ -59,6 +63,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin,Creator")]
 
         public IActionResult DeleteFAQ(int id)
         {
@@ -66,7 +71,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             _faqService.TDelete(value);
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteFAQ(int id)
         {
             var value = _faqService.TGetById(id).Data;

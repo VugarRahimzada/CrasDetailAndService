@@ -1,6 +1,4 @@
 ﻿using BusinessLayer.Abstrsact;
-using CoreLayer.Results.Concrete;
-using DocumentFormat.OpenXml.Math;
 using DTOLayer.PricingDTO;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class PricingController : BaseController
     {
         private readonly IPricingService _pricingService;
@@ -18,7 +15,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _pricingService = pricingservice;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var pricing = _pricingService.TGetAll().Data;
@@ -26,6 +23,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdatePricing(int id)
         {
             var pricing = _pricingService.TGetById(id).Data;
@@ -33,6 +31,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdatePricing(PricingDTOs pricingDTOs)
         {
             var result = _pricingService.TUpdate(pricingDTOs, out List<ValidationFailure> errors);
@@ -45,12 +44,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddPricing()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddPricing(PricingCreateDTOs pricingDTOs)
         {
             var result = _pricingService.TAdd(pricingDTOs, out List<ValidationFailure> errors);
@@ -61,7 +62,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
                 return RedirectToAction("Index");
         }
-        
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeletePricing(int id)
         {
             var value = _pricingService.TGetById(id).Data;
@@ -69,6 +70,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeletePricing(int id)
         {
             var value = _pricingService.TGetById(id).Data;

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
     public class ServiceController : BaseController
     {
         private readonly IServiceService _serviceService;
@@ -16,19 +15,22 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _serviceService = serviceService;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var services = _serviceService.TGetAll().Data;
             return View(services);
         }
         [HttpGet]
+
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddService()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult AddService(ServiceCreateDTOs serviceDTOs)
         {
             var result = _serviceService.TAdd(serviceDTOs, out List<ValidationFailure> errors);
@@ -41,6 +43,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateService(int id)
         {
             var service = _serviceService.TGetById(id).Data;
@@ -48,6 +51,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateService(ServiceDTOs serviceDTOs)
         {
             var result = _serviceService.TUpdate(serviceDTOs, out List<ValidationFailure> errors);
@@ -58,13 +62,14 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteService(int id)
         {
             var service = _serviceService.TGetById(id).Data;
             _serviceService.TDelete(service);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteService(int id)
         {
             var service = _serviceService.TGetById(id).Data;

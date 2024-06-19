@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FinalProjectVR.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
     public class ContactUsController : BaseController
     {
 
@@ -17,19 +16,21 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         {
             _contactUsService = contactUsService;
         }
-
+        [Authorize()]
         public IActionResult Index()
         {
             var value = _contactUsService.TGetAll();
             return View(value);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateContactUs(int id)
         {
             var value = _contactUsService.TGetById(id).Data;
             return View(value);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult UpdateContactUs(ContactUsDTOs contactUsDTOs)
         {
             var result = _contactUsService.TUpdate(contactUsDTOs, out List<ValidationFailure> errors);
@@ -40,6 +41,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult DeleteContactUs(int id)
         {
             var value = _contactUsService.TGetById(id).Data;
@@ -48,6 +50,7 @@ namespace FinalProjectVR.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Creator")]
         public IActionResult HardDeleteContactUs(int id)
         {
             var value = _contactUsService.TGetById(id).Data;

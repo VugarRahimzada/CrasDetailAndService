@@ -15,14 +15,19 @@ namespace DataAccessLayer.Concrete
             _appDbContext = appDbContext;
         }
 
-        public List<Comment> GetCommentsById(Expression<Func<Comment,bool>>filt)
+        public List<Comment> GetCommentsById(Expression<Func<Comment, bool>> filter)
         {
-            return _appDbContext.Comments.Where(filt).Where(x=>x.Delete==0).ToList();
+            return _appDbContext.Comments
+                .Where(filter)
+                .Where(x => x.Delete == 0)
+                .ToList();
         }
 
-        public List<Comment> GetCommentsByIdAdmin(Expression<Func<Comment, bool>> filt)
+        public List<Comment> GetCommentsByIdAdmin(Expression<Func<Comment, bool>> filter)
         {
-            return _appDbContext.Comments.Where(filt).ToList();
+            return _appDbContext.Comments
+                .Where(filter)
+                .ToList();
         }
     }
 }
