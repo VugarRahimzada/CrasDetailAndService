@@ -23,6 +23,11 @@ Cras is a web application developed for managing car details and various service
 - **FluentValidation:** Library used for input validation.
 - **SOLID Principles:** Design approach for implementing software development principles.
 
+## Additional Feature:
+--**VIN Code Recoder with RapidAPI
+--**VIN Code Recoder: Utilizes RapidAPI for VIN code recoding.
+ This feature enhances the application's capability by leveraging external APIs (such as RapidAPI) to decode and process Vehicle Identification Numbers (VINs). It enriches the data management and service functionalities by providing accurate and detailed information about vehicles.
+
 ## Contact
 
 If you have any questions or suggestions, please contact me at vuqarr32@gmail.com.
