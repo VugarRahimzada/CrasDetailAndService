@@ -1,33 +1,33 @@
-<h1 align="center">Cras</h1>
+# Cras
 
-Cras is an MVC project for managing car details and services. It incorporates C#, .NET, N-tier architecture, SQL Server, EF Core, FluentValidation, and adheres to SOLID principles.
+Cras is an MVC project for managing car details and services, built with C#, .NET, following N-tier architecture, utilizing SQL Server, EF Core, FluentValidation, and adhering to SOLID principles.
 
 ## Project Description
 
-Cras is a web application developed for managing car details and various services associated with them. It allows users to record vehicle specifications, track service history, and manage their vehicles. Additionally, it features dynamic application usage from both user and admin perspectives.
+Cras is a web application designed to manage car details and related services. It enables users to record vehicle specifications, track service history, and efficiently manage their vehicles. The application offers dynamic functionality tailored to both user and admin roles.
 
 ## Features
 
-- **Subscription System:** Users can subscribe to premium services for a monthly fee.
-- **Dynamic Application Usage:** Application adapts dynamically to user and admin needs.
-- **Admin Management:** Administrators can manage users, vehicles, and services efficiently.
-- **Role-based Authorization:** User roles determine access and permissions within the application.
+- **Subscription System:** Users can subscribe to premium services with a monthly fee.
+- **Dynamic Application Usage:** Application dynamically adapts to user and admin requirements.
+- **Admin Management:** Efficient management of users, vehicles, and services by administrators.
+- **Role-based Authorization:** Access and permissions controlled based on user roles.
 
 ## Technologies
 
 - **C#:** Primary programming language.
-- **.NET Framework:** Framework used for application development.
-- **N-tier Architecture:** Architectural pattern separating logical layers (presentation, business logic, data access).
-- **SQL Server:** Relational database management system.
-- **EF Core:** Object-Relational Mapping library for simplifying database operations.
-- **FluentValidation:** Library used for input validation.
-- **SOLID Principles:** Design approach for implementing software development principles.
+- **.NET Framework:** Framework used for development.
+- **N-tier Architecture:** Logical layer separation (presentation, business logic, data access).
+- **SQL Server:** Relational database management.
+- **EF Core:** Simplifies database operations with Object-Relational Mapping.
+- **FluentValidation:** Library for input validation.
+- **SOLID Principles:** Guiding principles for software design.
 
-## Additional Feature:
--**VIN Code Recoder with RapidAPI**
--**VIN Code Recoder:** Utilizes RapidAPI for VIN code recoding.
- This feature enhances the application's capability by leveraging external APIs (such as RapidAPI) to decode and process Vehicle Identification Numbers (VINs). It enriches the data management and service functionalities by providing accurate and detailed information about vehicles.
+## Additional Feature
+
+- **VIN Code Recoder:** Utilizes RapidAPI for decoding Vehicle Identification Numbers (VINs), enhancing data management and service functionalities with accurate vehicle information.
 
 ## Contact
 
-If you have any questions or suggestions, please contact me at vuqarr32@gmail.com.
+For questions or suggestions, feel free to reach out at vuqarr32@gmail.com.
+
